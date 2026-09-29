@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Légvárbérlés – 7 design</title>
+<meta http-equiv="refresh" content="0; url=puff.html">
+<script>
+  (function () {
+    var allowed = ['puff.html', 'ugri.html', 'holdudvar.html', 'ovikert.html', 'cirkusz.html', 'zonamester.html', 'hetvege.html'];
+    var target = 'puff.html';
+    try {
+      var last = localStorage.getItem('legvar-design');
+      if (allowed.indexOf(last) !== -1) target = last;
+    } catch (e) {}
+    location.replace(target);
+  })();
+</script>
+</head>
+<body>
+<p><a href="puff.html">Tovább az oldalra</a></p>
+</body>
+</html>

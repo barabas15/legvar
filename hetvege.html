@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Péntektől – légvár egész hétvégére</title>
+<meta name="description" content="Péntek délután hozzuk, hétfő reggel visszük. Légvár egész hétvégére a kertbe, Budapesten és 30 km-es környékén.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400..800&family=Shrikhand&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+  --paper: #f1dfc0;
+  --paper-2: #e6cb9f;
+  --card: #fbf0dc;
+  --orange: #d9582b;
+  --mustard: #e8a83a;
+  --brown: #4a2a17;
+  --teal: #2f7f79;
+  --pink: #e59c9a;
+  --ink-soft: #74492d;
+  --f-d: "Shrikhand", Georgia, serif;
+  --f-b: "DM Sans", system-ui, sans-serif;
+  --f-h: "Caveat", "Comic Sans MS", cursive;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f-b);
+  color: var(--brown);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(900px 600px at 12% 8%, rgba(255, 244, 222, .75), transparent 60%),
+    radial-gradient(700px 500px at 88% 30%, rgba(232, 168, 58, .16), transparent 60%),
+    radial-gradient(800px 700px at 30% 90%, rgba(229, 156, 154, .14), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .29 0 0 0 0 .16 0 0 0 0 .09 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+main { overflow-x: clip; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 6px; }
+.visually-hidden-focusable:focus { position: static; }
+
+.display { font-family: var(--f-d); font-weight: 400; line-height: 1.02; letter-spacing: 0; }
+.hand { font-family: var(--f-h); }
+.section-h { font-family: var(--f-d); font-weight: 400; font-size: clamp(2.1rem, 4.6vw, 3.6rem); line-height: 1.02; margin: 0 0 .75rem; color: var(--brown); text-wrap: balance; }
+.section-h .soft { color: var(--orange); }
+.lead-p { max-width: 54ch; color: var(--ink-soft); font-size: 1.125rem; margin: 0; }
+.aside-hand { font-family: var(--f-h); font-size: 1.6rem; line-height: 1.1; color: var(--teal); }
+
+.btn-sun {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font: 700 1rem/1.1 var(--f-b);
+  padding: .95rem 1.5rem;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--card);
+  border: 3px solid var(--brown);
+  box-shadow: 0 5px 0 var(--brown);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-sun:hover { color: var(--card); transform: translateY(-2px); box-shadow: 0 7px 0 var(--brown); }
+.btn-sun:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--brown); }
+.btn-sun.alt { background: var(--card); color: var(--brown); }
+.btn-sun.alt:hover { color: var(--brown); }
+.link-hand { font-family: var(--f-h); font-size: 1.55rem; line-height: 1; color: var(--brown); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; text-decoration-color: var(--orange); background: none; border: 0; padding: 0; cursor: pointer; }
+.link-hand:hover { color: var(--orange); }
+
+.brandbar { padding-top: 1.5rem; }
+.badge-sun { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--brown); }
+.badge-sun svg { width: 64px; height: 64px; flex: none; }
+.badge-word { font-family: var(--f-d); font-size: 1.9rem; line-height: 1; display: block; }
+.badge-sub { font-size: .85rem; font-weight: 600; color: var(--ink-soft); display: block; margin-top: .2rem; }
+.brand-where { font-family: var(--f-h); font-size: 1.45rem; line-height: 1.1; text-align: right; color: var(--ink-soft); transform: rotate(2deg); }
+
+.hero { position: relative; padding: 1.5rem 0 7rem; }
+.stage { position: relative; width: min(900px, 100%); margin: 1.5rem auto 0; }
+.stack { position: relative; width: 100%; aspect-ratio: 3 / 2; }
+.pc { position: absolute; inset: 0; background: var(--card); border-radius: 6px; padding: 14px; box-shadow: 0 1px 0 rgba(74, 42, 23, .12), 0 26px 50px -26px rgba(74, 42, 23, .7); }
+.pc svg { width: 100%; height: 100%; display: block; border-radius: 3px; }
+.pc-3 { transform: translate(-5%, 4%) rotate(-7deg); }
+.pc-2 { transform: translate(5%, -3%) rotate(5deg); }
+.pc-1 { transform: rotate(-1.4deg); }
+.pc-back { background-color: var(--card); background-image: repeating-linear-gradient(transparent 0 30px, rgba(74, 42, 23, .18) 30px 32px); }
+.tape { position: absolute; width: 120px; height: 34px; background: rgba(232, 168, 58, .55); top: -14px; left: 50%; transform: translateX(-50%) rotate(-4deg); box-shadow: 0 1px 2px rgba(74, 42, 23, .15); }
+.hero-note {
+  position: absolute; right: -15%; bottom: -15%; width: 310px; z-index: 3;
+  background: var(--card); padding: 1.6rem 1.5rem 1.4rem; border-radius: 4px;
+  transform: rotate(3deg);
+  box-shadow: 0 20px 36px -22px rgba(74, 42, 23, .75);
+}
+.hero-note .tape { width: 90px; background: rgba(229, 156, 154, .6); }
+.hero-note p { margin: 0 0 1rem; font-size: 1.05rem; }
+.hero-note .hand-line { font-family: var(--f-h); font-size: 1.7rem; line-height: 1.05; color: var(--orange); margin-bottom: .6rem; }
+.stage.drop .pc-3 { animation: drop3 .7s cubic-bezier(.2, .8, .2, 1) both; }
+.stage.drop .pc-2 { animation: drop2 .7s .15s cubic-bezier(.2, .8, .2, 1) both; }
+.stage.drop .pc-1 { animation: drop1 .8s .3s cubic-bezier(.2, .8, .2, 1.1) both; }
+.stage.drop .hero-note { animation: dropn .7s .75s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes drop3 { from { opacity: 0; transform: translate(-5%, -8%) rotate(-14deg) scale(1.06); } }
+@keyframes drop2 { from { opacity: 0; transform: translate(5%, -14%) rotate(12deg) scale(1.06); } }
+@keyframes drop1 { from { opacity: 0; transform: translateY(-16%) rotate(-6deg) scale(1.08); } }
+@keyframes dropn { from { opacity: 0; transform: translateY(20px) rotate(9deg); } }
+
+.spreads { padding: 6rem 0 5rem; }
+.spread { position: relative; display: grid; grid-template-columns: 1fr 1fr; background: var(--card); border-radius: 4px; box-shadow: 0 30px 60px -34px rgba(74, 42, 23, .7); margin-top: 3.5rem; }
+.spread::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 60px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(74, 42, 23, .14) 45%, rgba(74, 42, 23, .22) 50%, rgba(74, 42, 23, .14) 55%, transparent); pointer-events: none; }
+.spread.mirror .sp-art { order: 2; }
+.spread:nth-of-type(1) { transform: rotate(-.6deg); }
+.spread:nth-of-type(2) { transform: rotate(.5deg); }
+.sp-art { position: relative; padding: 18px; }
+.sp-art svg { width: 100%; height: 100%; min-height: 320px; display: block; border-radius: 2px; }
+.sp-text { padding: 3rem 3.25rem 3rem; position: relative; }
+.sp-kicker { font-family: var(--f-h); font-size: 1.7rem; line-height: 1; color: var(--teal); margin-bottom: .35rem; }
+.sp-title { font-family: var(--f-d); font-size: clamp(2.4rem, 4.4vw, 3.6rem); line-height: 1; margin: 0 0 1rem; }
+.sp-text p { color: var(--ink-soft); max-width: 44ch; }
+.guide { list-style: none; padding: 0; margin: 1.5rem 0 1.75rem; max-width: 380px; }
+.guide li { display: flex; align-items: baseline; gap: .5rem; padding: .3rem 0; }
+.guide li span:first-child { font-weight: 600; }
+.guide li i { flex: 1; border-bottom: 2px dotted rgba(74, 42, 23, .4); transform: translateY(-4px); }
+.guide li b { font-weight: 800; }
+.pricetag { position: absolute; top: -1.6rem; right: 2rem; width: 132px; height: 132px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--mustard); border: 3px solid var(--brown); transform: rotate(10deg); box-shadow: 0 5px 0 var(--brown); }
+.pricetag strong { font-family: var(--f-d); font-weight: 400; font-size: 1.45rem; line-height: 1; display: block; }
+.pricetag span { font-size: .8rem; font-weight: 700; }
+.spread.mirror .pricetag { background: var(--pink); transform: rotate(-8deg); top: auto; bottom: 2.25rem; right: 2.5rem; }
+
+.picker { padding: 5rem 0 4rem; }
+.strip-wrap { position: relative; }
+.strip { display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 1.25rem .25rem 1.75rem; margin: 0; list-style: none; scrollbar-width: thin; scrollbar-color: var(--brown) transparent; }
+.strip li { flex: 0 0 auto; scroll-snap-align: start; }
+.wk {
+  --c: var(--orange); --t: var(--card);
+  position: relative; display: grid; grid-template-columns: 1fr 68px;
+  width: 262px; min-height: 150px; padding: 0; border: 0; text-align: left;
+  background: var(--c); color: var(--t); border-radius: 12px; cursor: pointer;
+  box-shadow: 0 4px 0 rgba(74, 42, 23, .8);
+  transition: transform .15s ease;
+}
+.wk:hover { transform: translateY(-3px) rotate(-.6deg); }
+.wk::before, .wk::after { content: ""; position: absolute; right: 57px; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); }
+.wk::before { top: -11px; }
+.wk::after { bottom: -11px; }
+.wk-main { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .15rem; }
+.wk-from { font-size: .8rem; font-weight: 700; opacity: .85; }
+.wk-date { font-family: var(--f-d); font-size: 1.65rem; line-height: 1.05; }
+.wk-to { font-size: .95rem; font-weight: 600; }
+.wk-stub { border-left: 2px dashed currentColor; display: grid; place-items: center; padding: .5rem 0; opacity: .95; }
+.wk-no { font-family: var(--f-d); font-size: 1.7rem; line-height: 1; }
+.wk-long { position: absolute; left: 1rem; bottom: -14px; background: var(--card); color: var(--brown); font-family: var(--f-h); font-size: 1.25rem; line-height: 1; padding: .3rem .65rem .35rem; border-radius: 999px; border: 2px solid var(--brown); transform: rotate(-3deg); white-space: nowrap; }
+.wk-mark { position: absolute; top: 50%; left: 42%; width: 96px; height: 96px; margin: -48px 0 0 -48px; border: 3px solid var(--brown); border-radius: 50%; display: none; place-content: center; text-align: center; color: var(--brown); background: rgba(251, 240, 220, .88); font-family: var(--f-h); font-size: 1.5rem; line-height: .95; transform: rotate(-14deg); box-shadow: inset 0 0 0 4px rgba(251, 240, 220, .88), inset 0 0 0 6px var(--brown); }
+.wk[aria-pressed="true"] { outline: 3px solid var(--brown); outline-offset: 4px; }
+.wk[aria-pressed="true"] .wk-mark { display: grid; animation: stampin .25s ease-out; }
+@keyframes stampin { from { transform: rotate(-14deg) scale(1.6); opacity: 0; } }
+.strip li:nth-child(5n+2) .wk { --c: var(--teal); }
+.strip li:nth-child(5n+3) .wk { --c: var(--mustard); --t: var(--brown); }
+.strip li:nth-child(5n+4) .wk { --c: var(--pink); --t: var(--brown); }
+.strip li:nth-child(5n+5) .wk { --c: var(--brown); --t: var(--card); }
+.strip-nav { display: flex; gap: .6rem; }
+.round-btn { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--brown); background: var(--card); color: var(--brown); display: grid; place-items: center; box-shadow: 0 4px 0 var(--brown); cursor: pointer; }
+.round-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--brown); }
+.round-btn svg { width: 22px; height: 22px; }
+
+.write { padding: 4rem 0 6rem; }
+.post { position: relative; background: var(--card); border-radius: 6px; padding: 2.25rem; box-shadow: 0 1px 0 rgba(74, 42, 23, .12), 0 34px 60px -34px rgba(74, 42, 23, .75); transform: rotate(-.5deg); }
+.post-print { position: absolute; top: 1rem; left: 2.25rem; font-style: italic; font-size: .85rem; color: var(--ink-soft); }
+.post-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; margin-top: 1.25rem; }
+.post-left { padding-right: 2.25rem; display: flex; flex-direction: column; }
+.post-right { padding-left: 2.25rem; border-left: 2px solid rgba(74, 42, 23, .35); position: relative; }
+.msg { width: 100%; flex: 1; min-height: 280px; resize: vertical; border: 0; background: transparent; color: var(--brown); font-family: var(--f-h); font-size: 1.65rem; line-height: 2.2rem; padding: 0 .25rem; background-image: repeating-linear-gradient(transparent 0 calc(2.2rem - 2px), rgba(74, 42, 23, .22) calc(2.2rem - 2px) 2.2rem); background-attachment: local; }
+.msg::placeholder { color: rgba(116, 73, 45, .6); }
+.msg:focus { outline: none; box-shadow: 0 0 0 3px rgba(47, 127, 121, .4); border-radius: 4px; }
+.ps { font-family: var(--f-h); font-size: 1.45rem; line-height: 1.2; margin: 1rem 0 0; }
+.ps a { text-decoration-color: var(--orange); text-underline-offset: 4px; }
+.stamps { display: flex; justify-content: flex-end; gap: .9rem; border: 0; padding: 0; margin: 0 0 1.25rem; position: relative; }
+.stamps legend { float: left; width: auto; font-size: .9rem; font-weight: 700; margin: 0 auto 0 0; padding-top: .3rem; color: var(--ink-soft); max-width: 9rem; line-height: 1.3; }
+.stamp { position: relative; cursor: pointer; display: block; width: 104px; }
+.stamp input { position: absolute; opacity: 0; pointer-events: none; }
+.stamp-face { display: block; padding: 7px; background: radial-gradient(circle at 5px 5px, transparent 3.2px, var(--card) 3.8px) -5px -5px / 10px 10px; filter: drop-shadow(0 2px 2px rgba(74, 42, 23, .3)); }
+.stamp-in { display: block; background: var(--mustard); padding: 6px 6px 4px; text-align: center; border: 1px solid rgba(74, 42, 23, .3); }
+.stamp:nth-child(3) .stamp-in { background: var(--pink); }
+.stamp-in svg { width: 100%; height: 58px; display: block; }
+.stamp-in b { display: block; font-family: var(--f-d); font-weight: 400; font-size: .95rem; line-height: 1.1; }
+.stamp-in small { display: block; font-size: .68rem; font-weight: 700; }
+.stamp { transition: transform .15s ease; }
+.stamp:has(input:checked) { transform: rotate(-4deg) translateY(-3px); }
+.stamp:has(input:checked) .stamp-face { filter: drop-shadow(0 0 0 var(--brown)) drop-shadow(0 4px 0 var(--brown)); }
+.stamp:has(input:focus-visible) { outline: 3px solid var(--teal); outline-offset: 4px; border-radius: 4px; }
+.postmark { position: absolute; top: 3.1rem; right: 4.2rem; width: 120px; height: 120px; pointer-events: none; opacity: 0; transform: rotate(-12deg) scale(1.3); transition: opacity .25s ease, transform .25s ease; }
+.postmark.on { opacity: .9; transform: rotate(-12deg) scale(1); }
+.postmark svg { width: 100%; height: 100%; overflow: visible; }
+.addr { display: grid; gap: .35rem; }
+.addr-row { display: grid; grid-template-columns: 5.5rem 1fr; align-items: end; gap: .75rem; }
+.addr-row label { font-size: .9rem; font-weight: 700; color: var(--ink-soft); padding-bottom: .55rem; }
+.addr-row input, .addr-row select { border: 0; border-bottom: 2px dotted rgba(74, 42, 23, .55); background: transparent; color: var(--brown); font-family: var(--f-h); font-size: 1.6rem; line-height: 1.2; padding: .3rem .25rem .2rem; border-radius: 0; width: 100%; min-width: 0; }
+.addr-row select { font-family: var(--f-h); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%234a2a17' stroke-width='2' stroke-linecap='round' d='m3 6 5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .25rem center; background-size: 16px; padding-right: 1.75rem; }
+.addr-row input:focus, .addr-row select:focus { outline: none; border-bottom: 2px solid var(--teal); background-color: rgba(47, 127, 121, .07); }
+.addr-row input.bad, .addr-row select.bad { border-bottom: 2px solid #b3261e; }
+.total { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin: 1.5rem 0 1.25rem; padding-top: 1rem; border-top: 2px solid rgba(74, 42, 23, .2); }
+.total span { font-weight: 700; color: var(--ink-soft); }
+.total strong { font-family: var(--f-d); font-weight: 400; font-size: 1.9rem; line-height: 1; white-space: nowrap; }
+.total small { display: block; font-size: .85rem; font-weight: 600; color: var(--teal); text-align: right; }
+.status { font-weight: 600; margin: .9rem 0 0; min-height: 1.6em; }
+.status.bad { color: #b3261e; }
+
+.program { padding: 5rem 0 5rem; }
+.flip { display: block; width: 100%; aspect-ratio: 3 / 2; padding: 0; border: 0; background: none; perspective: 1400px; cursor: pointer; text-align: left; color: var(--brown); }
+.flip-in { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.3, .7, .2, 1); }
+.flip[aria-pressed="true"] .flip-in { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--card); border-radius: 6px; padding: 12px; box-shadow: 0 1px 0 rgba(74, 42, 23, .12), 0 22px 40px -24px rgba(74, 42, 23, .75); }
+.face-front svg { width: 100%; height: 100%; display: block; border-radius: 3px; }
+.face-back { transform: rotateY(180deg); display: grid; grid-template-columns: 1.6fr 1fr; padding: 1.25rem 1.4rem; }
+.fb-note { font-family: var(--f-h); font-size: clamp(1.3rem, 2.1vw, 1.9rem); line-height: 1.2; padding-right: 1.1rem; border-right: 2px solid rgba(74, 42, 23, .3); display: flex; flex-direction: column; }
+.fb-note .sig { margin-top: auto; color: var(--orange); }
+.fb-side { padding-left: 1.1rem; position: relative; display: flex; flex-direction: column; }
+.fb-stamp { align-self: flex-end; width: 64px; height: 76px; background: var(--mustard); border: 5px solid var(--card); outline: 2px dashed rgba(74, 42, 23, .5); outline-offset: -1px; display: grid; place-items: center; }
+.fb-stamp svg { width: 48px; height: 48px; }
+.fb-pm { position: absolute; top: 34px; right: 38px; width: 84px; height: 84px; opacity: .8; transform: rotate(-14deg); }
+.fb-lines { margin-top: auto; display: grid; gap: 1.1rem; }
+.fb-lines i { display: block; border-bottom: 2px solid rgba(74, 42, 23, .28); }
+.flip-col:nth-child(1) .flip { transform: rotate(-1.6deg); }
+.flip-col:nth-child(2) .flip { transform: rotate(1.3deg) translateY(12px); }
+.flip-col:nth-child(3) .flip { transform: rotate(1deg); }
+.flip-col:nth-child(4) .flip { transform: rotate(-1.2deg) translateY(10px); }
+.flip-hint { font-family: var(--f-h); font-size: 1.5rem; color: var(--teal); line-height: 1.1; }
+
+.tags { padding: 4rem 0 6rem; }
+.line-wrap { position: relative; margin-top: 2.5rem; }
+.rope { position: absolute; left: -2%; right: -2%; top: 0; width: 104%; height: 60px; overflow: visible; }
+.tag-row { display: flex; justify-content: space-between; gap: 1rem; padding-top: 38px; margin: 0; list-style: none; }
+.tag-row li { flex: 1 1 0; display: flex; justify-content: center; }
+.ltag { --r: 0deg; --bg: var(--mustard); position: relative; width: 100%; max-width: 225px; margin-top: var(--dy, 0px); transform-origin: 50% -30px; transform: rotate(var(--r)); }
+.ltag::before { content: ""; position: absolute; left: 50%; top: -34px; width: 2px; height: 42px; background: var(--brown); transform: translateX(-50%); }
+.ltag-body { position: relative; display: block; background: var(--bg); color: var(--brown); padding: 2.6rem 1.2rem 1.4rem; border-radius: 0 0 10px 10px; clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 100%, 0 100%, 0 16%); filter: drop-shadow(0 3px 0 rgba(74, 42, 23, .6)); }
+.ltag-body::before { content: ""; position: absolute; left: 50%; top: 13px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 3px var(--brown); }
+.ltag h3 { font-family: var(--f-d); font-weight: 400; font-size: 1.45rem; line-height: 1.05; margin: 0 0 .5rem; }
+.ltag p { margin: 0; font-size: .95rem; line-height: 1.45; }
+.ltag:hover { animation: swing 1.4s ease-in-out; }
+@keyframes swing { 25% { transform: rotate(calc(var(--r) + 5deg)); } 55% { transform: rotate(calc(var(--r) - 3deg)); } 80% { transform: rotate(calc(var(--r) + 1.5deg)); } }
+.tag-row li:nth-child(1) .ltag { --r: -4deg; --bg: var(--mustard); --dy: 6px; }
+.tag-row li:nth-child(2) .ltag { --r: 3deg; --bg: var(--pink); --dy: 22px; }
+.tag-row li:nth-child(3) .ltag { --r: -2deg; --bg: #9cc7bf; --dy: 30px; }
+.tag-row li:nth-child(4) .ltag { --r: 4deg; --bg: var(--card); --dy: 20px; }
+.tag-row li:nth-child(5) .ltag { --r: -3deg; --bg: #efb27a; --dy: 4px; }
+
+.farewell { padding: 3rem 0 4rem; text-align: center; border-top: 2px dashed rgba(74, 42, 23, .3); }
+.farewell .hand { font-size: 2.1rem; line-height: 1.1; color: var(--orange); }
+.contacts { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; list-style: none; padding: 0; margin: 1.25rem 0 0; font-weight: 600; }
+.contacts span { color: var(--ink-soft); font-weight: 500; margin-right: .35rem; }
+.contacts a { text-decoration-color: var(--orange); text-underline-offset: 4px; }
+.fine { font-size: .9rem; color: var(--ink-soft); margin-top: 1.5rem; }
+
+@media (max-width: 1299.98px) {
+  .hero { padding-bottom: 4rem; }
+  .hero-note { position: relative; right: auto; bottom: auto; width: auto; max-width: 440px; margin: 3rem auto 0; transform: rotate(1.5deg); }
+}
+@media (max-width: 991.98px) {
+  .spread, .spread.mirror { grid-template-columns: 1fr; }
+  .spread.mirror .sp-art { order: 0; }
+  .spread::after { top: auto; left: 0; right: 0; width: auto; height: 50px; transform: none; bottom: auto; background: linear-gradient(180deg, transparent, rgba(74, 42, 23, .16) 50%, transparent); }
+  .spread .sp-art + .sp-text { position: relative; }
+  .sp-art svg { min-height: 0; aspect-ratio: 4 / 3; }
+  .sp-text { padding: 2.5rem 1.75rem 2rem; }
+  .pricetag { top: -3.5rem; right: 1.25rem; width: 116px; height: 116px; }
+  .pricetag strong { font-size: 1.1rem; white-space: nowrap; }
+  .spread.mirror .pricetag { top: -3.5rem; bottom: auto; right: 1.25rem; }
+  .post-grid { grid-template-columns: 1fr; }
+  .post-left { padding-right: 0; }
+  .post-right { padding-left: 0; border-left: 0; border-top: 2px solid rgba(74, 42, 23, .35); padding-top: 1.5rem; margin-top: 1.5rem; }
+  .msg { min-height: 200px; }
+  .rope { display: none; }
+  .tag-row { flex-wrap: wrap; justify-content: center; gap: 3.25rem 1.25rem; }
+  .tag-row li { flex: 0 1 220px; }
+  .ltag { margin-top: 0; }
+}
+@media (max-width: 575.98px) {
+  body { font-size: 1rem; }
+  .brand-where { display: none; }
+  .badge-word { font-size: 1.6rem; }
+  .pc { padding: 8px; }
+  .post { padding: 1.5rem 1.1rem; transform: none; }
+  .post-print { left: 1.1rem; }
+  .stamps { flex-wrap: wrap; }
+  .stamps legend { max-width: none; width: 100%; margin-bottom: .6rem; }
+  .postmark { top: 3.4rem; right: 5.5rem; width: 96px; height: 96px; }
+  .addr-row { grid-template-columns: 1fr; gap: 0; }
+  .addr-row label { padding-bottom: 0; }
+  .face-back { grid-template-columns: 1fr; padding: 1rem 1.1rem; }
+  .fb-note { border-right: 0; padding-right: 0; font-size: 1.28rem; }
+  .fb-side { display: none; }
+  .flip-col .flip { transform: none !important; }
+  .wk { width: 236px; }
+  .tag-row li { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" class="position-absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="napfeny" viewBox="0 0 200 170">
+      <g stroke="#4a2a17" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="100" cy="161" rx="88" ry="6" fill="#4a2a17" opacity=".2" stroke="none"/>
+        <rect x="14" y="122" width="172" height="32" rx="16" fill="#e8a83a"/>
+        <rect x="40" y="62" width="120" height="68" rx="12" fill="#d9582b"/>
+        <path d="M68 128 V98 a32 32 0 0 1 64 0 V128 Z" fill="#4a2a17"/>
+        <path d="M84 74v52M100 68v58M116 74v52M70 104h60" stroke="#fbf0dc" stroke-width="2" opacity=".35"/>
+        <path d="M78 62 a22 22 0 0 1 44 0 Z" fill="#e8a83a"/>
+        <path d="M100 34v-8M83 42l-6-6M117 42l6-6M72 56h-8M128 56h8"/>
+        <rect x="16" y="44" width="30" height="92" rx="15" fill="#e59c9a"/>
+        <rect x="154" y="44" width="30" height="92" rx="15" fill="#e59c9a"/>
+        <path d="M20 74h22M20 96h22M158 74h22M158 96h22" stroke="#fbf0dc" stroke-width="4" opacity=".75"/>
+        <circle cx="31" cy="40" r="13" fill="#2f7f79"/>
+        <circle cx="169" cy="40" r="13" fill="#2f7f79"/>
+        <path d="M31 27V9l14 5-14 5" fill="#e8a83a"/>
+        <path d="M169 27V9l14 5-14 5" fill="#e8a83a"/>
+        <path d="M32 140h136" stroke="#fbf0dc" stroke-width="4" opacity=".5"/>
+      </g>
+    </symbol>
+    <symbol id="hullam" viewBox="0 0 260 170">
+      <g stroke="#4a2a17" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="130" cy="161" rx="120" ry="6" fill="#4a2a17" opacity=".2" stroke="none"/>
+        <rect x="8" y="124" width="244" height="30" rx="15" fill="#e8a83a"/>
+        <path d="M126 54 C168 50 178 92 206 102 C226 109 240 116 252 128 L252 146 L204 146 C190 128 172 114 150 108 C138 104 130 96 126 90 Z" fill="#e59c9a"/>
+        <path d="M136 64 C168 64 182 100 208 111 C226 118 236 125 245 136" fill="none" stroke="#fbf0dc" stroke-width="4" opacity=".8"/>
+        <path d="M146 52 c4 -16 26 -20 34 -6 c-9 -5 -18 -1 -18 8" fill="#e59c9a"/>
+        <rect x="22" y="54" width="108" height="78" rx="12" fill="#2f7f79"/>
+        <rect x="40" y="74" width="72" height="52" rx="22" fill="#4a2a17"/>
+        <path d="M58 76v48M76 74v52M94 76v48M42 100h68" stroke="#fbf0dc" stroke-width="2" opacity=".35"/>
+        <rect x="10" y="34" width="26" height="100" rx="13" fill="#d9582b"/>
+        <rect x="116" y="34" width="26" height="100" rx="13" fill="#d9582b"/>
+        <path d="M14 64h18M14 88h18M120 64h18M120 88h18" stroke="#fbf0dc" stroke-width="4" opacity=".75"/>
+        <circle cx="23" cy="30" r="11" fill="#e8a83a"/>
+        <circle cx="129" cy="30" r="11" fill="#e8a83a"/>
+        <path d="M40 58 Q76 32 112 58" fill="none" stroke-width="14"/>
+        <path d="M40 58 Q76 32 112 58" fill="none" stroke="#e59c9a" stroke-width="8"/>
+      </g>
+    </symbol>
+    <symbol id="sunbadge" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3"/>
+      <clipPath id="sbc"><circle cx="32" cy="32" r="27"/></clipPath>
+      <g clip-path="url(#sbc)">
+        <rect x="0" y="0" width="64" height="64" fill="#e8a83a"/>
+        <rect x="0" y="22" width="64" height="10" fill="#e2703a"/>
+        <rect x="0" y="32" width="64" height="10" fill="#d9582b"/>
+        <circle cx="32" cy="44" r="16" fill="#fbf0dc"/>
+        <rect x="0" y="36" width="64" height="2.5" fill="#d9582b"/>
+        <rect x="0" y="41" width="64" height="3" fill="#d9582b"/>
+        <path d="M0 46 C14 42 22 50 34 46 C46 42 54 48 64 45 V64 H0Z" fill="#2f7f79"/>
+      </g>
+    </symbol>
+    <symbol id="pmark" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="44" fill="none" stroke="#4a2a17" stroke-width="3"/>
+      <circle cx="60" cy="60" r="34" fill="none" stroke="#4a2a17" stroke-width="1.5"/>
+      <path d="M104 44 C120 38 134 50 150 44 M104 60 C120 54 134 66 150 60 M104 76 C120 70 134 82 150 76" fill="none" stroke="#4a2a17" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="container">
+      <div class="brandbar d-flex justify-content-between align-items-start gap-3">
+        <a class="badge-sun" href="#top" id="top" aria-label="Péntektől, légvár egész hétvégére">
+          <svg aria-hidden="true"><use href="#sunbadge"/></svg>
+          <span><span class="badge-word">Péntektől</span><span class="badge-sub">légvár egész hétvégére</span></span>
+        </a>
+        <p class="brand-where mb-0">Budapesten és 30 km-en belül,<br>péntek délutántól hétfő reggelig</p>
+      </div>
+
+      <h1 id="hero-h" class="visually-hidden">Péntektől: légvár a kertedbe, péntek délutántól hétfő reggelig</h1>
+
+      <div class="stage drop">
+      <div class="stack">
+        <div class="pc pc-3 pc-back" aria-hidden="true">
+          <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+            <rect width="600" height="400" fill="#2f7f79"/>
+            <path d="M0 80 C100 50 200 110 300 80 C400 50 500 110 600 80 M0 160 C100 130 200 190 300 160 C400 130 500 190 600 160 M0 240 C100 210 200 270 300 240 C400 210 500 270 600 240 M0 320 C100 290 200 350 300 320 C400 290 500 350 600 320" fill="none" stroke="#e8a83a" stroke-width="18" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="pc pc-2" aria-hidden="true">
+          <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+            <rect width="600" height="400" fill="#e59c9a"/>
+            <circle cx="470" cy="120" r="70" fill="#fbf0dc" opacity=".85"/>
+            <path d="M0 300 C150 250 300 330 450 280 C520 258 570 268 600 262 V400 H0Z" fill="#d9582b"/>
+          </svg>
+        </div>
+        <div class="pc pc-1">
+          <span class="tape" aria-hidden="true"></span>
+          <svg viewBox="0 0 600 400" role="img" aria-label="Képeslap: Üdvözlet a kertből! Csíkos naplemente, két légvár a füvön.">
+            <defs>
+              <clipPath id="heroClip"><rect width="600" height="400" rx="3"/></clipPath>
+              <path id="heroArc" d="M70 158 Q300 36 530 158"/>
+              <filter id="heroGrain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .3 0 0 0 0 .18 0 0 0 0 .1 0 0 0 .22 0"/></filter>
+            </defs>
+            <g clip-path="url(#heroClip)">
+              <rect width="600" height="60" fill="#e8a83a"/>
+              <rect y="60" width="600" height="50" fill="#ee9340"/>
+              <rect y="110" width="600" height="50" fill="#e2703a"/>
+              <rect y="160" width="600" height="50" fill="#d9582b"/>
+              <rect y="210" width="600" height="70" fill="#c44a2c"/>
+              <circle cx="300" cy="282" r="132" fill="#f6d27a"/>
+              <rect y="196" width="600" height="6" fill="#d9582b"/>
+              <rect y="222" width="600" height="8" fill="#c44a2c"/>
+              <rect y="248" width="600" height="10" fill="#c44a2c"/>
+              <path d="M0 282 C120 254 220 294 330 274 C430 256 520 266 600 254 L600 400 L0 400Z" fill="#2f7f79"/>
+              <path d="M0 330 C140 308 260 338 400 320 C480 310 550 318 600 308 L600 400 L0 400Z" fill="#276b66"/>
+              <use href="#napfeny" x="52" y="228" width="200" height="170"/>
+              <use href="#hullam" x="286" y="224" width="270" height="176"/>
+              <g font-family="Shrikhand, Georgia, serif" text-anchor="middle">
+                <g transform="translate(5 6)" fill="#4a2a17">
+                  <text font-size="68"><textPath href="#heroArc" startOffset="50%">Üdvözlet</textPath></text>
+                  <text x="300" y="222" font-size="80">a kertből!</text>
+                </g>
+                <g fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" paint-order="stroke" stroke-linejoin="round">
+                  <text font-size="68"><textPath href="#heroArc" startOffset="50%">Üdvözlet</textPath></text>
+                  <text x="300" y="222" font-size="80">a kertből!</text>
+                </g>
+              </g>
+              <rect width="600" height="400" filter="url(#heroGrain)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+        <aside class="hero-note" aria-label="Röviden">
+          <span class="tape" aria-hidden="true"></span>
+          <p class="hand-line">Péntek délután hozzuk, hétfő reggel visszük.</p>
+          <p>Három nap ugrálás a saját kertedben. Az unokatestvérek jöhetnek, a nagyszülők hozhatják a pogácsát.</p>
+          <div class="d-flex flex-wrap align-items-center gap-3">
+            <a class="btn-sun" href="#hetvegek">Válassz hétvégét</a>
+            <a class="link-hand" href="tel:+36301234567">vagy hívj: +36 30 123 4567</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="spreads" aria-labelledby="sp-h">
+    <div class="container">
+      <h2 id="sp-h" class="section-h">Két úti cél, <span class="soft">egy kert</span></h2>
+      <p class="lead-p">Hétvégi áron péntek 16 órától hétfő 10 óráig nálatok marad. Hosszú hétvégén egy nappal tovább, 12 000 Ft-ért.</p>
+
+      <article class="spread" aria-labelledby="napfeny-h">
+        <div class="sp-art">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A Napfény Vár a délutáni napsütésben">
+            <rect width="400" height="300" fill="#f4c26b"/>
+            <circle cx="300" cy="96" r="54" fill="#fbf0dc" opacity=".9"/>
+            <path d="M0 70 H400 M0 96 H400" stroke="#e8a83a" stroke-width="10" opacity=".6"/>
+            <path d="M0 214 C90 196 170 226 260 208 C320 196 360 204 400 198 V300 H0Z" fill="#2f7f79"/>
+            <path d="M0 250 C120 236 220 260 400 240 V300 H0Z" fill="#276b66"/>
+            <use href="#napfeny" x="70" y="96" width="240" height="204"/>
+          </svg>
+        </div>
+        <div class="sp-text">
+          <div class="pricetag" aria-label="Ár: 39 900 forint hétvégénként"><strong>39 900 Ft</strong><span>hétvégére</span></div>
+          <p class="sp-kicker">A kisebbeknek</p>
+          <h3 id="napfeny-h" class="sp-title">Napfény Vár</h3>
+          <p>Tornyos kis vár hálós falakkal, puha, széles ugrálótérrel. Kisebb kertbe is befér, és a reggeli kávé mellől is jól látni, ki mit csinál benne.</p>
+          <ul class="guide">
+            <li><span>Méret</span><i></i><b>4 × 4 m</b></li>
+            <li><span>Kor</span><i></i><b>3–10 év</b></li>
+            <li><span>Egyszerre</span><i></i><b>6 gyerek</b></li>
+            <li><span>Kell hozzá</span><i></i><b>5 × 5 m sík terület</b></li>
+          </ul>
+          <button type="button" class="btn-sun" data-castle="napfeny">Ez kerüljön a bélyegre</button>
+        </div>
+      </article>
+
+      <article class="spread mirror" aria-labelledby="hullam-h">
+        <div class="sp-art">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A Nagy Hullám csúszdás légvár naplementében">
+            <rect width="400" height="300" fill="#e59c9a"/>
+            <rect y="0" width="400" height="44" fill="#e8a83a"/>
+            <rect y="44" width="400" height="36" fill="#ee9340"/>
+            <rect y="80" width="400" height="36" fill="#e2703a"/>
+            <circle cx="96" cy="170" r="70" fill="#f6d27a"/>
+            <path d="M0 214 C90 196 170 226 260 208 C320 196 360 204 400 198 V300 H0Z" fill="#2f7f79"/>
+            <path d="M0 250 C120 236 220 260 400 240 V300 H0Z" fill="#276b66"/>
+            <use href="#hullam" x="40" y="104" width="320" height="210"/>
+          </svg>
+        </div>
+        <div class="sp-text">
+          <div class="pricetag" aria-label="Ár: 54 900 forint hétvégénként"><strong>54 900 Ft</strong><span>hétvégére</span></div>
+          <p class="sp-kicker">Ha jönnek az unokatestvérek</p>
+          <h3 id="hullam-h" class="sp-title">Nagy Hullám</h3>
+          <p>Ugrálótér, mászófal és egy 2,5 méter magas csúszda egyben. Három nap alatt sem unják meg, szombat estére saját játékszabályaik lesznek.</p>
+          <ul class="guide">
+            <li><span>Méret</span><i></i><b>7 × 4 m</b></li>
+            <li><span>Kor</span><i></i><b>4–14 év</b></li>
+            <li><span>Egyszerre</span><i></i><b>8 gyerek</b></li>
+            <li><span>Kell hozzá</span><i></i><b>8 × 5 m sík terület</b></li>
+          </ul>
+          <button type="button" class="btn-sun" data-castle="hullam">Ez kerüljön a bélyegre</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="picker" id="hetvegek" aria-labelledby="wk-h">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+        <div>
+          <h2 id="wk-h" class="section-h">Melyik hétvége legyen?</h2>
+          <p class="lead-p">A következő tizenkét hétvége. Koppints egy jegyre, és rákerül a képeslapra.</p>
+        </div>
+        <div class="strip-nav">
+          <button type="button" class="round-btn" data-scroll="-1" aria-label="Korábbi hétvégék"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="round-btn" data-scroll="1" aria-label="Későbbi hétvégék"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="strip-wrap">
+        <ul class="strip" id="strip" aria-label="Választható hétvégék"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="write" id="kepeslap" aria-labelledby="post-h">
+    <div class="container">
+      <h2 id="post-h" class="section-h">Írj nekünk egy képeslapot</h2>
+      <p class="lead-p mb-4">Ez a foglalás. Megírod, feladod, és egy napon belül visszahívunk, hogy minden rendben van-e.</p>
+
+      <form class="post" id="post" novalidate>
+        <span class="post-print">Levelezőlap</span>
+        <div class="post-grid">
+          <div class="post-left">
+            <label for="msg" class="visually-hidden">Üzenet nekünk</label>
+            <textarea id="msg" name="msg" class="msg" placeholder="Sziasztok! Jönnek az unokák, és azt szeretnénk, ha…"></textarea>
+            <p class="ps">Ui.: ha sietős, hívj bátran: <a href="tel:+36301234567">+36 30 123 4567</a></p>
+          </div>
+          <div class="post-right">
+            <fieldset class="stamps">
+              <legend>Válassz bélyeget</legend>
+              <label class="stamp">
+                <input type="radio" name="castle" value="napfeny" checked>
+                <span class="stamp-face"><span class="stamp-in"><svg viewBox="0 0 200 170" aria-hidden="true"><use href="#napfeny"/></svg><b>Napfény Vár</b><small>39 900 Ft</small></span></span>
+              </label>
+              <label class="stamp">
+                <input type="radio" name="castle" value="hullam">
+                <span class="stamp-face"><span class="stamp-in"><svg viewBox="0 0 260 170" aria-hidden="true"><use href="#hullam"/></svg><b>Nagy Hullám</b><small>54 900 Ft</small></span></span>
+              </label>
+            </fieldset>
+            <div class="postmark" id="postmark" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <use href="#pmark"/>
+                <text x="60" y="54" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="13" fill="#4a2a17" id="pm-date">okt. 2.</text>
+                <text x="60" y="72" text-anchor="middle" font-family="Caveat, cursive" font-size="17" fill="#4a2a17">Péntektől</text>
+              </svg>
+            </div>
+            <div class="addr">
+              <div class="addr-row"><label for="f-name">Név</label><input id="f-name" name="name" autocomplete="name" required></div>
+              <div class="addr-row"><label for="f-phone">Telefon</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+              <div class="addr-row"><label for="f-addr">Cím</label><input id="f-addr" name="addr" autocomplete="street-address" placeholder="Érd, Diósdi út 12."></div>
+              <div class="addr-row"><label for="f-week">Hétvége</label><select id="f-week" name="week" required><option value="">Válassz…</option></select></div>
+            </div>
+            <div class="total">
+              <span>Összesen</span>
+              <div><strong id="total">39 900 Ft</strong><small id="total-note"></small></div>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-3">
+              <button type="submit" class="btn-sun">Feladom</button>
+              <button type="button" class="link-hand" id="messenger">inkább Messengeren</button>
+            </div>
+            <p class="status" id="status" role="status"></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="program" aria-labelledby="prog-h">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-5">
+        <h2 id="prog-h" class="section-h mb-0">Így telik a hétvége</h2>
+        <p class="flip-hint mb-0">Fordítsd meg a lapokat</p>
+      </div>
+      <div class="row g-5">
+        <div class="col-md-6 flip-col">
+          <button type="button" class="flip" aria-pressed="false" aria-label="Péntek, 16:00. Megfordítás">
+            <span class="flip-in">
+              <span class="face face-front">
+                <svg viewBox="0 0 300 200" aria-hidden="true">
+                  <rect width="300" height="60" fill="#e8a83a"/>
+                  <rect y="60" width="300" height="46" fill="#e2703a"/>
+                  <rect y="106" width="300" height="34" fill="#d9582b"/>
+                  <circle cx="232" cy="140" r="48" fill="#f6d27a"/>
+                  <rect y="136" width="300" height="64" fill="#2f7f79"/>
+                  <rect y="160" width="300" height="24" fill="#4a2a17" opacity=".85"/>
+                  <path d="M10 172h24M56 172h24M102 172h24M148 172h24M194 172h24M240 172h24" stroke="#fbf0dc" stroke-width="3" stroke-linecap="round"/>
+                  <g transform="translate(118 104)" stroke="#4a2a17" stroke-width="3" stroke-linejoin="round">
+                    <rect x="20" y="0" width="80" height="12" rx="6" fill="#e8a83a"/>
+                    <rect x="0" y="12" width="132" height="52" rx="18" fill="#fbf0dc"/>
+                    <path d="M2 40 H130 V46 a18 18 0 0 1 -18 18 H20 a18 18 0 0 1 -18 -18Z" fill="#e59c9a"/>
+                    <rect x="14" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="46" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="78" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="110" y="20" width="16" height="15" rx="4" fill="#9cc7bf"/>
+                    <circle cx="32" cy="64" r="11" fill="#4a2a17"/>
+                    <circle cx="102" cy="64" r="11" fill="#4a2a17"/>
+                  </g>
+                  <g font-family="Shrikhand, Georgia, serif"><text x="18" y="46" font-size="36" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" paint-order="stroke">Péntek</text></g>
+                  <text x="22" y="80" font-family="Caveat, cursive" font-size="28" font-weight="700" fill="#4a2a17">16:00</text>
+                </svg>
+              </span>
+              <span class="face face-back">
+                <span class="fb-note">Megérkeztünk! Húsz perc alatt felállítjuk, megmutatjuk, hogyan kell ki- és bekapcsolni, és már ugrálhatnak is.<span class="sig">a Péntektől csapata</span></span>
+                <span class="fb-side"><span class="fb-stamp"><svg viewBox="0 0 64 64"><use href="#sunbadge"/></svg></span><svg class="fb-pm" viewBox="0 0 120 120"><use href="#pmark"/><text x="60" y="64" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="14" fill="#4a2a17">P 16:00</text></svg><span class="fb-lines"><i></i><i></i><i></i></span></span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div class="col-md-6 flip-col">
+          <button type="button" class="flip" aria-pressed="false" aria-label="Szombat, egész nap. Megfordítás">
+            <span class="flip-in">
+              <span class="face face-front">
+                <svg viewBox="0 0 300 200" aria-hidden="true">
+                  <rect width="300" height="200" fill="#f4c26b"/>
+                  <g stroke="#4a2a17" stroke-width="3" stroke-linecap="round">
+                    <path d="M240 12v-8M270 24l6-6M210 24l-6-6M282 52h8M198 52h-8M270 80l6 6M210 80l-6 6"/>
+                    <circle cx="240" cy="52" r="26" fill="#fbf0dc"/>
+                  </g>
+                  <path d="M0 150 C60 136 120 158 190 146 C240 138 270 144 300 140 V200 H0Z" fill="#2f7f79"/>
+                  <use href="#napfeny" x="92" y="72" width="148" height="126"/>
+                  <g fill="#d9582b"><rect x="40" y="96" width="8" height="4" transform="rotate(30 44 98)"/><rect x="236" y="110" width="8" height="4" transform="rotate(-20 240 112)"/><rect x="258" y="96" width="8" height="4" fill="#2f7f79" transform="rotate(50 262 98)"/><rect x="30" y="126" width="8" height="4" fill="#e59c9a"/></g>
+                  <g font-family="Shrikhand, Georgia, serif"><text x="18" y="46" font-size="36" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" paint-order="stroke">Szombat</text></g>
+                  <text x="22" y="78" font-family="Caveat, cursive" font-size="26" font-weight="700" fill="#4a2a17">egész nap</text>
+                </svg>
+              </span>
+              <span class="face face-back">
+                <span class="fb-note">Reggel bekapcsolod, este kikapcsolod. Éjszakára ráterítjük a ponyvát, reggel két perc alatt újra áll.<span class="sig">a Péntektől csapata</span></span>
+                <span class="fb-side"><span class="fb-stamp" style="background:#e59c9a"><svg viewBox="0 0 64 64"><use href="#sunbadge"/></svg></span><svg class="fb-pm" viewBox="0 0 120 120"><use href="#pmark"/><text x="60" y="64" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="14" fill="#4a2a17">SZO</text></svg><span class="fb-lines"><i></i><i></i><i></i></span></span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div class="col-md-6 flip-col">
+          <button type="button" class="flip" aria-pressed="false" aria-label="Vasárnap. Megfordítás">
+            <span class="flip-in">
+              <span class="face face-front">
+                <svg viewBox="0 0 300 200" aria-hidden="true">
+                  <rect width="300" height="200" fill="#e59c9a"/>
+                  <circle cx="264" cy="48" r="22" fill="#f6d27a" stroke="#4a2a17" stroke-width="3"/>
+                  <path d="M210 70 a16 16 0 0 1 22 -18 a22 22 0 0 1 40 6 a14 14 0 0 1 4 28 h-60 a12 12 0 0 1 -6 -16Z" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" stroke-linejoin="round"/>
+                  <path d="M226 96l-4 10M244 96l-4 10M262 96l-4 10" stroke="#2f7f79" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M0 150 C60 136 120 158 190 146 C240 138 270 144 300 140 V200 H0Z" fill="#2f7f79"/>
+                  <use href="#hullam" x="106" y="90" width="170" height="111"/>
+                  <g stroke="#4a2a17" stroke-width="3" stroke-linejoin="round">
+                    <rect x="22" y="150" width="70" height="8" rx="3" fill="#e8a83a"/>
+                    <path d="M30 158v26M84 158v26" fill="none"/>
+                    <rect x="40" y="130" width="34" height="20" rx="4" fill="#fbf0dc"/>
+                    <path d="M40 138h34" stroke="#d9582b"/>
+                    <path d="M57 130v-8" />
+                  </g>
+                  <g font-family="Shrikhand, Georgia, serif"><text x="18" y="46" font-size="36" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" paint-order="stroke">Vasárnap</text></g>
+                  <text x="22" y="78" font-family="Caveat, cursive" font-size="26" font-weight="700" fill="#4a2a17">jön a nagyi</text>
+                </svg>
+              </span>
+              <span class="face face-back">
+                <span class="fb-note">Jönnek a nagyszülők és az unokatesók. Ha elered, leengeded, és öt perccel azután, hogy eláll, újra lehet ugrálni.<span class="sig">a Péntektől csapata</span></span>
+                <span class="fb-side"><span class="fb-stamp" style="background:#9cc7bf"><svg viewBox="0 0 64 64"><use href="#sunbadge"/></svg></span><svg class="fb-pm" viewBox="0 0 120 120"><use href="#pmark"/><text x="60" y="64" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="14" fill="#4a2a17">VAS</text></svg><span class="fb-lines"><i></i><i></i><i></i></span></span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div class="col-md-6 flip-col">
+          <button type="button" class="flip" aria-pressed="false" aria-label="Hétfő, 10 óráig. Megfordítás">
+            <span class="flip-in">
+              <span class="face face-front">
+                <svg viewBox="0 0 300 200" aria-hidden="true">
+                  <rect width="300" height="200" fill="#bfd9d2"/>
+                  <rect width="300" height="40" fill="#f4d6a8" opacity=".6"/>
+                  <path d="M258 26 a22 22 0 1 0 14 38 a18 18 0 1 1 -14 -38Z" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" stroke-linejoin="round"/>
+                  <path d="M0 150 C60 136 120 158 190 146 C240 138 270 144 300 140 V200 H0Z" fill="#2f7f79"/>
+                  <rect y="164" width="300" height="22" fill="#4a2a17" opacity=".85"/>
+                  <path d="M198 128h40M206 140h48M200 116h28" stroke="#4a2a17" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+                  <g transform="translate(66 112) scale(.8)" stroke="#4a2a17" stroke-width="3.5" stroke-linejoin="round">
+                    <rect x="20" y="-6" width="60" height="18" rx="9" fill="#e8a83a"/>
+                    <rect x="0" y="12" width="132" height="52" rx="18" fill="#fbf0dc"/>
+                    <path d="M2 40 H130 V46 a18 18 0 0 1 -18 18 H20 a18 18 0 0 1 -18 -18Z" fill="#e59c9a"/>
+                    <rect x="6" y="20" width="16" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="28" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="60" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <rect x="92" y="20" width="26" height="15" rx="4" fill="#9cc7bf"/>
+                    <circle cx="30" cy="64" r="11" fill="#4a2a17"/>
+                    <circle cx="100" cy="64" r="11" fill="#4a2a17"/>
+                  </g>
+                  <g font-family="Shrikhand, Georgia, serif"><text x="18" y="46" font-size="36" fill="#fbf0dc" stroke="#4a2a17" stroke-width="3" paint-order="stroke">Hétfő</text></g>
+                  <text x="22" y="78" font-family="Caveat, cursive" font-size="26" font-weight="700" fill="#4a2a17">10:00-ig</text>
+                </svg>
+              </span>
+              <span class="face face-back">
+                <span class="fb-note">Összecsomagolunk és elvisszük. Ha dolgozol, nem kell itthon lenned, elég, ha a kapu nyitva marad.<span class="sig">a Péntektől csapata</span></span>
+                <span class="fb-side"><span class="fb-stamp" style="background:#efb27a"><svg viewBox="0 0 64 64"><use href="#sunbadge"/></svg></span><svg class="fb-pm" viewBox="0 0 120 120"><use href="#pmark"/><text x="60" y="64" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="14" fill="#4a2a17">H 10:00</text></svg><span class="fb-lines"><i></i><i></i><i></i></span></span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tags" aria-labelledby="tags-h">
+    <div class="container">
+      <h2 id="tags-h" class="section-h">Csomagolás előtt</h2>
+      <p class="lead-p">Öt dolog, amit mindenki megkérdez, mielőtt egy teljes hétvégére elviszi.</p>
+      <div class="line-wrap">
+        <svg class="rope" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 C250 44 750 44 1000 8" fill="none" stroke="#4a2a17" stroke-width="3" vector-effect="non-scaling-stroke"/></svg>
+        <ul class="tag-row">
+          <li><div class="ltag"><div class="ltag-body"><h3>Éjszakára</h3><p>Kapcsold ki a fúvót, a légvár leereszt. Ráterítjük a ponyvát, reggel egy gombnyomás.</p></div></div></li>
+          <li><div class="ltag"><div class="ltag-body"><h3>Ha esik</h3><p>Esőben nem ugrálunk. Ha péntek délben 70% felett az esőesély, díjmentesen áttesszük.</p></div></div></li>
+          <li><div class="ltag"><div class="ltag-body"><h3>Áram</h3><p>A fúvó 1,1 kW-os. Egy hétvége kb. 25 kWh, ez nagyjából 1 800 Ft.</p></div></div></li>
+          <li><div class="ltag"><div class="ltag-body"><h3>Kaució</h3><p>Nem kérünk. Átadáskor felírjuk a személyi igazolványod adatait.</p></div></div></li>
+          <li><div class="ltag"><div class="ltag-body"><h3>Hely</h3><p>Sík terület kell, 25 méteren belül konnektorral. Hosszabbítót hozunk.</p></div></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="farewell">
+    <div class="container">
+      <svg width="72" height="72" aria-hidden="true"><use href="#sunbadge"/></svg>
+      <p class="hand mt-3 mb-0">Üdv a kertből,<br>a Péntektől csapata</p>
+      <ul class="contacts">
+        <li><span>Telefon</span><a href="tel:+36301234567">+36 30 123 4567</a></li>
+        <li><span>E-mail</span><a href="mailto:hello@pentektol.hu">hello@pentektol.hu</a></li>
+        <li><span>Messenger</span><a href="https://m.me/pentektol" target="_blank" rel="noopener">m.me/pentektol</a></li>
+      </ul>
+      <p class="fine mb-0">Budapesten és 30 km-es környékén szállítunk. Minden légvárunk biztosított, EN 14960 szabvány szerint ellenőrzött.</p>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var EMAIL = 'hello@pentektol.hu';
+  var CASTLES = { napfeny: { name: 'Napfény Vár', price: 39900 }, hullam: { name: 'Nagy Hullám', price: 54900 } };
+  var EXTRA = 12000;
+  var MONTHS = ['jan.', 'febr.', 'márc.', 'ápr.', 'máj.', 'jún.', 'júl.', 'aug.', 'szept.', 'okt.', 'nov.', 'dec.'];
+
+  function addDays(d, n) { var x = new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); return x; }
+  function key(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function fmt(d) { return MONTHS[d.getMonth()] + ' ' + d.getDate() + '.'; }
+  function money(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u2009') + '\u2009Ft'; }
+
+  function easter(y) {
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(y, month - 1, day);
+  }
+  var holidayCache = {};
+  function holidays(y) {
+    if (holidayCache[y]) return holidayCache[y];
+    var s = {};
+    [[1, 1], [3, 15], [5, 1], [8, 20], [10, 23], [11, 1], [12, 24], [12, 25], [12, 26]].forEach(function (p) { s[key(new Date(y, p[0] - 1, p[1]))] = true; });
+    var e = easter(y);
+    [-2, 1, 50].forEach(function (o) { s[key(addDays(e, o))] = true; });
+    holidayCache[y] = s;
+    return s;
+  }
+  function isHoliday(d) { return !!holidays(d.getFullYear())[key(d)]; }
+
+  var today = new Date();
+  var start = addDays(today, (5 - today.getDay() + 7) % 7);
+  var weeks = [];
+  for (var w = 0; w < 12; w++) {
+    var fri = addDays(start, w * 7), mon = addDays(fri, 3);
+    var early = isHoliday(fri) || isHoliday(addDays(fri, -1));
+    var late = isHoliday(mon);
+    weeks.push({ fri: fri, mon: mon, from: early ? addDays(fri, -1) : fri, to: late ? addDays(mon, 1) : mon, long: early || late, early: early, late: late });
+  }
+
+  var state = { week: -1, castle: 'napfeny' };
+  var strip = document.getElementById('strip');
+  var sel = document.getElementById('f-week');
+  var postmark = document.getElementById('postmark');
+  var pmDate = document.getElementById('pm-date');
+  var total = document.getElementById('total');
+  var totalNote = document.getElementById('total-note');
+
+  strip.innerHTML = weeks.map(function (wk, i) {
+    var label = (wk.early ? 'Csütörtöktől' : 'Péntektől') + ', ' + fmt(wk.from) + ' – ' + (wk.late ? 'keddig' : 'hétfőig') + ', ' + fmt(wk.to) + (wk.long ? ', hosszú hétvége' : '');
+    return '<li><button type="button" class="wk" data-i="' + i + '" aria-pressed="false" aria-label="' + label + '">' +
+      '<span class="wk-main"><span class="wk-from">' + (wk.early ? 'csütörtöktől' : 'péntektől') + '</span><span class="wk-date">' + fmt(wk.from) + '</span><span class="wk-to">' + (wk.late ? 'keddig, ' : 'hétfőig, ') + fmt(wk.to) + '</span></span>' +
+      '<span class="wk-stub" aria-hidden="true"><span class="wk-no">' + (i + 1) + '.</span></span>' +
+      (wk.long ? '<span class="wk-long" aria-hidden="true">hosszú hétvége, +1 nap</span>' : '') +
+      '<span class="wk-mark" aria-hidden="true">ez<br>lesz!</span></button></li>';
+  }).join('');
+  weeks.forEach(function (wk, i) {
+    var o = document.createElement('option');
+    o.value = i;
+    o.textContent = fmt(wk.from) + ' – ' + fmt(wk.to) + (wk.long ? ' (hosszú)' : '');
+    sel.appendChild(o);
+  });
+
+  function refresh() {
+    strip.querySelectorAll('.wk').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.i === state.week ? 'true' : 'false'); });
+    sel.value = state.week >= 0 ? String(state.week) : '';
+    var wk = weeks[state.week];
+    if (wk) { pmDate.textContent = fmt(wk.from); postmark.classList.add('on'); } else { postmark.classList.remove('on'); }
+    var p = CASTLES[state.castle].price + (wk && wk.long ? EXTRA : 0);
+    total.textContent = money(p);
+    totalNote.textContent = wk && wk.long ? 'benne a hosszú hétvége +1 napja' : '';
+    document.querySelectorAll('input[name="castle"]').forEach(function (r) { r.checked = r.value === state.castle; });
+  }
+
+  strip.addEventListener('click', function (e) {
+    var b = e.target.closest('.wk');
+    if (!b) return;
+    state.week = +b.dataset.i;
+    sel.classList.remove('bad');
+    refresh();
+  });
+  sel.addEventListener('change', function () { state.week = sel.value === '' ? -1 : +sel.value; sel.classList.remove('bad'); refresh(); });
+  document.querySelectorAll('input[name="castle"]').forEach(function (r) { r.addEventListener('change', function () { state.castle = r.value; refresh(); }); });
+  document.querySelectorAll('[data-castle]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.castle = b.dataset.castle;
+      refresh();
+      document.getElementById('kepeslap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  document.querySelectorAll('[data-scroll]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var tile = strip.querySelector('li');
+      var step = tile ? tile.getBoundingClientRect().width + 18 : 280;
+      strip.scrollBy({ left: +b.dataset.scroll * step * 2, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.flip').forEach(function (f) {
+    f.addEventListener('click', function () {
+      var on = f.getAttribute('aria-pressed') !== 'true';
+      f.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  });
+
+  var form = document.getElementById('post');
+  var status = document.getElementById('status');
+  function compose() {
+    var wk = weeks[state.week];
+    var c = CASTLES[state.castle];
+    var lines = [
+      'Légvár: ' + c.name,
+      'Hétvége: ' + (wk ? fmt(wk.from) + ' – ' + fmt(wk.to) + (wk.long ? ' (hosszú hétvége)' : '') : '-'),
+      'Név: ' + document.getElementById('f-name').value.trim(),
+      'Telefon: ' + document.getElementById('f-phone').value.trim(),
+      'Cím: ' + (document.getElementById('f-addr').value.trim() || '-'),
+      'Összesen: ' + total.textContent,
+      '',
+      document.getElementById('msg').value.trim()
+    ];
+    return { subject: 'Hétvégi foglalás: ' + c.name + (wk ? ', ' + fmt(wk.from) + ' – ' + fmt(wk.to) : ''), body: lines.join('\n') };
+  }
+  function validate() {
+    var missing = [];
+    [['f-name', 'a neved'], ['f-phone', 'a telefonszámod']].forEach(function (p) {
+      var el = document.getElementById(p[0]);
+      var ok = el.value.trim() !== '';
+      el.classList.toggle('bad', !ok);
+      if (!ok) missing.push(p[1]);
+    });
+    sel.classList.toggle('bad', state.week < 0);
+    if (state.week < 0) missing.push('a hétvége');
+    if (missing.length) {
+      status.textContent = 'Még hiányzik a lapról: ' + missing.join(', ') + '.';
+      status.classList.add('bad');
+      return false;
+    }
+    status.classList.remove('bad');
+    return true;
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+    var m = compose();
+    location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body);
+    status.textContent = 'Megnyílt a leveleződ a képeslappal. Küldd el, és egy napon belül visszahívunk.';
+  });
+  document.getElementById('messenger').addEventListener('click', function () {
+    if (!validate()) return;
+    var m = compose();
+    var text = m.subject + '\n' + m.body;
+    var done = function () { status.textContent = 'A képeslap szövegét kimásoltuk. Illeszd be a Messengerben, és küldd el.'; };
+    try { navigator.clipboard.writeText(text).then(done, function () { status.textContent = 'Nyisd meg a Messengert, és írd meg nekünk a hétvégét és a légvárat.'; }); } catch (err) { done(); }
+    window.open('https://m.me/pentektol', '_blank', 'noopener');
+  });
+
+  refresh();
+})();
+</script>
+<script src="switcher.js"></script>
+</body>
+</html>

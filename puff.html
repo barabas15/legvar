@@ -1,0 +1,1268 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>puff! – légvár gyerekszülinapra</title>
+<meta name="description" content="puff! légvárbérlés gyerekszülinapra: két vár 3–10 éveseknek, kiszállítással és felállítással Budapesten és környékén.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Puff Accent";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDBImdTo3j77e.woff2) format("woff2");
+  unicode-range: U+0150-0151, U+0170-0171;
+}
+:root {
+  --display: "Bagel Fat One", "Puff Accent", system-ui, sans-serif;
+  --ink: #3b1e54;
+  --ink-soft: #6a4d86;
+  --pink: #ff8fc7;
+  --pink-d: #ec71ae;
+  --lemon: #ffe066;
+  --lemon-d: #f3c73a;
+  --sky: #a8daff;
+  --sky-d: #74bff3;
+  --lilac: #cdb4ff;
+  --lilac-d: #a98bf0;
+  --mint: #bff2d8;
+  --wall: #ffeaf5;
+  --paper: #ffffff;
+  --puffy: inset 0 -7px 0 rgba(59, 30, 84, .14), inset 0 7px 12px rgba(255, 255, 255, .7);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--wall);
+  overflow-x: hidden;
+}
+h1, h2, h3, .display { font-family: var(--display); font-weight: 400; letter-spacing: .005em; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 12px; }
+.visually-hidden-focusable:focus { position: fixed !important; top: calc(var(--dsw-h, 40px) + 8px); left: 8px; z-index: 50; background: var(--paper); padding: .5rem 1rem; border-radius: 999px; }
+
+.room {
+  position: relative;
+  min-height: min(calc(100svh - var(--dsw-h, 40px)), 1000px);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 55% at 50% 100%, #f6dcff 0 60%, transparent 61%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .55) 0 44px, rgba(255, 255, 255, 0) 44px 88px),
+    linear-gradient(180deg, #ffe4f2 0%, #f4e6ff 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem 1.5rem;
+}
+.bunting { position: absolute; top: 0; left: 0; width: 100%; height: 96px; pointer-events: none; }
+.logo {
+  position: absolute;
+  top: 92px;
+  left: clamp(12px, 3vw, 40px);
+  z-index: 3;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: bob 5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+.logo svg { width: 20px; height: 70px; margin-top: -6px; }
+.wordmark {
+  position: relative;
+  display: inline-block;
+  font-family: var(--display);
+  font-size: clamp(2.3rem, 5vw, 3.3rem);
+  line-height: 1;
+  letter-spacing: .05em;
+  font-variant-ligatures: none;
+  color: var(--pink);
+  text-shadow: 0 1px 0 #f77db8, 0 2px 0 #ee72ae, 0 3px 0 #e467a3, 0 4px 0 #d95c98, 0 6px 0 var(--ink), 0 12px 16px rgba(59, 30, 84, .22);
+}
+.wordmark::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  text-shadow: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .7) 0 18%, rgba(255, 255, 255, 0) 40%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform: translateY(-1px);
+  pointer-events: none;
+}
+.wordmark-sm { font-size: 1.6rem; text-shadow: 0 1px 0 #ee72ae, 0 2px 0 #d95c98, 0 3px 0 var(--ink); }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+
+.room-head { position: relative; z-index: 2; text-align: center; max-width: 780px; margin: 3.4rem auto 0; }
+.room-head h1 { font-size: clamp(2.5rem, 7vw, 5.2rem); line-height: .98; margin: 0 0 .9rem; color: var(--ink); text-wrap: balance; }
+.room-head p { font-size: 1.15rem; color: var(--ink-soft); max-width: 46ch; margin: 0 auto; }
+.room-head p a { font-weight: 800; }
+
+.stage { position: relative; z-index: 1; flex: 1 1 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 1.5rem; min-height: 240px; margin-top: 1rem; }
+.castle-wrap { grid-column: 2; width: clamp(300px, calc((100svh - 480px) * 1.69), 720px); max-width: 100%; transform-origin: 50% 100%; }
+.castle-wrap svg { display: block; width: 100%; height: auto; overflow: visible; }
+.castle-wrap.is-full { animation: boing 1.4s cubic-bezier(.3, 0, .3, 1) 1, idle 2.6s ease-in-out 1.4s infinite; }
+@keyframes boing {
+  0% { transform: scale(1, 1); }
+  12% { transform: scale(1.12, .84); }
+  30% { transform: scale(.94, 1.1) translateY(-4%); }
+  48% { transform: scale(1.05, .95); }
+  66% { transform: scale(.98, 1.03); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes idle { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, .985); } }
+.fan-blades { transform-box: fill-box; transform-origin: center; }
+.is-pumping .fan-blades { animation: spin .35s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.controls { grid-column: 3; justify-self: start; position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-bottom: .5rem; }
+.pump {
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  border: 0;
+  background: radial-gradient(circle at 35% 30%, #ffc3e2 0 18%, var(--pink) 45%, var(--pink-d) 100%);
+  color: var(--ink);
+  font: 900 .98rem/1.2 "Nunito", system-ui, sans-serif;
+  box-shadow: inset 0 -10px 0 rgba(59, 30, 84, .18), inset 0 10px 18px rgba(255, 255, 255, .6), 0 18px 26px -12px rgba(59, 30, 84, .55), 0 0 0 8px rgba(255, 255, 255, .7);
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: transform .12s ease;
+}
+.pump svg { width: 38px; height: 38px; margin-bottom: .2rem; }
+.pump.is-down { transform: scale(.93, .88) translateY(4px); }
+.pump[disabled] { cursor: default; background: radial-gradient(circle at 35% 30%, #fff5c2 0 18%, var(--lemon) 45%, var(--lemon-d) 100%); }
+.pump:focus-visible { outline-offset: 10px; border-radius: 50%; }
+.gauge { text-align: center; }
+.gauge svg { width: 150px; height: 88px; display: block; }
+.gauge-num { font-family: var(--display); font-size: 1.5rem; line-height: 1; margin-top: .35rem; }
+.gauge-label { font-size: .85rem; font-weight: 700; color: var(--ink-soft); }
+.room-status { position: relative; z-index: 3; text-align: center; min-height: 3.4rem; margin-top: 1rem; }
+.room-status p { margin: 0 0 .6rem; font-weight: 800; font-size: 1.1rem; }
+.confetti { position: absolute; inset: 0; pointer-events: none; z-index: 4; overflow: hidden; }
+.confetti i { position: absolute; display: block; border-radius: 3px; }
+.deco-balloon { position: absolute; z-index: 0; pointer-events: none; animation: bob 7s ease-in-out infinite; }
+
+.puff-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border: 0;
+  border-radius: 999px;
+  padding: .85rem 1.5rem;
+  font: 900 1rem/1.1 "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--lemon);
+  box-shadow: var(--puffy), 0 10px 18px -10px rgba(59, 30, 84, .5);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.puff-btn:hover { transform: translateY(-2px); color: var(--ink); }
+.puff-btn:active { transform: scale(.97, .93); }
+.puff-btn.pink { background: var(--pink); }
+.puff-btn.sky { background: var(--sky); }
+.puff-btn.ghost { background: rgba(255, 255, 255, .75); box-shadow: inset 0 0 0 3px var(--ink); }
+
+.sky-sec {
+  position: relative;
+  padding: 6rem 0 0;
+  background: linear-gradient(180deg, #c3e6ff 0%, #e6f5ff 70%);
+  overflow: hidden;
+}
+.sec-title { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1; margin: 0 0 .8rem; text-wrap: balance; }
+.sec-lead { font-size: 1.15rem; color: var(--ink-soft); max-width: 50ch; }
+.cloud-shape { position: absolute; background: #fff; border-radius: 999px; opacity: .85; }
+.sky-sec .container { position: relative; z-index: 1; }
+.cloud-shape::before, .cloud-shape::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+.cloud-shape::before { width: 55%; height: 170%; left: 14%; bottom: 20%; }
+.cloud-shape::after { width: 40%; height: 130%; right: 12%; bottom: 25%; }
+.balloon-field { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; margin-top: 1.5rem; padding-top: 5.5rem; }
+.tag-col { display: flex; flex-direction: column; align-items: center; }
+.tag-col.small { padding-top: 5rem; }
+.balloon {
+  position: relative;
+  width: min(300px, 82vw);
+  aspect-ratio: 300 / 340;
+  border-radius: 50% 50% 47% 53% / 56% 56% 44% 44%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.4rem 2rem 2.6rem;
+  box-shadow: inset -18px -22px 0 rgba(59, 30, 84, .08), inset 14px 16px 28px rgba(255, 255, 255, .55);
+  animation: sway 6s ease-in-out infinite;
+  transform-origin: 50% 110%;
+}
+.balloon::before { content: ""; position: absolute; top: 12%; left: 20%; width: 18%; height: 12%; border-radius: 50%; background: rgba(255, 255, 255, .7); transform: rotate(-30deg); }
+.balloon::after { content: ""; position: absolute; bottom: -12px; left: 50%; width: 22px; height: 16px; transform: translateX(-50%); background: inherit; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.tag-col.big .balloon { width: min(350px, 88vw); animation-delay: -2.4s; }
+.balloon.pink { background: var(--pink); }
+.balloon.lilac { background: var(--lilac); }
+.balloon h3 { font-size: clamp(1.45rem, 2.6vw, 1.8rem); line-height: 1.02; margin: 0 0 .5rem; }
+.balloon .price { font-family: var(--display); font-size: clamp(1.7rem, 3.4vw, 2.2rem); line-height: 1; margin: 0; }
+.balloon .per { font-weight: 800; font-size: .9rem; margin: .1rem 0 .7rem; }
+.balloon ul { list-style: none; padding: 0; margin: 0; font-weight: 700; font-size: .95rem; line-height: 1.45; }
+@keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+.tag-string { width: 40px; height: 120px; display: block; margin-top: 6px; }
+.tag-col.big .tag-string { height: 90px; }
+.tag-castle { width: 100%; max-width: 440px; margin-top: -4px; position: relative; z-index: 1; }
+.tag-castle svg { display: block; width: 100%; height: auto; }
+.tag-pick { margin-top: .9rem; }
+.duo-note {
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  transform: translateX(-50%) rotate(-3deg);
+  background: #fff;
+  border-radius: 40px;
+  padding: .8rem 1.3rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 10px 20px -12px rgba(59, 30, 84, .4);
+  max-width: 240px;
+  line-height: 1.3;
+  z-index: 2;
+}
+.duo-note strong { font-family: var(--display); font-weight: 400; display: block; font-size: 1.4rem; color: var(--pink-d); }
+.lawn { height: 80px; margin-top: -40px; background: var(--mint); position: relative; }
+.lawn::before { content: ""; position: absolute; left: 0; right: 0; top: -28px; height: 30px; background: radial-gradient(circle at 30px 30px, var(--mint) 29px, transparent 30px) 0 0 / 60px 30px repeat-x; }
+
+.garden-sec { background: var(--mint); padding: 4.5rem 0 6rem; }
+.scene-wrap { position: relative; margin-top: 2.5rem; }
+.scene { position: relative; width: 100%; aspect-ratio: 1000 / 560; border-radius: 48px; background: linear-gradient(180deg, #d9f0ff 0%, #f1f9ff 78%); overflow: visible; box-shadow: inset 0 0 0 6px #fff; }
+.scene > svg { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 48px; }
+.spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  cursor: pointer;
+  color: var(--ink);
+  font: 900 .9rem/1 "Nunito", system-ui, sans-serif;
+  z-index: 2;
+}
+.spot-dot { position: relative; width: 34px; height: 34px; border-radius: 50%; background: var(--pink); box-shadow: var(--puffy), 0 0 0 5px #fff; display: grid; place-items: center; flex: none; }
+.spot-dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 4px solid var(--pink); animation: ping 2.2s ease-out infinite; }
+.spot-dot b { font-size: 1.15rem; line-height: 1; transition: transform .2s ease; }
+.spot[aria-expanded="true"] .spot-dot { background: var(--lemon); }
+.spot[aria-expanded="true"] .spot-dot::after { animation: none; opacity: 0; }
+.spot[aria-expanded="true"] .spot-dot b { transform: rotate(45deg); }
+.spot-name { background: #fff; padding: .35rem .6rem; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 10px -6px rgba(59, 30, 84, .5); }
+.spot:focus-visible { outline: none; }
+.spot:focus-visible .spot-dot { outline: 3px solid var(--ink); outline-offset: 6px; }
+@keyframes ping { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+.bubble {
+  position: absolute;
+  z-index: 5;
+  width: min(330px, 86vw);
+  background: #fff;
+  border-radius: 30px;
+  padding: 1.2rem 1.4rem 1.3rem;
+  box-shadow: 0 22px 40px -20px rgba(59, 30, 84, .55);
+}
+.bubble::after { content: ""; position: absolute; left: var(--arrow-x, 50%); width: 26px; height: 16px; background: #fff; transform: translateX(-50%); }
+.bubble.is-below::after { top: -14px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.bubble.is-above::after { bottom: -14px; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.bubble h3 { font-size: 1.35rem; margin: 0 0 .4rem; }
+.bubble p { margin: 0; color: var(--ink-soft); }
+.bubble-close { position: absolute; top: .7rem; right: .8rem; border: 0; background: var(--wall); width: 32px; height: 32px; border-radius: 50%; font-weight: 900; color: var(--ink); cursor: pointer; }
+
+.planner-sec { padding: 6rem 0 5rem; background: linear-gradient(180deg, var(--mint) 0, var(--wall) 180px); }
+.planner {
+  position: relative;
+  background: #fff;
+  border-radius: 44px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 2.5rem;
+  box-shadow: 0 30px 60px -36px rgba(59, 30, 84, .5);
+}
+.planner::before { content: ""; position: absolute; left: 36px; right: 36px; top: -18px; height: 20px; background: radial-gradient(circle at 18px 20px, #fff 17px, transparent 18px) 0 0 / 36px 20px repeat-x; }
+.plan-balloons { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; justify-content: space-between; gap: .5rem; max-width: 560px; }
+.plan-balloons li { flex: 1; display: flex; flex-direction: column; align-items: center; font-weight: 800; font-size: .85rem; color: var(--ink-soft); }
+.plan-balloons svg { width: 46px; height: 64px; transform: scale(.55); transform-origin: 50% 100%; transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+.plan-balloons li.is-current svg { transform: scale(.85); }
+.plan-balloons li.is-current { --bf: var(--lemon); }
+.plan-balloons li.is-done svg { transform: scale(1); }
+.plan-balloons li.is-done { --bf: var(--pink); }
+.plan-balloons li.is-current, .plan-balloons li.is-done { color: var(--ink); }
+.step { border: 0; padding: 0; margin: 0; min-width: 0; }
+.step[hidden] { display: none !important; }
+.step legend { font-family: var(--display); font-size: clamp(1.7rem, 3.6vw, 2.4rem); line-height: 1.05; margin-bottom: .5rem; float: none; }
+.step-hint { color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 55ch; }
+.choice-row { display: flex; flex-wrap: wrap; gap: .8rem; }
+.age-choice input, .garden-choice input { position: absolute; opacity: 0; pointer-events: none; }
+.age-choice label {
+  width: 68px;
+  height: 78px;
+  border-radius: 50% 50% 46% 54% / 56% 56% 44% 44%;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  background: #f4ecfb;
+  cursor: pointer;
+  box-shadow: inset -6px -8px 0 rgba(59, 30, 84, .07);
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), background-color .2s ease;
+}
+.age-choice input:checked + label { background: var(--pink); transform: scale(1.12) rotate(-4deg); }
+.age-choice input:focus-visible + label, .garden-choice input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 4px; }
+.garden-choice { flex: 1 1 200px; }
+.garden-choice label {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  height: 100%;
+  padding: 1.1rem 1.2rem;
+  border-radius: 28px;
+  background: #f4ecfb;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.3;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.garden-choice label strong { font-family: var(--display); font-weight: 400; font-size: 1.25rem; }
+.garden-choice label span { color: var(--ink-soft); font-size: .95rem; }
+.garden-choice svg { width: 64px; height: 48px; }
+.garden-choice input:checked + label { background: var(--sky); transform: translateY(-3px); }
+.stepper { display: inline-flex; align-items: center; gap: 1rem; background: #f4ecfb; border-radius: 999px; padding: .5rem; }
+.stepper button { width: 58px; height: 58px; border-radius: 50%; border: 0; background: var(--lemon); font: 900 1.8rem/1 "Nunito", sans-serif; color: var(--ink); box-shadow: var(--puffy); cursor: pointer; }
+.stepper output { font-family: var(--display); font-size: 2.6rem; min-width: 3.2ch; text-align: center; line-height: 1; }
+.kid-hint { margin-top: 1rem; font-weight: 700; min-height: 1.6em; }
+.field-label { font-weight: 800; margin-bottom: .35rem; display: block; }
+.planner .form-control, .planner .form-select { border: 3px solid #eee3f7; border-radius: 20px; padding: .75rem 1rem; font-size: 1rem; color: var(--ink); background-color: #fff; }
+.planner .form-control:focus, .planner .form-select:focus { border-color: var(--lilac-d); box-shadow: 0 0 0 4px rgba(169, 139, 240, .25); }
+.planner .form-control.is-invalid { border-color: #d6336c; }
+.plan-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+.plan-msg { font-weight: 800; color: #b3265e; min-height: 1.5em; margin: 1rem 0 0; }
+
+.invite-wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.invite {
+  position: relative;
+  background: #fff7fb;
+  border-radius: 12px;
+  padding: 2.4rem 2rem 2rem;
+  --scallop: radial-gradient(circle at 10px 10px, transparent 9px, #000 10px);
+  box-shadow: 0 0 0 10px #fff, 0 0 0 13px var(--pink), 0 26px 40px -24px rgba(59, 30, 84, .5);
+  background-image: radial-gradient(circle, rgba(255, 143, 199, .25) 2px, transparent 2.5px), radial-gradient(circle, rgba(168, 218, 255, .35) 2px, transparent 2.5px);
+  background-size: 36px 36px, 36px 36px;
+  background-position: 0 0, 18px 18px;
+  transform: rotate(-1.2deg);
+}
+.invite-age { position: absolute; top: -34px; right: 22px; width: 84px; height: 96px; }
+.invite-age span { position: absolute; inset: 0 0 14px; display: grid; place-items: center; font-family: var(--display); font-size: 2.2rem; }
+.invite h3 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); line-height: 1.05; margin: 0 0 1rem; padding-right: 80px; }
+.invite p { margin: 0 0 1rem; font-size: 1.05rem; }
+.invite dl { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; margin: 0 0 1.2rem; }
+.invite dt { font-weight: 700; color: var(--ink-soft); }
+.invite dd { margin: 0; font-weight: 800; }
+.invite-price { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; border-top: 3px dotted var(--pink); padding-top: 1rem; }
+.invite-price strong { font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; }
+.why { background: #f4ecfb; border-radius: 28px; padding: 1.4rem; }
+.why h4 { font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin: 0 0 .4rem; }
+.why p { margin: 0 0 1rem; color: var(--ink-soft); }
+.swap-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.swap-row button { border: 0; border-radius: 999px; padding: .45rem .9rem; font-weight: 800; background: #fff; color: var(--ink); cursor: pointer; }
+.swap-row button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.send-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
+.send-status { font-weight: 800; margin-top: .9rem; min-height: 1.5em; }
+
+.cloud-foot { padding: 3rem 1rem 3.5rem; display: flex; justify-content: center; background: var(--wall); }
+.cloud {
+  position: relative;
+  background: #fff;
+  border-radius: 999px;
+  padding: 1.6rem 2.6rem 1.4rem;
+  max-width: 640px;
+  text-align: center;
+  font-size: .92rem;
+  box-shadow: 0 18px 30px -24px rgba(59, 30, 84, .5);
+}
+.cloud::before, .cloud::after { content: ""; position: absolute; background: #fff; border-radius: 50%; z-index: -1; }
+.cloud::before { width: 150px; height: 120px; left: 18%; top: -48px; }
+.cloud::after { width: 110px; height: 90px; right: 20%; top: -34px; }
+.cloud p { margin: .2rem 0 0; color: var(--ink-soft); }
+.cloud a { font-weight: 800; color: var(--ink); text-decoration: none; }
+.cloud a:hover { text-decoration: underline; }
+
+@media (max-width: 991.98px) {
+  .invite-wrap { grid-template-columns: 1fr; }
+  .stage { grid-template-columns: 1fr; justify-items: center; }
+  .castle-wrap, .controls { grid-column: 1; }
+  .castle-wrap { width: min(640px, 100%); }
+  .controls { flex-direction: row; justify-self: center; }
+}
+@media (max-width: 767.98px) {
+  .room { padding-top: 1rem; }
+  .room-head { margin-top: .5rem; }
+  .logo { position: relative; top: auto; left: auto; margin: 64px auto 0; animation: none; }
+  .logo svg { height: 26px; }
+  .balloon-field { grid-template-columns: 1fr; gap: 3.5rem; }
+  .tag-col.small { padding-top: 0; }
+  .duo-note { position: relative; left: auto; top: auto; transform: rotate(-3deg); margin: 0 auto; }
+  .scene { border-radius: 28px; }
+  .cloud-shape { display: none; }
+  .scene > svg { border-radius: 28px; }
+  .spot-name { display: none; }
+  .spot-dot { width: 30px; height: 30px; }
+  .bubble { position: relative; left: auto !important; top: auto !important; width: 100%; margin-top: 1.4rem; }
+  .bubble::after { display: none; }
+  .pump { width: 140px; height: 140px; font-size: .9rem; }
+  .controls { flex-direction: row; justify-self: center; }
+}
+@media (max-width: 420px) {
+  .age-choice label { width: 58px; height: 68px; font-size: 1.45rem; }
+  .stepper button { width: 50px; height: 50px; }
+  .invite { padding: 2.2rem 1.3rem 1.5rem; }
+  .invite h3 { padding-right: 64px; }
+  .invite-age { width: 70px; height: 80px; right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<a href="#tervezo" class="visually-hidden-focusable">Ugrás a szülinap-tervezőhöz</a>
+
+<svg width="0" height="0" class="position-absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="net" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M0 7h14M7 0v14" stroke="#fff" stroke-width="2.2" opacity=".32"/>
+    </pattern>
+    <symbol id="palota" viewBox="0 0 400 320">
+      <ellipse cx="200" cy="298" rx="176" ry="12" fill="#3b1e54" opacity=".13"/>
+      <rect x="30" y="228" width="340" height="62" rx="31" fill="#ffd84d"/>
+      <path d="M62 250h276" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".45"/>
+      <rect x="78" y="118" width="244" height="122" rx="28" fill="#c3a6ff"/>
+      <circle cx="98" cy="138" r="7" fill="#fff" opacity=".6"/><circle cx="303" cy="146" r="6" fill="#fff" opacity=".6"/><circle cx="106" cy="218" r="5" fill="#fff" opacity=".6"/><circle cx="296" cy="214" r="8" fill="#fff" opacity=".6"/>
+      <rect x="122" y="142" width="156" height="92" rx="46" fill="#5a3a8e"/>
+      <rect x="122" y="142" width="156" height="92" rx="46" fill="url(#net)"/>
+      <path d="M100 124 Q200 48 300 124" fill="none" stroke="#ff8fc7" stroke-width="24" stroke-linecap="round"/>
+      <path d="M116 114 Q200 62 284 114" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+      <path d="M200 84v-36" stroke="#3b1e54" stroke-width="4" stroke-linecap="round"/>
+      <path d="M202 48l30 10-30 10z" fill="#ffe066"/>
+      <rect x="36" y="92" width="60" height="150" rx="30" fill="#ff8fc7"/>
+      <path d="M52 112v108" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+      <path d="M30 104 Q66 20 102 104 Z" fill="#8fd0ff"/>
+      <circle cx="66" cy="58" r="10" fill="#ffe066"/>
+      <circle cx="58" cy="160" r="6" fill="#fff" opacity=".6"/><circle cx="76" cy="196" r="5" fill="#fff" opacity=".6"/>
+      <rect x="304" y="92" width="60" height="150" rx="30" fill="#ff8fc7"/>
+      <path d="M320 112v108" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+      <path d="M298 104 Q334 20 370 104 Z" fill="#8fd0ff"/>
+      <circle cx="334" cy="58" r="10" fill="#ffe066"/>
+      <circle cx="342" cy="170" r="6" fill="#fff" opacity=".6"/>
+    </symbol>
+    <symbol id="oriasi" viewBox="0 0 520 320">
+      <ellipse cx="260" cy="300" rx="240" ry="12" fill="#3b1e54" opacity=".13"/>
+      <rect x="18" y="234" width="484" height="58" rx="29" fill="#ffd84d"/>
+      <path d="M50 256h420" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".45"/>
+      <path d="M246 108 L304 108 Q386 168 496 250 L496 286 L392 286 Q330 190 246 172 Z" fill="#8fd0ff"/>
+      <path d="M272 124 Q360 176 446 268" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+      <path d="M292 116 Q380 170 476 256" fill="none" stroke="#5a3a8e" stroke-width="4" stroke-linecap="round" opacity=".25"/>
+      <rect x="40" y="98" width="222" height="150" rx="26" fill="#ff8fc7"/>
+      <circle cx="60" cy="120" r="6" fill="#fff" opacity=".6"/><circle cx="244" cy="230" r="7" fill="#fff" opacity=".6"/><circle cx="62" cy="226" r="5" fill="#fff" opacity=".6"/>
+      <rect x="80" y="126" width="142" height="102" rx="42" fill="#5a3a8e"/>
+      <rect x="80" y="126" width="142" height="102" rx="42" fill="url(#net)"/>
+      <circle cx="104" cy="206" r="9" fill="#ffe066"/><circle cx="130" cy="190" r="8" fill="#a8daff"/><circle cx="118" cy="168" r="8" fill="#ff8fc7"/>
+      <path d="M72 106 Q151 56 230 106" fill="none" stroke="#ffe066" stroke-width="20" stroke-linecap="round"/>
+      <rect x="24" y="68" width="50" height="182" rx="25" fill="#c3a6ff"/>
+      <rect x="228" y="68" width="50" height="182" rx="25" fill="#c3a6ff"/>
+      <path d="M38 88v140M242 88v140" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+      <circle cx="49" cy="58" r="24" fill="#ffe066"/>
+      <circle cx="253" cy="58" r="24" fill="#ffe066"/>
+      <circle cx="41" cy="50" r="7" fill="#fff" opacity=".7"/><circle cx="245" cy="50" r="7" fill="#fff" opacity=".7"/>
+    </symbol>
+    <symbol id="balloon-mini" viewBox="0 0 46 64">
+      <path style="fill: var(--bf, #eee3f7)" d="M23 2c11 0 20 9 20 21 0 13-10 24-20 24S3 36 3 23C3 11 12 2 23 2z"/>
+      <path style="fill: var(--bf, #eee3f7)" d="M19 49h8l-4-4z"/>
+      <path d="M23 49c-3 5 3 8 0 14" fill="none" stroke="#3b1e54" stroke-width="1.6" stroke-linecap="round"/>
+      <ellipse cx="15" cy="15" rx="4" ry="6" fill="#fff" opacity=".6" transform="rotate(30 15 15)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <section class="room" id="room" aria-labelledby="room-title">
+    <svg class="bunting" id="bunting" aria-hidden="true" focusable="false" preserveAspectRatio="none"></svg>
+    <svg class="deco-balloon d-none d-md-block" style="right:4%;top:18%;width:70px" viewBox="0 0 46 64" aria-hidden="true"><path d="M23 2c11 0 20 9 20 21 0 13-10 24-20 24S3 36 3 23C3 11 12 2 23 2z" fill="#a8daff"/><path d="M23 49c-3 5 3 8 0 14" fill="none" stroke="#3b1e54" stroke-width="1.4"/><ellipse cx="15" cy="15" rx="4" ry="6" fill="#fff" opacity=".6"/></svg>
+    <svg class="deco-balloon d-none d-md-block" style="right:10%;top:30%;width:52px;animation-delay:-3s" viewBox="0 0 46 64" aria-hidden="true"><path d="M23 2c11 0 20 9 20 21 0 13-10 24-20 24S3 36 3 23C3 11 12 2 23 2z" fill="#ffe066"/><path d="M23 49c-3 5 3 8 0 14" fill="none" stroke="#3b1e54" stroke-width="1.4"/><ellipse cx="15" cy="15" rx="4" ry="6" fill="#fff" opacity=".6"/></svg>
+    <svg class="deco-balloon d-none d-lg-block" style="left:6%;top:44%;width:58px;animation-delay:-1.5s" viewBox="0 0 46 64" aria-hidden="true"><path d="M23 2c11 0 20 9 20 21 0 13-10 24-20 24S3 36 3 23C3 11 12 2 23 2z" fill="#cdb4ff"/><path d="M23 49c-3 5 3 8 0 14" fill="none" stroke="#3b1e54" stroke-width="1.4"/><ellipse cx="15" cy="15" rx="4" ry="6" fill="#fff" opacity=".6"/></svg>
+
+    <a href="#room" class="logo" aria-label="puff! légvár, kezdőlap">
+      <span class="wordmark" data-text="puff!">puff!</span>
+      <svg viewBox="0 0 20 70" aria-hidden="true"><path d="M10 0c-8 12 8 22 0 34s8 22 0 36" fill="none" stroke="#3b1e54" stroke-width="2" stroke-linecap="round"/></svg>
+    </a>
+
+    <div class="room-head">
+      <h1 id="room-title">Fújjuk fel a szülinapot!</h1>
+      <p>Légvár 3–10 éveseknek: kiszállítjuk, felállítjuk, este elvisszük. Tartsd lenyomva a pumpát, és nézd, mi lesz. Vagy hívj most: <a href="tel:+36301234567">+36 30 123 4567</a>.</p>
+    </div>
+
+    <div class="stage">
+      <div class="castle-wrap" id="castleWrap">
+        <svg viewBox="-20 0 540 320" role="img" aria-labelledby="castle-desc">
+          <title id="castle-desc">A Pöttyös Palota légvár, a pumpával lehet felfújni</title>
+          <ellipse id="shadow" cx="200" cy="298" rx="180" ry="12" fill="#3b1e54" opacity=".14"/>
+          <path d="M368 272 C400 306 424 248 444 270" fill="none" stroke="#ff8fc7" stroke-width="13" stroke-linecap="round"/>
+          <g id="blower">
+            <rect x="432" y="238" width="74" height="54" rx="16" fill="#a8daff"/>
+            <rect x="432" y="280" width="74" height="12" rx="6" fill="#74bff3"/>
+            <circle cx="469" cy="262" r="19" fill="#fff"/>
+            <g class="fan-blades">
+              <path d="M469 262 l0 -15 a6 6 0 0 1 6 6z M469 262 l15 0 a6 6 0 0 1 -6 6z M469 262 l0 15 a6 6 0 0 1 -6 -6z M469 262 l-15 0 a6 6 0 0 1 6 -6z" fill="#ff8fc7"/>
+              <circle cx="469" cy="262" r="4" fill="#3b1e54"/>
+            </g>
+          </g>
+          <g id="castle">
+            <rect x="30" y="228" width="340" height="62" rx="31" fill="#ffd84d"/>
+            <path d="M62 250h276" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".45"/>
+            <rect x="78" y="118" width="244" height="122" rx="28" fill="#c3a6ff"/>
+            <circle cx="98" cy="138" r="7" fill="#fff" opacity=".6"/><circle cx="303" cy="146" r="6" fill="#fff" opacity=".6"/><circle cx="106" cy="218" r="5" fill="#fff" opacity=".6"/><circle cx="296" cy="214" r="8" fill="#fff" opacity=".6"/>
+            <rect x="122" y="142" width="156" height="92" rx="46" fill="#5a3a8e"/>
+            <rect x="122" y="142" width="156" height="92" rx="46" fill="url(#net)"/>
+            <path d="M100 124 Q200 48 300 124" fill="none" stroke="#ff8fc7" stroke-width="24" stroke-linecap="round"/>
+            <path d="M116 114 Q200 62 284 114" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+            <path d="M200 84v-36" stroke="#3b1e54" stroke-width="4" stroke-linecap="round"/>
+            <path d="M202 48l30 10-30 10z" fill="#ffe066"/>
+            <g id="turretL">
+              <rect x="36" y="92" width="60" height="150" rx="30" fill="#ff8fc7"/>
+              <path d="M52 112v108" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+              <path d="M30 104 Q66 20 102 104 Z" fill="#8fd0ff"/>
+              <circle cx="66" cy="58" r="10" fill="#ffe066"/>
+              <circle cx="58" cy="160" r="6" fill="#fff" opacity=".6"/>
+            </g>
+            <g id="turretR">
+              <rect x="304" y="92" width="60" height="150" rx="30" fill="#ff8fc7"/>
+              <path d="M320 112v108" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+              <path d="M298 104 Q334 20 370 104 Z" fill="#8fd0ff"/>
+              <circle cx="334" cy="58" r="10" fill="#ffe066"/>
+              <circle cx="342" cy="170" r="6" fill="#fff" opacity=".6"/>
+            </g>
+          </g>
+          <g id="puddle">
+            <path d="M24 292 C22 266 70 262 104 266 C130 252 170 262 200 254 C236 246 262 262 296 256 C332 252 380 264 378 292 Z" fill="#c3a6ff"/>
+            <ellipse cx="72" cy="284" rx="46" ry="13" fill="#ff8fc7"/>
+            <ellipse cx="330" cy="283" rx="48" ry="13" fill="#ff8fc7"/>
+            <path d="M40 276 q14 -14 34 -6" fill="none" stroke="#8fd0ff" stroke-width="10" stroke-linecap="round"/>
+            <path d="M318 270 q20 -10 36 2" fill="none" stroke="#8fd0ff" stroke-width="10" stroke-linecap="round"/>
+            <rect x="26" y="284" width="352" height="10" rx="5" fill="#ffd84d"/>
+            <path d="M110 272 q15 -7 30 0 M190 264 q12 -9 27 -2 M246 276 q18 -6 30 2 M150 284 q10 -5 20 0" fill="none" stroke="#5a3a8e" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+          </g>
+        </svg>
+      </div>
+      <div class="controls">
+      <button type="button" class="pump" id="pump" aria-describedby="pump-help">
+        <span>
+          <svg viewBox="0 0 38 38" aria-hidden="true"><path d="M8 6h22M19 6v8" stroke="#3b1e54" stroke-width="4" stroke-linecap="round"/><rect x="12" y="14" width="14" height="18" rx="5" fill="#fff"/><path d="M26 26c6 0 8 3 8 8" fill="none" stroke="#3b1e54" stroke-width="3" stroke-linecap="round"/></svg>
+          <span class="d-block" id="pump-text">Tartsd lenyomva, és fújd fel!</span>
+        </span>
+      </button>
+      <div class="gauge">
+        <svg viewBox="0 0 150 88" role="progressbar" id="gauge" aria-label="Felfújtság" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#ff8fc7"/><stop offset="1" stop-color="#ffd84d"/></linearGradient></defs>
+          <path d="M15 78 A60 60 0 0 1 135 78" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/>
+          <path id="gaugeArc" d="M15 78 A60 60 0 0 1 135 78" fill="none" stroke="url(#gg)" stroke-width="16" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+          <line id="needle" x1="75" y1="78" x2="75" y2="30" stroke="#3b1e54" stroke-width="5" stroke-linecap="round" transform="rotate(-90 75 78)"/>
+          <circle cx="75" cy="78" r="8" fill="#3b1e54"/>
+        </svg>
+        <div class="gauge-num" id="gaugeNum">0%</div>
+        <div class="gauge-label">nyomás</div>
+      </div>
+    </div>
+    </div>
+
+    <p id="pump-help" class="visually-hidden">Tartsd lenyomva az egérgombot, az ujjad vagy a szóköz billentyűt. Ha elengeded, a vár lassan leereszt.</p>
+    <div class="room-status" id="roomStatus" aria-live="polite"></div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </section>
+
+  <section class="sky-sec" aria-labelledby="tags-title">
+    <span class="cloud-shape" style="width:180px;height:46px;left:6%;top:70px" aria-hidden="true"></span>
+    <span class="cloud-shape" style="width:120px;height:32px;right:9%;top:150px" aria-hidden="true"></span>
+    <div class="container">
+      <div class="text-center mx-auto" style="max-width:720px">
+        <h2 class="sec-title" id="tags-title">Két vár, két méret</h2>
+        <p class="sec-lead mx-auto mb-0">A kisebbik a legkisebbeknek készült, a nagyobbikon a tízévesek is kitombolják magukat. Mindkettő ára tartalmazza a felállítást és a fertőtlenítést.</p>
+      </div>
+      <div class="balloon-field">
+        <p class="duo-note d-none d-md-block">A kettő együtt<strong>52 000 Ft</strong>egy napra</p>
+        <article class="tag-col small" aria-labelledby="t-palota">
+          <div class="balloon pink">
+            <h3 id="t-palota">Pöttyös Palota</h3>
+            <p class="price">24 900 Ft</p>
+            <p class="per">egy napra, hétvégére 39 900 Ft</p>
+            <ul>
+              <li>4 × 4 méter</li>
+              <li>3–10 éveseknek</li>
+              <li>egyszerre 6 gyerek</li>
+            </ul>
+          </div>
+          <svg class="tag-string" viewBox="0 0 40 120" preserveAspectRatio="none" aria-hidden="true"><path d="M20 0c-10 20 10 40 0 60s10 40 0 60" fill="none" stroke="#3b1e54" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+          <div class="tag-castle"><svg viewBox="0 0 400 320" aria-hidden="true"><use href="#palota"/></svg></div>
+          <button type="button" class="puff-btn pink tag-pick" data-pick="palota">A Palotával tervezek</button>
+        </article>
+        <article class="tag-col big" aria-labelledby="t-oriasi">
+          <div class="balloon lilac">
+            <h3 id="t-oriasi">Csúszdás Óriás</h3>
+            <p class="price">34 900 Ft</p>
+            <p class="per">egy napra, hétvégére 54 900 Ft</p>
+            <ul>
+              <li>7 × 4 méter, 2,5 m-es csúszda</li>
+              <li>mászófal, 4–14 éveseknek</li>
+              <li>egyszerre 8 gyerek</li>
+            </ul>
+          </div>
+          <svg class="tag-string" viewBox="0 0 40 120" preserveAspectRatio="none" aria-hidden="true"><path d="M20 0c10 20 -10 40 0 60s-10 40 0 60" fill="none" stroke="#3b1e54" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+          <div class="tag-castle"><svg viewBox="0 0 520 320" aria-hidden="true"><use href="#oriasi"/></svg></div>
+          <button type="button" class="puff-btn sky tag-pick" data-pick="oriasi">Az Óriással tervezek</button>
+        </article>
+        <p class="duo-note d-md-none">A kettő együtt<strong>52 000 Ft</strong>egy napra</p>
+      </div>
+    </div>
+    <div class="lawn" aria-hidden="true"></div>
+  </section>
+
+  <section class="garden-sec" aria-labelledby="garden-title">
+    <div class="container">
+      <h2 class="sec-title" id="garden-title">Minden válasz ott van, ahol kérdeznéd</h2>
+      <p class="sec-lead mb-0">Nyomj a pöttyökre a kertben: áram, hely, időjárás, tisztaság, felügyelet és kiszállítás.</p>
+      <div class="scene-wrap">
+        <div class="scene" id="scene">
+          <svg viewBox="0 0 1000 560" aria-hidden="true" focusable="false">
+            <g id="rainCloud">
+              <path d="M760 110 c-30 0 -44 -40 -14 -54 c4 -34 52 -44 70 -16 c20 -26 70 -14 70 22 c34 2 36 48 2 48 z" fill="#fff"/>
+              <path d="M780 128 l-8 18 M812 128 l-8 18 M844 128 l-8 18 M876 128 l-8 18" stroke="#74bff3" stroke-width="5" stroke-linecap="round"/>
+              <path d="M650 70 c30 -6 50 4 70 0 M660 92 c26 -4 40 4 58 0" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+            </g>
+            <path d="M-10 150h176v330h-176z" fill="#ffeaf5"/>
+            <path d="M-20 160 L78 90 L176 160 Z" fill="#ff8fc7"/>
+            <rect x="22" y="210" width="90" height="80" rx="16" fill="#a8daff"/>
+            <path d="M67 210v80M22 250h90" stroke="#fff" stroke-width="6"/>
+            <rect x="118" y="330" width="30" height="40" rx="8" fill="#fff" stroke="#3b1e54" stroke-width="3"/>
+            <circle cx="128" cy="346" r="3" fill="#3b1e54"/><circle cx="138" cy="346" r="3" fill="#3b1e54"/>
+            <path d="M0 450 C160 430 320 460 500 446 C680 432 840 456 1000 440 L1000 560 L0 560 Z" fill="#bff2d8"/>
+            <path d="M133 370 C140 440 300 478 520 484 S740 480 776 452" fill="none" stroke="#3b1e54" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 0"/>
+            <g transform="translate(176 360)">
+              <path d="M8 0h52v40h-52z" fill="#ffe066" transform="skewX(-6)"/>
+              <rect x="0" y="40" width="70" height="14" rx="7" fill="#ffd84d"/>
+              <path d="M6 54v36M64 54v36" stroke="#3b1e54" stroke-width="5" stroke-linecap="round"/>
+              <path d="M10 8h40M10 20h40M10 32h40" stroke="#fff" stroke-width="4" opacity=".7"/>
+            </g>
+            <use href="#oriasi" x="232" y="156" width="520" height="320"/>
+            <g transform="translate(748 404)">
+              <rect x="0" y="0" width="58" height="44" rx="12" fill="#a8daff"/>
+              <circle cx="29" cy="20" r="13" fill="#fff"/>
+              <circle cx="29" cy="20" r="4" fill="#3b1e54"/>
+            </g>
+            <g stroke="#3b1e54" stroke-width="3" stroke-linecap="round">
+              <path d="M252 512 H732"/>
+              <path d="M252 500 V524 M732 500 V524"/>
+            </g>
+            <rect x="436" y="496" width="112" height="32" rx="16" fill="#fff"/>
+            <text x="492" y="518" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="900" font-size="18" fill="#3b1e54">8 × 5 m</text>
+            <g fill="#ffe066">
+              <path d="M420 238 l6 14 14 6 -14 6 -6 14 -6 -14 -14 -6 14 -6z"/>
+              <path d="M452 214 l4 8 8 4 -8 4 -4 8 -4 -8 -8 -4 8 -4z"/>
+            </g>
+            <g transform="translate(832 368)">
+              <path d="M0 26 C0 10 10 0 26 0 H100 C120 0 128 14 136 32 L150 44 C156 48 158 54 158 60 V76 H0 Z" fill="#fff"/>
+              <path d="M104 8 H116 C126 8 132 20 136 34 H104 Z" fill="#a8daff"/>
+              <rect x="0" y="50" width="158" height="10" fill="#ff8fc7"/>
+              <text x="48" y="40" text-anchor="middle" font-family="'Bagel Fat One', sans-serif" font-size="24" fill="#ff8fc7">puff!</text>
+              <circle cx="34" cy="78" r="15" fill="#3b1e54"/><circle cx="34" cy="78" r="6" fill="#fff"/>
+              <circle cx="122" cy="78" r="15" fill="#3b1e54"/><circle cx="122" cy="78" r="6" fill="#fff"/>
+            </g>
+          </svg>
+          <button type="button" class="spot" style="left:13.3%;top:61.8%" data-spot="aram" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Áram</span></button>
+          <button type="button" class="spot" style="left:21%;top:70%" data-spot="felugyelet" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Felügyelet</span></button>
+          <button type="button" class="spot" style="left:43%;top:44%" data-spot="tiszta" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Tisztaság</span></button>
+          <button type="button" class="spot" style="left:38%;top:91.4%" data-spot="hely" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Hely</span></button>
+          <button type="button" class="spot" style="left:81%;top:15%" data-spot="ido" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Eső és szél</span></button>
+          <button type="button" class="spot" style="left:92%;top:63%" data-spot="kiszallitas" aria-expanded="false" aria-controls="bubble"><span class="spot-dot"><b aria-hidden="true">+</b></span><span class="spot-name">Kiszállítás</span></button>
+        </div>
+        <div class="bubble" id="bubble" role="region" aria-live="polite" hidden>
+            <button type="button" class="bubble-close" id="bubbleClose" aria-label="Buborék bezárása">×</button>
+            <h3 id="bubbleTitle"></h3>
+            <p id="bubbleText"></p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="planner-sec" id="tervezo" aria-labelledby="plan-title">
+    <div class="container">
+      <h2 class="sec-title" id="plan-title">Szülinap-tervező</h2>
+      <p class="sec-lead mb-0">Négy kérdés, és megmondjuk, melyik vár illik a bulihoz. A végén kapsz egy meghívót, amit egy gombnyomással elküldhetsz nekünk.</p>
+      <div class="planner">
+        <ol class="plan-balloons" id="planBalloons" aria-label="A tervezés lépései">
+          <li class="is-current"><svg viewBox="0 0 46 64" aria-hidden="true"><use href="#balloon-mini"/></svg>Kor</li>
+          <li><svg viewBox="0 0 46 64" aria-hidden="true"><use href="#balloon-mini"/></svg>Vendégek</li>
+          <li><svg viewBox="0 0 46 64" aria-hidden="true"><use href="#balloon-mini"/></svg>Kert</li>
+          <li><svg viewBox="0 0 46 64" aria-hidden="true"><use href="#balloon-mini"/></svg>Időpont</li>
+        </ol>
+        <form id="planner" novalidate>
+          <fieldset class="step" data-step="0">
+            <legend>Hány éves lesz az ünnepelt?</legend>
+            <p class="step-hint">A kicsiknek más vár való, mint a nagyobbaknak.</p>
+            <div class="choice-row" id="ageRow"></div>
+            <div class="mt-4" style="max-width:360px">
+              <label class="field-label" for="kidName">Hogy hívják? <span class="fw-normal">(nem kötelező)</span></label>
+              <input class="form-control" id="kidName" autocomplete="off" placeholder="pl. Bence">
+            </div>
+          </fieldset>
+          <fieldset class="step" data-step="1" hidden>
+            <legend>Hány gyerek jön a buliba?</legend>
+            <p class="step-hint">Nagyjából is elég. A testvéreket is számold bele.</p>
+            <div class="stepper">
+              <button type="button" id="kidsMinus" aria-label="Eggyel kevesebb gyerek">−</button>
+              <output id="kidsOut" aria-live="polite">8</output>
+              <button type="button" id="kidsPlus" aria-label="Eggyel több gyerek">+</button>
+            </div>
+            <p class="kid-hint" id="kidHint"></p>
+          </fieldset>
+          <fieldset class="step" data-step="2" hidden>
+            <legend>Mekkora a kert?</legend>
+            <p class="step-hint">Sík, füves terület a legjobb. A Palotához 5 × 5, az Óriáshoz 8 × 5 méter kell.</p>
+            <div class="choice-row">
+              <div class="garden-choice"><input type="radio" name="garden" id="g-small" value="small"><label for="g-small"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="16" y="14" width="32" height="28" rx="8" fill="#bff2d8"/><rect x="24" y="22" width="16" height="12" rx="4" fill="#ff8fc7"/></svg><strong>Kicsi</strong><span>Kb. 5 × 5 méter jut a várra.</span></label></div>
+              <div class="garden-choice"><input type="radio" name="garden" id="g-mid" value="mid"><label for="g-mid"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="4" y="12" width="56" height="32" rx="8" fill="#bff2d8"/><rect x="14" y="20" width="36" height="14" rx="4" fill="#cdb4ff"/></svg><strong>Elég nagy</strong><span>A 8 × 5 méter is kényelmesen elfér.</span></label></div>
+              <div class="garden-choice"><input type="radio" name="garden" id="g-huge" value="huge"><label for="g-huge"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="0" y="6" width="64" height="40" rx="8" fill="#bff2d8"/><rect x="6" y="14" width="22" height="16" rx="4" fill="#ff8fc7"/><rect x="32" y="16" width="26" height="14" rx="4" fill="#cdb4ff"/></svg><strong>Nagyon nagy</strong><span>Mindkét vár elférne egymás mellett.</span></label></div>
+              <div class="garden-choice"><input type="radio" name="garden" id="g-unknown" value="unknown"><label for="g-unknown"><svg viewBox="0 0 64 48" aria-hidden="true"><rect x="8" y="10" width="48" height="32" rx="8" fill="#eee3f7"/><text x="32" y="34" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="900" font-size="22" fill="#3b1e54">?</text></svg><strong>Még nem mértem le</strong><span>Semmi gond, a végén szólunk, mit mérj.</span></label></div>
+            </div>
+          </fieldset>
+          <fieldset class="step" data-step="3" hidden>
+            <legend>Mikor és hol lesz a buli?</legend>
+            <p class="step-hint">Ezek alapján tudjuk megnézni, szabad-e a vár.</p>
+            <div class="row g-3" style="max-width:760px">
+              <div class="col-sm-6"><label class="field-label" for="pDate">Dátum</label><input class="form-control" type="date" id="pDate" required></div>
+              <div class="col-sm-6"><label class="field-label" for="pTime">Napszak</label><select class="form-select" id="pTime"><option>Délután (13–18 óra)</option><option>Délelőtt (9–13 óra)</option><option>Egész nap</option></select></div>
+              <div class="col-12"><label class="field-label" for="pPlace">Település</label><input class="form-control" id="pPlace" placeholder="pl. Budaörs" autocomplete="address-level2"></div>
+              <div class="col-sm-6"><label class="field-label" for="pName">A te neved</label><input class="form-control" id="pName" autocomplete="name" required></div>
+              <div class="col-sm-6"><label class="field-label" for="pPhone">Telefonszámod</label><input class="form-control" type="tel" id="pPhone" autocomplete="tel" required></div>
+            </div>
+          </fieldset>
+          <div class="step" data-step="4" hidden>
+            <div class="invite-wrap">
+              <article class="invite" aria-labelledby="invTitle">
+                <div class="invite-age" aria-hidden="true"><svg viewBox="0 0 46 64" width="84" height="96"><path d="M23 2c11 0 20 9 20 21 0 13-10 24-20 24S3 36 3 23C3 11 12 2 23 2z" fill="#ffe066"/><path d="M19 49h8l-4-4z" fill="#ffe066"/><path d="M23 49c-3 5 3 8 0 14" fill="none" stroke="#3b1e54" stroke-width="1.6"/></svg><span id="invAge">6</span></div>
+                <h3 id="invTitle">Kedves Csúszdás Óriás!</h3>
+                <p id="invText"></p>
+                <dl id="invList"></dl>
+                <div class="invite-price"><strong id="invPrice"></strong><span id="invPer">egy napra, a felállítással együtt</span></div>
+              </article>
+              <div>
+                <div class="why">
+                  <h4>Miért ez a vár?</h4>
+                  <p id="whyText"></p>
+                  <div class="swap-row" role="group" aria-label="Vár kiválasztása">
+                    <button type="button" data-swap="palota" aria-pressed="false">Pöttyös Palota</button>
+                    <button type="button" data-swap="oriasi" aria-pressed="false">Csúszdás Óriás</button>
+                    <button type="button" data-swap="both" aria-pressed="false">Mindkettő</button>
+                  </div>
+                </div>
+                <div class="send-row">
+                  <button type="button" class="puff-btn pink" id="sendMail">Küldés e-mailben</button>
+                  <button type="button" class="puff-btn sky" id="sendMsg">Küldés Messengeren</button>
+                </div>
+                <p class="send-status" id="sendStatus" aria-live="polite"></p>
+                <p class="mb-0">Inkább beszélnél? Hívj: <a href="tel:+36301234567" class="fw-bold">+36 30 123 4567</a></p>
+              </div>
+            </div>
+          </div>
+          <p class="plan-msg" id="planMsg" aria-live="assertive"></p>
+          <div class="plan-nav">
+            <button type="button" class="puff-btn ghost" id="planBack" hidden>Vissza</button>
+            <button type="button" class="puff-btn" id="planNext">Tovább</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="cloud-foot">
+  <div class="cloud">
+    <span class="wordmark wordmark-sm" data-text="puff!">puff!</span>
+    <p>Légvárbérlés gyerekszülinapra, Budapesten és 30 km-es körzetében.</p>
+    <p><a href="tel:+36301234567">+36 30 123 4567</a> vagy <a href="mailto:hello@puff-legvar.hu">hello@puff-legvar.hu</a></p>
+    <p>© 2026 puff! légvár</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var bunting = document.getElementById('bunting');
+  function drawBunting() {
+    var w = bunting.clientWidth || window.innerWidth;
+    var colors = ['#ff8fc7', '#ffe066', '#a8daff', '#cdb4ff', '#bff2d8'];
+    var n = Math.max(8, Math.round(w / 64));
+    var step = w / n;
+    var html = '<path d="M0 10 Q' + (w / 2) + ' 70 ' + w + ' 10" fill="none" stroke="#3b1e54" stroke-width="2"/>';
+    for (var i = 0; i < n; i++) {
+      var x = step * (i + 0.5);
+      var t = x / w;
+      var y = 10 + 120 * t * (1 - t) * 1;
+      var y2 = 10 + 120 * ((x + step * 0.36) / w) * (1 - (x + step * 0.36) / w);
+      var y1 = 10 + 120 * ((x - step * 0.36) / w) * (1 - (x - step * 0.36) / w);
+      html += '<path d="M' + (x - step * 0.36) + ' ' + y1 + ' L' + (x + step * 0.36) + ' ' + y2 + ' L' + x + ' ' + (y + 30) + ' Z" fill="' + colors[i % colors.length] + '"/>';
+    }
+    bunting.setAttribute('viewBox', '0 0 ' + w + ' 96');
+    bunting.innerHTML = html;
+  }
+  drawBunting();
+  window.addEventListener('resize', drawBunting);
+
+  var castle = document.getElementById('castle');
+  var puddle = document.getElementById('puddle');
+  var tl = document.getElementById('turretL');
+  var tr = document.getElementById('turretR');
+  var shadow = document.getElementById('shadow');
+  var wrap = document.getElementById('castleWrap');
+  var pump = document.getElementById('pump');
+  var pumpText = document.getElementById('pump-text');
+  var gauge = document.getElementById('gauge');
+  var arc = document.getElementById('gaugeArc');
+  var needle = document.getElementById('needle');
+  var num = document.getElementById('gaugeNum');
+  var status = document.getElementById('roomStatus');
+  var room = document.getElementById('room');
+
+  var p = 0;
+  var pressing = false;
+  var full = false;
+  var last = 0;
+  var raf = null;
+  var t0 = performance.now();
+
+  function ease(x) { return 1 - Math.pow(1 - x, 2); }
+
+  function paint(now) {
+    var e = ease(p);
+    var wobble = pressing && !full ? Math.sin((now - t0) / 45) * 0.025 * (1 - e) : 0;
+    var sy = 0.08 + 0.92 * e + wobble;
+    var sx = 1 + 0.32 * (1 - e) - wobble;
+    castle.setAttribute('transform', 'translate(200 290) scale(' + sx.toFixed(4) + ' ' + sy.toFixed(4) + ') translate(-200 -290)');
+    var a = (1 - e) * 38;
+    tl.setAttribute('transform', 'rotate(' + (-a).toFixed(2) + ' 66 240)');
+    tr.setAttribute('transform', 'rotate(' + a.toFixed(2) + ' 334 240)');
+    puddle.style.opacity = Math.max(0, 1 - p * 2.6).toFixed(3);
+    castle.style.opacity = Math.max(0, Math.min(1, (p - 0.06) / 0.22)).toFixed(3);
+    shadow.setAttribute('rx', (180 + 30 * (1 - e)).toFixed(1));
+    arc.setAttribute('stroke-dashoffset', (188.5 * (1 - p)).toFixed(2));
+    needle.setAttribute('transform', 'rotate(' + (-90 + 180 * p).toFixed(2) + ' 75 78)');
+    var pct = Math.round(p * 100);
+    num.textContent = pct + '%';
+    gauge.setAttribute('aria-valuenow', pct);
+  }
+
+  function loop(now) {
+    var dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (!full) {
+      if (pressing) p = Math.min(1, p + dt * 0.42);
+      else p = Math.max(0, p - dt * 0.09);
+    }
+    paint(now);
+    if (p >= 1 && !full) complete();
+    if (pressing || (!full && p > 0)) raf = requestAnimationFrame(loop);
+    else raf = null;
+  }
+
+  function kick() {
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
+  }
+
+  function start(e) {
+    if (full) return;
+    if (e && e.type === 'pointerdown') {
+      e.preventDefault();
+      try { pump.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    pressing = true;
+    pump.classList.add('is-down');
+    room.classList.add('is-pumping');
+    if (!status.textContent || p === 0) status.innerHTML = '<p>Pumpálj tovább!</p>';
+    kick();
+  }
+
+  function stop() {
+    if (!pressing) return;
+    pressing = false;
+    pump.classList.remove('is-down');
+    room.classList.remove('is-pumping');
+    if (!full && p > 0) status.innerHTML = '<p>Ereszt! Nyomd tovább, különben lelapul.</p>';
+    kick();
+  }
+
+  function complete() {
+    full = true;
+    pressing = false;
+    p = 1;
+    paint(performance.now());
+    pump.classList.remove('is-down');
+    room.classList.remove('is-pumping');
+    pump.disabled = true;
+    pumpText.textContent = 'Kész, áll a vár!';
+    wrap.classList.add('is-full');
+    status.innerHTML = '<p>Áll a vár! Most jöhet a szülinap megtervezése.</p><a class="puff-btn pink" href="#tervezo">Tervezzük meg a bulit</a>';
+    confetti();
+  }
+
+  function confetti() {
+    if (reduce) return;
+    var layer = document.getElementById('confetti');
+    var box = wrap.getBoundingClientRect();
+    var rb = room.getBoundingClientRect();
+    var cx = box.left - rb.left + box.width * 0.4;
+    var cy = box.top - rb.top + box.height * 0.35;
+    var colors = ['#ff8fc7', '#ffe066', '#a8daff', '#cdb4ff', '#bff2d8', '#3b1e54'];
+    for (var i = 0; i < 110; i++) {
+      var el = document.createElement('i');
+      var s = 6 + Math.random() * 9;
+      el.style.width = s + 'px';
+      el.style.height = (Math.random() > 0.5 ? s : s * 0.45) + 'px';
+      el.style.left = cx + 'px';
+      el.style.top = cy + 'px';
+      el.style.background = colors[i % colors.length];
+      if (Math.random() > 0.6) el.style.borderRadius = '50%';
+      layer.appendChild(el);
+      var ang = Math.random() * Math.PI * 2;
+      var sp = 120 + Math.random() * 360;
+      var dx = Math.cos(ang) * sp;
+      var dy = Math.sin(ang) * sp * 0.7 - 160;
+      var anim = el.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + dx * 0.7 + 'px,' + dy + 'px) rotate(' + (Math.random() * 360) + 'deg)', opacity: 1, offset: 0.45 },
+        { transform: 'translate(' + dx + 'px,' + (dy + 380) + 'px) rotate(' + (Math.random() * 720) + 'deg)', opacity: 0 }
+      ], { duration: 1600 + Math.random() * 1200, easing: 'cubic-bezier(.2,.7,.3,1)' });
+      anim.onfinish = (function (node) { return function () { node.remove(); }; })(el);
+    }
+  }
+
+  if (reduce) {
+    p = 1;
+    full = true;
+    paint(performance.now());
+    pump.disabled = true;
+    pumpText.textContent = 'Már felfújtuk neked';
+    status.innerHTML = '<p>Áll a vár! Most jöhet a szülinap megtervezése.</p><a class="puff-btn pink" href="#tervezo">Tervezzük meg a bulit</a>';
+  } else {
+    paint(performance.now());
+  }
+
+  pump.addEventListener('pointerdown', start);
+  pump.addEventListener('pointerup', stop);
+  pump.addEventListener('pointercancel', stop);
+  pump.addEventListener('lostpointercapture', stop);
+  pump.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  pump.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      if (!e.repeat) start();
+    }
+  });
+  pump.addEventListener('keyup', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); stop(); }
+  });
+  pump.addEventListener('blur', stop);
+
+  var SPOTS = {
+    aram: ['Áram', 'Egy sima 230 V-os konnektor kell, legfeljebb 25 méterre a vártól. A hosszabbítót mi hozzuk. A fúvó nagyjából egy porszívó hangerejével zúg.'],
+    felugyelet: ['Felügyelet', 'Egy felnőttnek végig a vár mellett kell lennie. Ha szeretnéd, küldünk egy felügyelőt is, óránként 3 500 Ft-ért.'],
+    tiszta: ['Tisztaság', 'Minden bérlés után lemossuk és gyerekbarát szerrel fertőtlenítjük. Cipő nélkül ugrálnak, az ételt és az italt a váron kívül hagyják.'],
+    hely: ['Hely', 'A Pöttyös Palotához 5 × 5, a Csúszdás Óriáshoz 8 × 5 méter sík terület kell. Füvön a legjobb, burkolaton homokzsákkal rögzítjük.'],
+    ido: ['Eső és szél', 'Esőben és 35 km/h feletti szélben nem ugrálunk. Ha emiatt lemondod, az előleget visszaadjuk, vagy áttesszük egy másik napra.'],
+    kiszallitas: ['Kiszállítás', 'Budapesten belül ingyen visszük. 30 km-en belül 150 Ft kilométerenként, oda-vissza. Kb. 30 perc alatt felállítjuk, este elvisszük.']
+  };
+  var scene = document.getElementById('scene');
+  var bubble = document.getElementById('bubble');
+  var bTitle = document.getElementById('bubbleTitle');
+  var bText = document.getElementById('bubbleText');
+  var spots = scene.querySelectorAll('.spot');
+  var openSpot = null;
+
+  function placeBubble(btn) {
+    if (window.matchMedia('(max-width: 767.98px)').matches) {
+      bubble.classList.remove('is-above', 'is-below');
+      return;
+    }
+    var sr = scene.getBoundingClientRect();
+    var br = btn.querySelector('.spot-dot').getBoundingClientRect();
+    var cx = br.left + br.width / 2 - sr.left;
+    var cy = br.top + br.height / 2 - sr.top;
+    var bw = bubble.offsetWidth;
+    var bh = bubble.offsetHeight;
+    var left = Math.max(12, Math.min(sr.width - bw - 12, cx - bw / 2));
+    var above = cy > sr.height * 0.45;
+    var top = above ? cy - bh - 32 : cy + 32;
+    bubble.style.left = left + 'px';
+    bubble.style.top = top + 'px';
+    bubble.style.setProperty('--arrow-x', Math.max(26, Math.min(bw - 26, cx - left)) + 'px');
+    bubble.classList.toggle('is-above', above);
+    bubble.classList.toggle('is-below', !above);
+  }
+
+  function show(btn) {
+    var d = SPOTS[btn.dataset.spot];
+    spots.forEach(function (s) { s.setAttribute('aria-expanded', s === btn ? 'true' : 'false'); });
+    bTitle.textContent = d[0];
+    bText.textContent = d[1];
+    bubble.hidden = false;
+    openSpot = btn;
+    placeBubble(btn);
+  }
+
+  function hide() {
+    bubble.hidden = true;
+    spots.forEach(function (s) { s.setAttribute('aria-expanded', 'false'); });
+    if (openSpot) openSpot.focus();
+    openSpot = null;
+  }
+
+  spots.forEach(function (s) {
+    s.addEventListener('click', function () {
+      if (openSpot === s) hide(); else show(s);
+    });
+  });
+  document.getElementById('bubbleClose').addEventListener('click', hide);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && openSpot) hide(); });
+  window.addEventListener('resize', function () { if (openSpot) placeBubble(openSpot); });
+  show(spots[0]);
+  openSpot = spots[0];
+
+  var CASTLES = {
+    palota: { name: 'Pöttyös Palota', acc: 'a Pöttyös Palotát', voc: 'Kedves Pöttyös Palota!', price: '24 900 Ft', per: 'egy napra, a felállítással együtt' },
+    oriasi: { name: 'Csúszdás Óriás', acc: 'a Csúszdás Óriást', voc: 'Kedves Csúszdás Óriás!', price: '34 900 Ft', per: 'egy napra, a felállítással együtt' },
+    both: { name: 'Pöttyös Palota és Csúszdás Óriás', acc: 'mindkét várat', voc: 'Kedves Pöttyös Palota és Csúszdás Óriás!', price: '52 000 Ft', per: 'a két vár egy napra, felállítással' }
+  };
+
+  var ageRow = document.getElementById('ageRow');
+  var ages = [3, 4, 5, 6, 7, 8, 9, 10, 11];
+  ageRow.setAttribute('role', 'radiogroup');
+  ageRow.setAttribute('aria-label', 'Az ünnepelt életkora');
+  ageRow.innerHTML = ages.map(function (a) {
+    var label = a === 11 ? '11+' : String(a);
+    return '<div class="age-choice"><input type="radio" name="age" id="age-' + a + '" value="' + a + '"><label for="age-' + a + '" aria-label="' + (a === 11 ? '11 éves vagy idősebb' : a + ' éves') + '">' + label + '</label></div>';
+  }).join('');
+
+  var kids = 8;
+  var kidsOut = document.getElementById('kidsOut');
+  var kidHint = document.getElementById('kidHint');
+  function renderKids() {
+    kidsOut.textContent = kids;
+    if (kids <= 6) kidHint.textContent = 'Egyszerre mindannyian beférnek a Pöttyös Palotába.';
+    else if (kids <= 8) kidHint.textContent = 'Egyszerre mindannyian beférnek a Csúszdás Óriásba.';
+    else if (kids <= 16) kidHint.textContent = 'Turnusokban ugrálnak majd, így is bőven jut idő mindenkinek.';
+    else kidHint.textContent = 'Ekkora bulihoz érdemes mindkét várat elhozni.';
+  }
+  document.getElementById('kidsMinus').addEventListener('click', function () { kids = Math.max(1, kids - 1); renderKids(); });
+  document.getElementById('kidsPlus').addEventListener('click', function () { kids = Math.min(40, kids + 1); renderKids(); });
+  renderKids();
+
+  var dateEl = document.getElementById('pDate');
+  var today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  dateEl.min = today.toISOString().slice(0, 10);
+
+  var steps = document.querySelectorAll('#planner .step');
+  var dots = document.querySelectorAll('#planBalloons li');
+  var back = document.getElementById('planBack');
+  var next = document.getElementById('planNext');
+  var msg = document.getElementById('planMsg');
+  var cur = 0;
+  var override = null;
+  var chosen = null;
+
+  function val(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function recommend() {
+    var age = +val('age');
+    var garden = val('garden');
+    var why;
+    var pick;
+    if (garden === 'small') {
+      pick = 'palota';
+      why = age >= 8 || kids > 6
+        ? 'A kertbe a kisebbik fér el biztosan. Ha mégis van 8 × 5 méter sík hely, a Csúszdás Óriás is jöhet.'
+        : 'Kisebb kertbe és ' + age + ' éveseknek pont ideális, és a hálós falon át mindent látsz.';
+    } else if (garden === 'huge' && kids >= 12) {
+      pick = 'both';
+      why = kids + ' gyereknek és nagy kertnek a két vár együtt a legjobb: a kicsik és a nagyok külön ugrálhatnak.';
+    } else if (age >= 8 || kids > 6) {
+      pick = 'oriasi';
+      why = age >= 8
+        ? age + ' évesen már a csúszda a lényeg, és az Óriás 14 éves korig bírja a strapát.'
+        : kids + ' gyereknél jól jön, hogy az Óriásba egyszerre 8-an is beférnek.';
+    } else {
+      pick = 'palota';
+      why = 'Ennyi idős gyerekeknek a Palota a legbiztonságosabb: alacsony bejárat, puha, széles ugrálótér.';
+    }
+    if (garden === 'unknown') why += ' Mérd le a kertet: a Palotához 5 × 5, az Óriáshoz 8 × 5 méter kell.';
+    return { pick: pick, why: why };
+  }
+
+  function validate(i) {
+    if (i === 0 && !val('age')) return 'Válaszd ki, hány éves lesz az ünnepelt.';
+    if (i === 2 && !val('garden')) return 'Válaszd ki, mekkora a kert.';
+    if (i === 3) {
+      var miss = [];
+      [['pDate', 'a dátum'], ['pName', 'a neved'], ['pPhone', 'a telefonszámod']].forEach(function (f) {
+        var el = document.getElementById(f[0]);
+        var ok = el.value.trim() !== '';
+        el.classList.toggle('is-invalid', !ok);
+        if (!ok) miss.push(f[1]);
+      });
+      if (miss.length) return 'Még hiányzik: ' + miss.join(', ') + '.';
+    }
+    return '';
+  }
+
+  function fmtDate(v) {
+    var d = new Date(v + 'T12:00:00');
+    return d.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  }
+
+  function renderInvite() {
+    var r = recommend();
+    if (!chosen) chosen = override || r.pick;
+    var c = CASTLES[chosen];
+    var age = +val('age');
+    var name = document.getElementById('kidName').value.trim();
+    var place = document.getElementById('pPlace').value.trim();
+    document.getElementById('invAge').textContent = age === 11 ? '11+' : age;
+    document.getElementById('invTitle').textContent = c.voc;
+    document.getElementById('invText').textContent = name
+      ? 'Szeretettel meghívunk ' + name + ' ' + age + '. születésnapjára. Ugrálni, csúszni és visítani is lehet majd.'
+      : 'Szeretettel meghívunk egy ' + age + '. születésnapra. Ugrálni, csúszni és visítani is lehet majd.';
+    var rows = [
+      ['Mikor', fmtDate(dateEl.value) + ', ' + document.getElementById('pTime').value.toLowerCase()],
+      ['Hol', place || 'a település még egyeztetés alatt'],
+      ['Vendégek', 'kb. ' + kids + ' gyerek'],
+      ['Szervező', document.getElementById('pName').value.trim() + ', ' + document.getElementById('pPhone').value.trim()]
+    ];
+    document.getElementById('invList').innerHTML = rows.map(function (row) {
+      return '<dt>' + row[0] + '</dt><dd>' + escapeHtml(row[1]) + '</dd>';
+    }).join('');
+    document.getElementById('invPrice').textContent = c.price;
+    document.getElementById('invPer').textContent = c.per;
+    var why = chosen === r.pick ? r.why : 'Te ' + c.acc + ' választottad. Mi ' + CASTLES[r.pick].acc + ' javasoltuk volna, de ez is remek választás.';
+    document.getElementById('whyText').textContent = why;
+    document.querySelectorAll('[data-swap]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.swap === chosen ? 'true' : 'false'); });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; });
+  }
+
+  function go(i) {
+    cur = i;
+    steps.forEach(function (s, k) { s.hidden = k !== i; });
+    dots.forEach(function (d, k) {
+      d.classList.toggle('is-done', k < i);
+      d.classList.toggle('is-current', k === i);
+    });
+    back.hidden = i === 0;
+    next.hidden = i === 4;
+    next.textContent = i === 3 ? 'Mutasd a meghívót' : 'Tovább';
+    msg.textContent = '';
+    if (i === 4) renderInvite();
+  }
+
+  next.addEventListener('click', function () {
+    var err = validate(cur);
+    if (err) { msg.textContent = err; return; }
+    if (cur === 3) chosen = null;
+    go(cur + 1);
+    var focusTarget = steps[cur].querySelector('legend, h3') || steps[cur];
+    document.getElementById('tervezo').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (focusTarget) { focusTarget.setAttribute('tabindex', '-1'); focusTarget.focus({ preventScroll: true }); }
+  });
+  back.addEventListener('click', function () { go(cur - 1); });
+
+  document.querySelectorAll('[data-swap]').forEach(function (b) {
+    b.addEventListener('click', function () { chosen = b.dataset.swap; renderInvite(); });
+  });
+
+  document.querySelectorAll('[data-pick]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      override = b.dataset.pick;
+      chosen = null;
+      go(0);
+      msg.textContent = '';
+      document.getElementById('tervezo').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+      setTimeout(function () { var first = document.querySelector('#ageRow input'); if (first) first.focus({ preventScroll: true }); }, reduce ? 0 : 600);
+    });
+  });
+
+  function summary() {
+    var c = CASTLES[chosen];
+    var age = +val('age');
+    var name = document.getElementById('kidName').value.trim();
+    return [
+      'Szia puff!',
+      '',
+      'Szeretnénk ' + c.acc + ' ' + (name ? name + ' ' : '') + age + '. születésnapjára.',
+      'Időpont: ' + fmtDate(dateEl.value) + ', ' + document.getElementById('pTime').value.toLowerCase(),
+      'Helyszín: ' + (document.getElementById('pPlace').value.trim() || '-'),
+      'Gyerekek: kb. ' + kids,
+      'Kert: ' + document.querySelector('input[name="garden"]:checked + label strong').textContent,
+      'Ár: ' + c.price + ' (' + c.per + ')',
+      '',
+      document.getElementById('pName').value.trim() + ', ' + document.getElementById('pPhone').value.trim()
+    ].join('\n');
+  }
+
+  var sendStatus = document.getElementById('sendStatus');
+  document.getElementById('sendMail').addEventListener('click', function () {
+    var subject = 'Szülinapi foglalás: ' + CASTLES[chosen].name + ', ' + dateEl.value;
+    location.href = 'mailto:hello@puff-legvar.hu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(summary());
+    sendStatus.textContent = 'Megnyílt a leveleződ a kitöltött meghívóval. Küldd el, és egy munkanapon belül válaszolunk.';
+  });
+  document.getElementById('sendMsg').addEventListener('click', function () {
+    var text = summary();
+    var open = function () { window.open('https://m.me/pufflegvar', '_blank', 'noopener'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        sendStatus.textContent = 'Kimásoltuk a meghívót. Illeszd be a Messenger-beszélgetésbe, és küldd el.';
+        open();
+      }, function () {
+        sendStatus.textContent = 'Nem sikerült a másolás. Írd meg nekünk Messengeren a fenti adatokat.';
+        open();
+      });
+    } else {
+      sendStatus.textContent = 'Írd meg nekünk Messengeren a fenti adatokat.';
+      open();
+    }
+  });
+
+  go(0);
+})();
+</script>
+<script src="switcher.js"></script>
+</body>
+</html>

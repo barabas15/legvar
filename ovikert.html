@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ovikert légvárprogram</title>
+<meta name="description" content="Légvár óvodáknak és iskoláknak gyereknapra, évzáróra, alapítványi napra. Felügyelővel, díjbekérővel, számlával, turnusbeosztással.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+  --desk: #d9e1e8;
+  --paper: #fdfdf8;
+  --grid: #c3d8ee;
+  --grid-strong: #a9c6e6;
+  --margin: #e98a84;
+  --red: #d7263d;
+  --ink: #1f3fa8;
+  --graphite: #3a3b40;
+  --graphite-soft: #6b6d75;
+  --yellow: #f7c948;
+  --green: #5fb35f;
+  --orange: #f08a24;
+  --sky: #6fb7e6;
+  --pink: #e87ea1;
+  --violet: #9b7ede;
+  --cover: #f5a524;
+  --hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --print: "Figtree", system-ui, sans-serif;
+  --cell: 24px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--desk);
+  color: var(--graphite);
+  font-family: var(--print);
+  font-size: 1rem;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+::selection { background: #ffe68a; }
+
+.hand { font-family: var(--hand); }
+.ink { color: var(--ink); }
+.redpen { color: var(--red); }
+
+.cover {
+  position: relative;
+  max-width: 1080px;
+  margin: 28px auto 0;
+  background-color: var(--cover);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.35' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M20 18l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z'/%3E%3Ccircle cx='86' cy='30' r='9'/%3E%3Cpath d='M70 88c6-10 18-10 24 0M60 100h44'/%3E%3Cpath d='M18 88q8-14 16 0t16 0'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: 6px 18px 18px 6px;
+  box-shadow: inset 14px 0 0 rgba(0, 0, 0, .08), 0 18px 40px -20px rgba(30, 40, 60, .55);
+  padding: clamp(28px, 6vw, 72px) clamp(18px, 5vw, 64px) clamp(36px, 6vw, 64px);
+  overflow: hidden;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(0, 0, 0, .12);
+}
+.cover-brand { font-family: var(--print); font-weight: 800; color: #fff; font-size: .95rem; letter-spacing: .02em; text-align: center; }
+.label {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  border: 3px solid #2b5aa8;
+  box-shadow: 0 0 0 5px #fff, 0 0 0 7px #2b5aa8, 0 16px 30px -14px rgba(0, 0, 0, .45);
+  padding: 26px 30px 20px;
+  max-width: 620px;
+  margin: 40px auto 0;
+}
+.label-row { display: grid; grid-template-columns: 6.2rem 1fr; align-items: end; gap: 10px; padding: 8px 0 4px; border-bottom: 1.5px solid #8aa6cf; }
+.label-row:last-of-type { border-bottom: 0; }
+.label-key { font-family: var(--print); font-size: .85rem; font-weight: 700; color: #2b5aa8; padding-bottom: 4px; }
+.label-val { font-family: var(--hand); color: var(--ink); font-size: 1.55rem; line-height: 1.15; }
+.label h1.label-val { margin: 0; font-weight: 400; font-family: var(--hand); font-size: 1.9rem; }
+.label-val a { color: var(--ink); text-decoration: none; }
+.label-val a:hover { text-decoration: underline; }
+.stamp { position: absolute; width: 150px; height: 150px; right: -34px; top: -58px; transform: rotate(-14deg); }
+.cover-sun { position: absolute; width: 150px; left: 4%; top: 6%; opacity: .95; }
+.cover-castle { position: absolute; width: 190px; right: 3%; bottom: -8px; }
+.cover-hint { font-family: var(--hand); color: #fff; font-size: 1.35rem; text-align: center; margin-top: 30px; }
+.cover-hint a { color: #fff; }
+
+.book {
+  position: relative;
+  max-width: 1080px;
+  margin: -6px auto 60px;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: var(--cell) var(--cell);
+  background-position: -1px -1px;
+  border-radius: 4px 4px 14px 14px;
+  box-shadow: 0 22px 50px -28px rgba(30, 40, 60, .6);
+  padding: 72px clamp(18px, 4vw, 56px) 80px calc(clamp(18px, 4vw, 56px) + 64px);
+}
+.book::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 64px;
+  width: 7px;
+  border-left: 2px solid var(--margin);
+  border-right: 2px solid var(--margin);
+  opacity: .85;
+}
+.book::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .09), transparent);
+  border-radius: 4px 4px 0 0;
+}
+
+.tabs { position: fixed; right: 0; top: calc(var(--dsw-h, 40px) + 110px); z-index: 20; display: none; flex-direction: column; gap: 10px; }
+.tabs a {
+  display: block;
+  width: 168px;
+  padding: 10px 14px 10px 18px;
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  color: var(--graphite);
+  text-decoration: none;
+  transform: translateX(14px);
+  transition: transform .2s ease;
+  box-shadow: -3px 3px 0 rgba(0, 0, 0, .08);
+  border-radius: 4px 0 0 4px;
+}
+.tabs a:hover, .tabs a:focus-visible { transform: translateX(0); }
+.tabs a:nth-child(1) { background: #fff27a; }
+.tabs a:nth-child(2) { background: #b7ecb0; }
+.tabs a:nth-child(3) { background: #ffc6d9; }
+.tabs a:nth-child(4) { background: #bfe3ff; }
+@media (min-width: 1300px) { .tabs { display: flex; } }
+
+.task { position: relative; padding-top: 72px; }
+.task:first-of-type { padding-top: 0; }
+.task-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: .25rem .9rem; margin-bottom: 28px; }
+.task-no { font-family: var(--hand); color: var(--red); font-size: 1.6rem; white-space: nowrap; }
+.task-title { font-family: var(--hand); font-weight: 400; color: var(--graphite); font-size: clamp(2rem, 4.4vw, 2.9rem); line-height: 1.05; margin: 0; }
+.task-lead { font-family: var(--hand); color: var(--ink); font-size: 1.4rem; line-height: 1.35; max-width: 40ch; margin: 0 0 24px; }
+
+.note {
+  position: relative;
+  max-width: 720px;
+  background: #fffef6;
+  background-image: linear-gradient(transparent 38px, #9dbbe0 38px, #9dbbe0 39px, transparent 39px);
+  background-size: 100% 40px;
+  background-position: 0 70px;
+  background-repeat: repeat-y;
+  border: 1px solid #d8d6c8;
+  box-shadow: 4px 6px 0 rgba(58, 59, 64, .12);
+  padding: 20px 28px 22px 30px;
+  transform: rotate(-.6deg);
+}
+.note-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; font-size: .82rem; color: var(--graphite-soft); border-bottom: 2px solid #cf7c76; padding-bottom: 8px; margin-bottom: 14px; min-height: 38px; }
+.note-top strong { font-size: .95rem; color: var(--graphite); }
+.note-date { font-family: var(--hand); color: var(--ink); font-size: 1.2rem; }
+.note h2 { font-family: var(--hand); font-weight: 400; color: var(--ink); font-size: clamp(2.1rem, 5vw, 3.3rem); line-height: 1.2; margin: 0 0 10px; }
+.u-red { position: relative; white-space: nowrap; }
+.u-red svg { position: absolute; left: -2%; bottom: -.28em; width: 104%; height: .5em; overflow: visible; }
+.note p { font-family: var(--hand); color: var(--ink); font-size: 1.42rem; line-height: 40px; margin: 0; }
+.note .sign { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-top: 10px; }
+.note .sign small { font-family: var(--print); font-size: .78rem; color: var(--graphite-soft); display: block; border-top: 1px dotted var(--graphite-soft); padding-top: 2px; min-width: 150px; }
+.sticker { position: absolute; width: 112px; height: 112px; right: -38px; bottom: -44px; transform: rotate(12deg); }
+.sticker text { font-family: var(--hand); }
+
+.facts { display: flex; flex-wrap: wrap; gap: 14px 26px; margin: 34px 0 0; padding: 0; list-style: none; max-width: 760px; }
+.facts li { font-family: var(--hand); font-size: 1.35rem; color: var(--graphite); display: flex; align-items: center; gap: 8px; }
+.tick { width: 26px; height: 26px; flex: none; }
+
+.sheet { position: relative; }
+.drawing { position: relative; }
+.drawing svg { width: 100%; height: auto; display: block; overflow: visible; }
+.spec { font-family: var(--hand); color: var(--ink); font-size: 1.35rem; line-height: 1.45; padding: 0; margin: 0 0 18px; list-style: none; }
+.spec li { padding: 2px 0; }
+.spec b { font-weight: 400; color: var(--graphite); }
+.castle-name { font-family: var(--hand); font-weight: 400; font-size: clamp(2rem, 4vw, 2.6rem); color: var(--graphite); margin: 0 0 6px; line-height: 1.1; }
+.castle-for { font-family: var(--hand); color: var(--red); font-size: 1.3rem; margin: 0 0 14px; }
+.price-box { display: inline-flex; align-items: center; gap: 14px; border: 2px solid var(--graphite); padding: 8px 16px; background: #fff; font-family: var(--hand); font-size: 1.35rem; }
+.price-box strong { font-weight: 400; color: var(--ink); font-size: 1.7rem; position: relative; }
+.price-box strong svg { position: absolute; inset: -12px -16px; width: calc(100% + 32px); height: calc(100% + 24px); overflow: visible; pointer-events: none; }
+.margin-note { font-family: var(--hand); color: var(--red); font-size: 1.25rem; line-height: 1.2; transform: rotate(-3deg); max-width: 15rem; }
+.solution { font-family: var(--hand); color: var(--red); font-size: 1.35rem; border-left: 3px solid var(--red); padding: 4px 0 4px 16px; margin: 40px 0 0; max-width: 46ch; }
+
+.tool { background: rgba(255, 255, 255, .8); border: 2px solid var(--graphite); box-shadow: 6px 6px 0 rgba(58, 59, 64, .15); padding: clamp(16px, 3vw, 30px); }
+.tool h3 { font-family: var(--hand); font-weight: 400; font-size: 1.6rem; color: var(--graphite); margin: 0 0 10px; }
+.blank {
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--graphite-soft);
+  border-radius: 0;
+  padding: 2px 4px;
+  width: 100%;
+  min-width: 0;
+}
+.blank:focus { outline: none; border-bottom-color: var(--red); background: #fff8c9; }
+select.blank { cursor: pointer; }
+.group-row { display: grid; grid-template-columns: 22px 1fr 5.2rem 36px; gap: 10px; align-items: end; padding: 6px 0; }
+.swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--graphite); margin-bottom: 6px; }
+.fo { font-family: var(--hand); color: var(--graphite-soft); font-size: 1.1rem; }
+.icon-btn { width: 34px; height: 34px; border: 2px solid var(--graphite); background: #fff; border-radius: 50%; display: grid; place-items: center; font-family: var(--hand); font-size: 1.3rem; line-height: 1; color: var(--red); cursor: pointer; padding: 0; }
+.icon-btn:hover { background: #ffe1e5; }
+.hand-btn {
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  color: var(--graphite);
+  background: #fff;
+  border: 2px solid var(--graphite);
+  border-radius: 999px 900px 999px 950px;
+  padding: 6px 18px;
+  box-shadow: 3px 3px 0 var(--graphite);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.hand-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--graphite); color: var(--graphite); }
+.hand-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--graphite); }
+.hand-btn.is-red { background: var(--red); color: #fff; border-color: #8f1426; box-shadow: 3px 3px 0 #8f1426; }
+.hand-btn.is-red:hover { color: #fff; box-shadow: 4px 4px 0 #8f1426; }
+.check { display: flex; align-items: center; gap: 10px; font-family: var(--hand); font-size: 1.35rem; cursor: pointer; }
+.check input { appearance: none; width: 24px; height: 24px; border: 2px solid var(--graphite); background: #fff; display: grid; place-items: center; margin: 0; cursor: pointer; flex: none; }
+.check input:checked::after { content: ""; width: 26px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'%3E%3Cpath d='M3 12l6 7L24 2' fill='none' stroke='%23d7263d' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; transform: translate(3px, -3px); }
+.check input:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+
+.timetable-wrap { overflow-x: auto; }
+.timetable { width: 100%; border-collapse: collapse; background: #fff; font-family: var(--hand); font-size: 1.15rem; min-width: 320px; }
+.timetable caption { caption-side: top; font-family: var(--hand); color: var(--graphite); font-size: 1.5rem; padding: 0 0 8px; }
+.timetable th, .timetable td { border: 2px solid var(--graphite); padding: 4px 8px; vertical-align: middle; }
+.timetable thead th { background: #fff27a; font-weight: 400; font-size: 1.25rem; text-align: center; }
+.timetable tbody th { font-weight: 400; white-space: nowrap; color: var(--graphite-soft); width: 7.5rem; text-align: center; }
+.timetable td { padding: 3px; }
+.slot {
+  display: block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: var(--graphite);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='40'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.3 .9'/%3E%3C/filter%3E%3Crect width='90' height='40' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.k-short { display: none; }
+.slot.is-empty { background: none; color: #b0b3bb; text-align: center; }
+.report { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: 7.5rem 1fr 7.8rem; gap: 10px; align-items: center; font-family: var(--hand); font-size: 1.2rem; }
+.bar { height: 18px; border: 2px solid var(--graphite); background: #fff; position: relative; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; transition: width .4s ease; }
+.grade { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+.grade-mark { width: 74px; height: 74px; flex: none; }
+.grade-text { font-family: var(--hand); color: var(--red); font-size: 1.45rem; line-height: 1.25; margin: 0; }
+
+.form-sheet {
+  position: relative;
+  background: #fff;
+  font-family: var(--print);
+  color: #202125;
+  border: 1px solid #cfd2d8;
+  box-shadow: 0 2px 0 #e7e8ec, 0 4px 0 #cfd2d8, 0 24px 40px -24px rgba(30, 40, 60, .5);
+  padding: clamp(18px, 4vw, 40px);
+  max-width: 860px;
+}
+.clip { position: absolute; width: 40px; top: -40px; right: 120px; }
+.form-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; border-bottom: 3px double #202125; padding-bottom: 12px; margin-bottom: 18px; }
+.form-head h3 { font-size: 1.6rem; font-weight: 800; margin: 0; letter-spacing: -.01em; }
+.form-head p { font-size: .78rem; margin: 0; color: #555; line-height: 1.4; }
+.form-no { font-size: .8rem; text-align: right; color: #555; }
+.boxes { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1.5px solid #202125; border-left: 1.5px solid #202125; }
+.box { border-right: 1.5px solid #202125; border-bottom: 1.5px solid #202125; padding: 5px 8px 4px; grid-column: span 3; min-width: 0; position: relative; }
+.box.w2 { grid-column: span 2; }
+.box.w4 { grid-column: span 4; }
+.box.w6 { grid-column: span 6; }
+.box label, .box .box-label { display: block; font-size: .7rem; font-weight: 700; color: #555; margin-bottom: 1px; }
+.box input, .box textarea, .box select {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: var(--hand);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1.3;
+  padding: 0;
+  min-width: 0;
+}
+.box textarea { resize: vertical; min-height: 52px; }
+.box:focus-within { background: #fffbe0; }
+.box input:focus, .box textarea:focus, .box select:focus { outline: none; }
+.box.is-invalid { background: #ffeef0; }
+.box.is-invalid::after { content: attr(data-error); position: absolute; right: 8px; top: 4px; font-family: var(--hand); color: var(--red); font-size: 1rem; }
+.radio-line { display: flex; flex-wrap: wrap; gap: 4px 18px; padding-top: 2px; }
+.radio-line label { display: inline-flex; align-items: center; gap: 6px; font-family: var(--hand); color: var(--graphite); font-size: 1.2rem; font-weight: 400; margin: 0; cursor: pointer; }
+.radio-line input { width: 18px; height: 18px; accent-color: var(--red); }
+.price-table { width: 100%; font-size: .9rem; border-collapse: collapse; margin: 16px 0 0; }
+.price-table td { padding: 5px 0; border-bottom: 1px dotted #9aa0aa; }
+.price-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price-table tr.total td { border-bottom: 0; border-top: 2px solid #202125; font-weight: 800; font-size: 1rem; padding-top: 8px; }
+.sign-area { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; align-items: end; }
+.ph { width: 104px; height: 104px; border: 1.5px dashed #9aa0aa; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; color: #9aa0aa; justify-self: center; }
+.sig { border-top: 1.5px solid #202125; font-size: .75rem; color: #555; padding-top: 4px; text-align: center; }
+.small-print { font-size: .74rem; color: #5c5f66; line-height: 1.5; margin: 22px 0 0; columns: 2 260px; column-gap: 28px; }
+.small-print p { margin: 0 0 6px; break-inside: avoid; }
+.form-status { font-family: var(--hand); font-size: 1.3rem; color: var(--ink); margin: 0; min-height: 1.6em; }
+.form-status.is-error { color: var(--red); }
+
+.letter {
+  background: #fff;
+  background-image: linear-gradient(transparent 35px, #d6e3f3 35px, #d6e3f3 36px, transparent 36px);
+  background-size: 100% 36px;
+  border: 1px solid #d8d6c8;
+  box-shadow: 4px 6px 0 rgba(58, 59, 64, .12);
+  padding: 36px clamp(18px, 4vw, 44px);
+  background-position: 0 36px;
+  max-width: 780px;
+  transform: rotate(.4deg);
+}
+.letter-body { font-family: var(--hand); color: var(--graphite); font-size: 1.32rem; line-height: 36px; }
+.letter-body h3 { font-family: var(--hand); font-weight: 400; font-size: 1.8rem; line-height: 36px; margin: 0 0 36px; color: var(--graphite); }
+.letter-body p { margin: 0; }
+.letter-body p + p, .letter-body ol + p { margin-top: 36px; }
+.letter-body ol { margin: 0; padding-left: 1.6rem; }
+.letter-body p + ol { margin-top: 0; }
+.letter-body .fill { display: inline-block; min-width: 9rem; border-bottom: 1.5px solid var(--graphite-soft); }
+
+.backcover {
+  max-width: 1080px;
+  margin: 0 auto 60px;
+  background-color: var(--cover);
+  border-radius: 18px 6px 6px 18px;
+  box-shadow: inset -14px 0 0 rgba(0, 0, 0, .08), 0 18px 40px -20px rgba(30, 40, 60, .55);
+  padding: clamp(28px, 5vw, 56px) clamp(18px, 5vw, 64px);
+  color: #fff;
+}
+.backcover h2 { font-family: var(--hand); font-weight: 400; font-size: clamp(2rem, 4vw, 2.6rem); margin: 0 0 6px; }
+.backcover p { font-family: var(--hand); font-size: 1.3rem; margin: 0; max-width: 48ch; }
+.times { width: 100%; max-width: 640px; background: #fff; color: var(--graphite); border-collapse: collapse; font-family: var(--hand); font-size: 1.25rem; margin-top: 22px; border-radius: 10px; overflow: hidden; }
+.times th, .times td { border: 1.5px solid #f0c77c; padding: 6px 10px; text-align: center; font-weight: 400; }
+.times thead th { background: #fff4d6; color: #a0620a; }
+.times tbody th { text-align: left; color: #a0620a; background: #fff9ea; }
+.contact-card { background: #fff; color: var(--graphite); border-radius: 14px; padding: 18px 22px; border: 3px solid #2b5aa8; box-shadow: 0 0 0 4px #fff, 0 0 0 6px #2b5aa8; }
+.contact-card dl { margin: 0; display: grid; grid-template-columns: 6rem 1fr; gap: 6px 12px; align-items: baseline; }
+.contact-card dt { font-size: .8rem; font-weight: 700; color: #2b5aa8; }
+.contact-card dd { margin: 0; font-family: var(--hand); color: var(--ink); font-size: 1.35rem; overflow-wrap: anywhere; }
+.contact-card a { color: var(--ink); text-decoration: none; }
+.contact-card a:hover { text-decoration: underline; }
+.backcover .fine { font-size: .8rem; opacity: .85; margin-top: 26px !important; font-family: var(--print) !important; }
+
+.visually-hidden-focusable:focus { position: static !important; }
+
+@media (max-width: 767.98px) {
+  .book { padding-left: calc(18px + 30px); padding-top: 56px; }
+  .book::before { left: 26px; width: 5px; }
+  .stamp { width: 112px; height: 112px; right: -14px; top: -62px; }
+  .cover-sun { width: 90px; left: auto; right: 6%; top: 3%; }
+  .cover-castle { display: none; }
+  .label { padding: 22px 18px 16px; margin-top: 70px; }
+  .label-row { grid-template-columns: 1fr; gap: 0; }
+  .label-val { font-size: 1.4rem; }
+  .sticker { width: 84px; height: 84px; right: -12px; bottom: -40px; }
+  .note { padding: 18px 16px 18px 18px; }
+  .note p { font-size: 1.28rem; }
+  .boxes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .box, .box.w2, .box.w4 { grid-column: span 2; }
+  .box.w6 { grid-column: span 2; }
+  .box.half-sm { grid-column: span 1; }
+  .sign-area { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 5.4rem 1fr; }
+  .bar-row span:last-child { grid-column: 2; font-size: 1.05rem; margin-top: -6px; }
+  .group-row { grid-template-columns: 22px 1fr 4.4rem 34px; gap: 8px; }
+  .contact-card dl { grid-template-columns: 1fr; gap: 0; }
+  .contact-card dd { margin-bottom: 8px; }
+  .clip { right: 20px; }
+  .t-end { display: none; }
+  .timetable { font-size: 1rem; min-width: 0; table-layout: fixed; }
+  .timetable tbody th { width: 3.4rem; padding: 2px 4px; }
+  .timetable thead th { font-size: 1.05rem; padding: 4px; hyphens: manual; }
+  .tool { padding: 14px 12px; }
+  .timetable thead th:first-child { width: 3.6rem; }
+  .slot { padding: 2px 5px; line-height: 1.15; }
+  .k-full { display: none; }
+  .k-short { display: inline; }
+}
+@media (max-width: 440px) {
+  .box.half-sm { grid-column: span 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff; margin: 0 !important; }
+  .dsw, .tabs, .cover, .backcover, .no-print { display: none !important; }
+  .book { box-shadow: none; background: #fff; padding: 0; margin: 0; max-width: none; }
+  .book::before, .book::after { display: none; }
+  .task { padding-top: 0; }
+  body[data-print="order"] .task:not(#turnusok):not(#megrendelo) { display: none !important; }
+  body[data-print="order"] #megrendelo { break-before: page; }
+  body[data-print="letter"] .task:not(#szuloknek) { display: none !important; }
+  .tool, .form-sheet, .letter { box-shadow: none; transform: none; }
+  .timetable { font-size: 11pt; }
+  .timetable-wrap { overflow: visible; }
+  .slot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .timetable thead th, .bar i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" class="position-absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="crayon" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="4" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.55" result="m"/>
+      <feComposite in="SourceGraphic" in2="m" operator="in" result="c"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="9" result="w"/>
+      <feDisplacementMap in="c" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="2" result="w"/>
+      <feDisplacementMap in="SourceGraphic" in2="w" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="stampy" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="11" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.6 2" result="m"/>
+      <feComposite in="SourceGraphic" in2="m" operator="in"/>
+    </filter>
+    <radialGradient id="gold" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff6c4"/>
+      <stop offset=".45" stop-color="#f6c53c"/>
+      <stop offset="1" stop-color="#c98a0c"/>
+    </radialGradient>
+    <symbol id="tick" viewBox="0 0 26 22"><path d="M3 12l6 7L24 2" fill="none" stroke="#d7263d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="katica" viewBox="0 0 360 290">
+      <path d="M10 262 C80 250 140 268 200 258 C260 250 310 266 352 258" fill="none" stroke="#5fb35f" stroke-width="10" stroke-linecap="round" filter="url(#crayon)"/>
+      <g filter="url(#crayon)">
+        <rect x="30" y="206" width="300" height="50" rx="24" fill="#f7c948"/>
+        <rect x="70" y="112" width="220" height="108" rx="16" fill="#e63b2e"/>
+        <rect x="108" y="132" width="144" height="80" rx="36" fill="#fff"/>
+        <rect x="40" y="84" width="48" height="150" rx="24" fill="#e63b2e"/>
+        <rect x="272" y="84" width="48" height="150" rx="24" fill="#e63b2e"/>
+        <path d="M40 92 a24 26 0 0 1 48 0 Z" fill="#2b2b2b"/>
+        <path d="M272 92 a24 26 0 0 1 48 0 Z" fill="#2b2b2b"/>
+        <path d="M94 118 Q180 52 266 118" fill="none" stroke="#2b2b2b" stroke-width="18" stroke-linecap="round"/>
+        <circle cx="64" cy="140" r="7" fill="#2b2b2b"/>
+        <circle cx="58" cy="182" r="6" fill="#2b2b2b"/>
+        <circle cx="300" cy="150" r="7" fill="#2b2b2b"/>
+        <circle cx="294" cy="196" r="6" fill="#2b2b2b"/>
+        <circle cx="90" cy="176" r="5" fill="#2b2b2b"/>
+        <circle cx="270" cy="178" r="5" fill="#2b2b2b"/>
+      </g>
+      <g fill="none" stroke="#3a3b40" stroke-width="2.4" stroke-linecap="round" filter="url(#pencil)">
+        <rect x="30" y="206" width="300" height="50" rx="24"/>
+        <rect x="70" y="112" width="220" height="108" rx="16"/>
+        <rect x="108" y="132" width="144" height="80" rx="36"/>
+        <rect x="40" y="84" width="48" height="150" rx="24"/>
+        <rect x="272" y="84" width="48" height="150" rx="24"/>
+        <path d="M126 132v80M148 132v80M170 132v80M192 132v80M214 132v80M236 132v80M108 152h144M108 172h144M108 192h144" stroke-width="1.4" opacity=".6"/>
+        <path d="M56 68 Q50 50 40 44M72 68 Q78 50 88 44M288 68 Q282 50 272 44M304 68 Q310 50 320 44"/>
+      </g>
+      <g fill="#2b2b2b"><circle cx="40" cy="44" r="4"/><circle cx="88" cy="44" r="4"/><circle cx="272" cy="44" r="4"/><circle cx="320" cy="44" r="4"/></g>
+    </symbol>
+    <symbol id="mokus" viewBox="0 0 470 300">
+      <path d="M8 276 C90 264 170 282 250 272 C330 262 400 280 462 272" fill="none" stroke="#5fb35f" stroke-width="10" stroke-linecap="round" filter="url(#crayon)"/>
+      <g filter="url(#crayon)">
+        <rect x="18" y="222" width="430" height="48" rx="24" fill="#5fb35f"/>
+        <path d="M218 104 L262 104 Q320 166 444 238 L444 262 L354 262 Q282 190 218 172 Z" fill="#f7c948"/>
+        <rect x="40" y="100" width="190" height="136" rx="18" fill="#f08a24"/>
+        <rect x="40" y="100" width="46" height="136" rx="14" fill="#8a5a3b"/>
+        <rect x="104" y="126" width="110" height="88" rx="34" fill="#fff"/>
+        <path d="M112 102 C84 88 78 52 96 28 C114 4 156 2 176 22 C196 42 188 70 166 74 C150 77 142 62 152 52 C140 60 132 76 140 92 C146 100 150 102 150 102 Z" fill="#b5651d"/>
+        <path d="M104 40 C112 26 130 20 146 24" fill="none" stroke="#d98a45" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="236" cy="92" rx="14" ry="16" fill="#b5651d"/>
+        <path d="M222 84 q14 -14 28 0" fill="#6b3d17"/>
+      </g>
+      <g fill="none" stroke="#3a3b40" stroke-width="2.4" stroke-linecap="round" filter="url(#pencil)">
+        <rect x="18" y="222" width="430" height="48" rx="24"/>
+        <path d="M218 104 L262 104 Q320 166 444 238 L444 262 L354 262 Q282 190 218 172 Z"/>
+        <path d="M242 118 Q300 170 400 250" stroke-width="1.6" opacity=".7"/>
+        <rect x="40" y="100" width="190" height="136" rx="18"/>
+        <rect x="104" y="126" width="110" height="88" rx="34"/>
+        <path d="M122 126v88M140 126v88M158 126v88M176 126v88M194 126v88M104 148h110M104 170h110M104 192h110" stroke-width="1.4" opacity=".6"/>
+        <path d="M112 102 C84 88 78 52 96 28 C114 4 156 2 176 22 C196 42 188 70 166 74 C150 77 142 62 152 52 C140 60 132 76 140 92 C146 100 150 102 150 102"/>
+        <path d="M92 60l-8 -4M96 40l-9 -8M112 18l-4 -10M140 8l2 -10M170 18l8 -8M186 44l10 -2" stroke-width="2"/>
+      </g>
+      <g filter="url(#crayon)">
+        <circle cx="54" cy="124" r="6" fill="#6fb7e6"/>
+        <circle cx="72" cy="146" r="6" fill="#e87ea1"/>
+        <circle cx="56" cy="170" r="6" fill="#f7c948"/>
+        <circle cx="74" cy="194" r="6" fill="#9b7ede"/>
+        <circle cx="56" cy="216" r="6" fill="#6fb7e6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<nav class="tabs" aria-label="Ugrás a füzetben">
+  <a href="#legvarak">Légvárak</a>
+  <a href="#turnusok">Turnusbeosztó</a>
+  <a href="#megrendelo">Megrendelő</a>
+  <a href="#szuloknek">Szülőknek</a>
+</nav>
+
+<header class="cover" aria-label="Ovikert légvárprogram">
+  <svg class="cover-sun" viewBox="0 0 160 160" aria-hidden="true">
+    <g filter="url(#crayon)">
+      <circle cx="80" cy="80" r="38" fill="#fff27a"/>
+      <g stroke="#fff27a" stroke-width="9" stroke-linecap="round">
+        <path d="M80 10v20M80 130v20M10 80h20M130 80h20M30 30l14 14M116 116l14 14M30 130l14-14M116 44l14-14"/>
+      </g>
+    </g>
+    <g fill="#3a3b40"><circle cx="68" cy="76" r="4"/><circle cx="92" cy="76" r="4"/></g>
+    <path d="M66 92 q14 12 28 0" fill="none" stroke="#3a3b40" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <p class="cover-brand mb-0 position-relative">Ovikert légvárprogram, óvodáknak és iskoláknak 2026</p>
+  <div class="label">
+    <svg class="stamp" viewBox="0 0 200 200" role="img" aria-label="Ovikert pecsét">
+      <defs><path id="ring" d="M100 100 m-72 0 a72 72 0 1 1 144 0 a72 72 0 1 1 -144 0"/></defs>
+      <g filter="url(#stampy)" fill="none" stroke="#3b4cc0" opacity=".88">
+        <circle cx="100" cy="100" r="92" stroke-width="5"/>
+        <circle cx="100" cy="100" r="56" stroke-width="3"/>
+        <text font-family="Figtree, sans-serif" font-weight="800" font-size="19" letter-spacing="3.2" fill="#3b4cc0" stroke="none"><textPath href="#ring" startOffset="0">OVIKERT ✶ LÉGVÁRPROGRAM ✶ 2026 ✶</textPath></text>
+        <path d="M70 124h60M76 124v-26h48v26M76 98v-14h10v8h10v-8h8v8h10v-8h10v14" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M88 124v-12a12 12 0 0 1 24 0v12" stroke-width="3.5"/>
+      </g>
+    </svg>
+    <div class="label-row"><span class="label-key">Név</span><h1 class="label-val">Ovikert légvárprogram</h1></div>
+    <div class="label-row"><span class="label-key">Osztály</span><span class="label-val">óvodák, iskolák, alapítványok</span></div>
+    <div class="label-row"><span class="label-key">Tantárgy</span><span class="label-val">gyereknap, évzáró, alapítványi nap</span></div>
+    <div class="label-row"><span class="label-key">Tanév</span><span class="label-val">2026/27, egész évben</span></div>
+    <div class="label-row"><span class="label-key">Üzenet</span><span class="label-val"><a href="tel:+36301234567">+36 30 123 4567</a></span></div>
+  </div>
+  <p class="cover-hint position-relative">Nyisd ki a füzetet <a href="#uzenet">lent</a> ↓</p>
+  <svg class="cover-castle" viewBox="0 0 360 290" aria-hidden="true"><use href="#katica"/></svg>
+</header>
+
+<main class="book" id="uzenet">
+
+  <section class="task" aria-labelledby="note-title">
+    <article class="note">
+      <svg class="sticker" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 6l15 33 36 4-27 24 8 36-32-19-32 19 8-36L9 43l36-4z" fill="url(#gold)" stroke="#b07a08" stroke-width="2"/>
+        <text x="60" y="68" text-anchor="middle" font-size="17" fill="#6b4300">Ügyes!</text>
+      </svg>
+      <div class="note-top">
+        <strong>Üzenőfüzet</strong>
+        <span class="note-date">Kelt: 2026. szeptember</span>
+      </div>
+      <h2 id="note-title">Kedves Óvó nénik és Tanító nénik! Idén <span class="u-red">légvár lesz az udvaron.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C40 4 90 16 130 8 S180 12 198 6" fill="none" stroke="#d7263d" stroke-width="4" stroke-linecap="round" filter="url(#pencil)"/><path d="M10 18 C60 12 120 20 190 14" fill="none" stroke="#d7263d" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg></span></h2>
+      <p>Kivisszük a gyereknapra, évzáróra vagy az alapítványi napra, felállítjuk, és egy felügyelőt is adunk mellé. Ti a műsorra figyeltek, mi arra, hogy egyszerre csak hatan-nyolcan ugráljanak. Utána díjbekérőt és számlát küldünk, ahogy a fenntartó kéri.</p>
+      <div class="sign">
+        <p class="m-0">Üdvözlettel: az Ovikert csapata</p>
+        <small>Láttam, tudomásul vettem:<br>óvodavezető aláírása</small>
+      </div>
+    </article>
+    <ul class="facts">
+      <li><svg class="tick" aria-hidden="true"><use href="#tick"/></svg>Felügyelő az árban</li>
+      <li><svg class="tick" aria-hidden="true"><use href="#tick"/></svg>Díjbekérő, számla, 8 napos utalás</li>
+      <li><svg class="tick" aria-hidden="true"><use href="#tick"/></svg>Tornateremben is</li>
+      <li><svg class="tick" aria-hidden="true"><use href="#tick"/></svg>Felelősségbiztosítással</li>
+    </ul>
+  </section>
+
+  <section class="task" id="legvarak" aria-labelledby="t1">
+    <div class="task-head"><span class="task-no">1. feladat</span><h2 class="task-title" id="t1">Melyik légvár kell nektek?</h2></div>
+    <p class="task-lead">Két légvárunk van. Nézd meg a méreteket, és válaszd ki, melyik illik a csoportjaitokhoz.</p>
+
+    <div class="sheet row g-4 align-items-center">
+      <div class="col-lg-7">
+        <div class="drawing">
+          <svg viewBox="0 0 360 330" role="img" aria-label="Katicavár rajza: piros, fekete pöttyös légvár két toronnyal">
+            <use href="#katica" width="360" height="290"/>
+            <g fill="none" stroke="#3a3b40" stroke-width="2" stroke-linecap="round" filter="url(#pencil)">
+              <path d="M30 304h300M30 296v16M330 296v16M40 304l10 -5M40 304l10 5M320 304l-10 -5M320 304l-10 5"/>
+            </g>
+            <text x="180" y="326" text-anchor="middle" font-family="Patrick Hand" font-size="20" fill="#1f3fa8">4 m</text>
+          </svg>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="castle-name">Katicavár</h3>
+        <p class="castle-for">a kiscsoportosok kedvence</p>
+        <ul class="spec">
+          <li><b>Méret:</b> 4 × 4 méter</li>
+          <li><b>Kor:</b> 3–10 év</li>
+          <li><b>Egyszerre:</b> legfeljebb 6 gyerek</li>
+          <li><b>Hely kell:</b> 5 × 5 m sík terület</li>
+          <li><b>Tornaterembe:</b> 4 m belmagasságtól</li>
+        </ul>
+        <div class="price-box">Ára: <strong>44 900 Ft<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="20" rx="48" ry="17" fill="none" stroke="#d7263d" stroke-width="2.2" filter="url(#pencil)"/></svg></strong><span class="fo">/ délelőtt</span></div>
+        <p class="margin-note mt-3">Alacsony bejárat, hálós fal: az óvó néni kívülről is mindenkit lát.</p>
+      </div>
+    </div>
+
+    <div class="sheet row g-4 align-items-center mt-4 flex-lg-row-reverse">
+      <div class="col-lg-7">
+        <div class="drawing">
+          <svg viewBox="0 0 470 340" role="img" aria-label="Mókuscsúszda rajza: narancs torony mászófallal, sárga csúszdával és mókusfarokkal">
+            <use href="#mokus" width="470" height="300"/>
+            <g fill="none" stroke="#3a3b40" stroke-width="2" stroke-linecap="round" filter="url(#pencil)">
+              <path d="M18 312h430M18 304v16M448 304v16M28 312l10 -5M28 312l10 5M438 312l-10 -5M438 312l-10 5"/>
+              <path d="M462 104v158M454 104h16M454 262h16" stroke-dasharray="6 6"/>
+            </g>
+            <text x="233" y="334" text-anchor="middle" font-family="Patrick Hand" font-size="20" fill="#1f3fa8">7 m</text>
+            <text x="456" y="96" text-anchor="end" font-family="Patrick Hand" font-size="18" fill="#1f3fa8">2,5 m csúszda</text>
+          </svg>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="castle-name">Mókuscsúszda</h3>
+        <p class="castle-for">nagycsoportnak és alsósoknak</p>
+        <ul class="spec">
+          <li><b>Méret:</b> 7 × 4 méter</li>
+          <li><b>Kor:</b> 4–14 év</li>
+          <li><b>Egyszerre:</b> legfeljebb 8 gyerek</li>
+          <li><b>Benne:</b> mászófal és 2,5 m-es csúszda</li>
+          <li><b>Tornaterembe:</b> 4,5 m belmagasságtól</li>
+        </ul>
+        <div class="price-box">Ára: <strong>59 900 Ft<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="20" rx="48" ry="17" fill="none" stroke="#d7263d" stroke-width="2.2" filter="url(#pencil)"/></svg></strong><span class="fo">/ délelőtt</span></div>
+        <p class="margin-note mt-3">A mászófal a nagyoknak kihívás, a csúszda mindenkinek jutalom.</p>
+      </div>
+    </div>
+
+    <p class="solution">Megoldás: ha egész intézmény jön, kérjétek mindkettőt. Együtt 94 000 Ft egy délelőttre, két felügyelővel. A délelőtt legfeljebb 4 óra, utána óránként +9 000 Ft.</p>
+  </section>
+
+  <section class="task" id="turnusok" aria-labelledby="t2">
+    <div class="task-head"><span class="task-no">2. feladat</span><h2 class="task-title" id="t2">Oszd be a turnusokat!</h2></div>
+    <p class="task-lead">Írd be a csoportokat és a létszámot. A turnusbeosztó 10 perces körökre osztja a délelőttöt, és kiszámolja, hányszor kerül sorra egy gyerek.</p>
+
+    <div class="tool">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <h3>Csoportok</h3>
+          <div id="groups"></div>
+          <button type="button" class="hand-btn mt-2 no-print" id="add-group">+ Új csoport</button>
+
+          <h3 class="mt-4">Időpont</h3>
+          <div class="d-flex align-items-end gap-3 flex-wrap">
+            <label class="d-flex align-items-end gap-2 hand"><span class="fo">kezdés</span><select id="start" class="blank" style="width:6rem"></select></label>
+            <label class="d-flex align-items-end gap-2 hand"><span class="fo">vége</span><select id="end" class="blank" style="width:6rem"></select></label>
+          </div>
+
+          <h3 class="mt-4">Légvárak</h3>
+          <div class="d-flex flex-column gap-2">
+            <label class="check"><input type="checkbox" id="use-katica" checked> Katicavár <span class="fo">(6 gyerek / kör)</span></label>
+            <label class="check"><input type="checkbox" id="use-mokus" checked> Mókuscsúszda <span class="fo">(8 gyerek / kör)</span></label>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="timetable-wrap">
+            <table class="timetable" id="timetable">
+              <caption>Légvár-órarend</caption>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2 align-items-center">
+        <div class="col-lg-7">
+          <h3>Hányszor kerül sorra egy gyerek?</h3>
+          <div class="report" id="report" aria-live="polite"></div>
+        </div>
+        <div class="col-lg-5">
+          <div class="grade" aria-live="polite">
+            <svg class="grade-mark" viewBox="0 0 80 80" aria-hidden="true">
+              <ellipse cx="40" cy="41" rx="34" ry="31" fill="none" stroke="#d7263d" stroke-width="3" filter="url(#pencil)"/>
+              <text id="grade-num" x="40" y="56" text-anchor="middle" font-family="Patrick Hand" font-size="46" fill="#d7263d">5</text>
+            </svg>
+            <p class="grade-text" id="grade-text"></p>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-3 no-print">
+            <button type="button" class="hand-btn" data-print-mode="order">Órarend és megrendelő nyomtatása</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="task" id="megrendelo" aria-labelledby="t3">
+    <div class="task-head"><span class="task-no">3. feladat</span><h2 class="task-title" id="t3">Töltsd ki a megrendelőt!</h2></div>
+    <p class="task-lead">Amit a turnusbeosztóban megadtál, azt már beírtuk. Küldd el e-mailben, vagy nyomtasd ki, pecsételd le, és fotózd le nekünk.</p>
+
+    <form class="form-sheet" id="order" novalidate>
+      <svg class="clip" viewBox="0 0 46 110" aria-hidden="true"><path d="M14 96V20a9 9 0 0 1 18 0v70a15 15 0 0 1-30 0V30" fill="none" stroke="#8d939d" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <div class="form-head">
+        <div>
+          <h3>Megrendelő lap</h3>
+          <p>Ovikert légvárprogram, légvárbérlés intézményeknek<br>hello@ovikert.hu, +36 30 123 4567</p>
+        </div>
+        <p class="form-no">Iktatószám: ………………<br>Érkezett: ………………</p>
+      </div>
+      <div class="boxes">
+        <div class="box w6" data-error="kérjük kitölteni"><label for="o-org">Intézmény neve</label><input id="o-org" name="Intézmény" required autocomplete="organization"></div>
+        <div class="box w6"><label for="o-addr">Intézmény címe (a felállítás helye)</label><input id="o-addr" name="Cím" autocomplete="street-address"></div>
+        <div class="box" data-error="kérjük kitölteni"><label for="o-name">Kapcsolattartó neve</label><input id="o-name" name="Kapcsolattartó" required autocomplete="name"></div>
+        <div class="box" data-error="kérjük kitölteni"><label for="o-phone">Telefonszám</label><input id="o-phone" name="Telefon" type="tel" required autocomplete="tel"></div>
+        <div class="box w4"><label for="o-mail">E-mail-cím</label><input id="o-mail" name="E-mail" type="email" autocomplete="email"></div>
+        <div class="box w2 half-sm" data-error="!"><label for="o-date">A program napja</label><input id="o-date" name="Dátum" type="date" required></div>
+        <div class="box w2 half-sm"><label for="o-time">Időtartam</label><input id="o-time" name="Időtartam" readonly></div>
+        <div class="box w2 half-sm"><label for="o-kids">Gyereklétszám</label><input id="o-kids" name="Gyereklétszám" type="number" min="1"></div>
+        <div class="box w2 half-sm"><span class="box-label">Légvár</span><div class="radio-line"><label><input type="checkbox" id="o-katica" checked> Katicavár</label><label><input type="checkbox" id="o-mokus" checked> Mókuscsúszda</label></div></div>
+        <div class="box w6"><span class="box-label">Hol legyen?</span><div class="radio-line">
+          <label><input type="radio" name="Hely" value="Udvaron" checked> udvaron</label>
+          <label><input type="radio" name="Hely" value="Tornateremben"> tornateremben</label>
+          <label><input type="radio" name="Hely" value="Udvaron, eső esetén tornateremben"> udvaron, eső esetén tornateremben</label>
+        </div></div>
+        <div class="box w4"><label for="o-bill">Számlázási név</label><input id="o-bill" name="Számlázási név" placeholder="pl. Napsugár Óvoda Alapítvány"></div>
+        <div class="box w2"><label for="o-tax">Adószám</label><input id="o-tax" name="Adószám" inputmode="numeric"></div>
+        <div class="box w6"><label for="o-msg">Megjegyzés</label><textarea id="o-msg" name="Megjegyzés" rows="2" placeholder="pl. a kapun csak 9 után lehet behajtani"></textarea></div>
+      </div>
+
+      <table class="price-table" aria-label="Tájékoztató ár">
+        <tbody id="price-rows"></tbody>
+      </table>
+
+      <div class="sign-area">
+        <div class="ph">P. H.</div>
+        <div class="sig">intézményvezető aláírása</div>
+      </div>
+
+      <div class="small-print">
+        <p>A megrendelés beérkezése után két munkanapon belül visszaigazoljuk az időpontot, és díjbekérőt küldünk. A program után számlát állítunk ki, 8 napos átutalási határidővel.</p>
+        <p>Az ár tartalmazza a kiszállítást Budapesten és 30 km-es körzetében, a felállítást, a bontást, légváranként egy felügyelőt és a használat utáni fertőtlenítést.</p>
+        <p>Légváraink az EN 14960 szabványnak megfelelnek. 50 millió Ft keretösszegű felelősségbiztosításunk igazolását és a biztonsági szabályzatot kérésre előre megküldjük.</p>
+        <p>Esőben és 35 km/h feletti szélben a légvár nem használható. Ha nincs tornaterem, az időpontot díjmentesen áttesszük.</p>
+      </div>
+
+      <div class="d-flex flex-wrap align-items-center gap-3 mt-4 no-print">
+        <button type="submit" class="hand-btn is-red">Küldés e-mailben</button>
+        <button type="button" class="hand-btn" data-print-mode="order">Nyomtatás</button>
+        <p class="form-status" id="order-status" role="status"></p>
+      </div>
+    </form>
+  </section>
+
+  <section class="task" id="szuloknek" aria-labelledby="t4">
+    <div class="task-head"><span class="task-no">Házi feladat</span><h2 class="task-title" id="t4">Tájékoztató a szülőknek</h2></div>
+    <p class="task-lead">Ezt a levelet kinyomtathatjátok, vagy bemásolhatjátok a szülői csoportba.</p>
+
+    <article class="letter">
+      <div class="letter-body" id="letter-text">
+        <h3>Kedves Szülők!</h3>
+        <p><span class="fill" id="letter-date">&nbsp;</span> napján légvár lesz az intézmény <span id="letter-place">udvarán</span>. Hogy mindenki biztonságban ugrálhasson, kérjük, beszéljék meg otthon a gyerekekkel az alábbiakat:</p>
+        <ol>
+          <li>A légvárba csak zokniban lehet bemenni, a cipő a bejáratnál marad.</li>
+          <li>Ugrálás közben nem lehet enni, inni és rágózni.</li>
+          <li>A szemüveget, hajcsatot és nyakláncot ugrálás előtt le kell venni.</li>
+          <li>Egyszerre csak annyian ugrálhatnak, ahányat a felügyelő beenged.</li>
+          <li>A kisebbek és a nagyobbak külön turnusban ugrálnak.</li>
+          <li>Aki fáradt vagy rosszul érzi magát, szóljon, és kijöhet pihenni.</li>
+        </ol>
+        <p>Kérjük, aznap kényelmes, hosszú szárú nadrágot és zoknit adjanak a gyerekekre.</p>
+        <p class="mb-0">Köszönjük! Az óvoda dolgozói és az Ovikert csapata</p>
+      </div>
+    </article>
+    <div class="d-flex flex-wrap align-items-center gap-3 mt-4 no-print">
+      <button type="button" class="hand-btn" id="copy-letter">Szöveg másolása</button>
+      <button type="button" class="hand-btn" data-print-mode="letter">Levél nyomtatása</button>
+      <p class="form-status" id="letter-status" role="status"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="backcover">
+  <div class="row g-4 align-items-start">
+    <div class="col-lg-7">
+      <h2>Légvár-tábla</h2>
+      <p>A füzet hátulján régen a szorzótábla volt. Nálunk ez: hány ugrálási kör fér bele egy délelőttbe, 10 perces turnusokkal.</p>
+      <div class="timetable-wrap">
+        <table class="times">
+          <thead><tr><th scope="col">légvár</th><th scope="col">1 óra</th><th scope="col">2 óra</th><th scope="col">3 óra</th><th scope="col">4 óra</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Katicavár</th><td>36</td><td>72</td><td>108</td><td>144</td></tr>
+            <tr><th scope="row">Mókuscsúszda</th><td>48</td><td>96</td><td>144</td><td>192</td></tr>
+            <tr><th scope="row">Mindkettő</th><td>84</td><td>168</td><td>252</td><td>336</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="contact-card">
+        <dl>
+          <dt>Telefon</dt><dd><a href="tel:+36301234567">+36 30 123 4567</a></dd>
+          <dt>E-mail</dt><dd><a href="mailto:hello@ovikert.hu">hello@ovikert.hu</a></dd>
+          <dt>Messenger</dt><dd><a href="https://m.me/ovikert" target="_blank" rel="noopener">m.me/ovikert</a></dd>
+          <dt>Körzet</dt><dd>Budapest és 30 km-es környéke</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <p class="fine">© 2026 Ovikert légvárprogram. A gyereknapi hetet érdemes már márciusban lefoglalni.</p>
+</footer>
+
+<script>
+(function () {
+  var COLORS = ['#f7c948', '#8fd18a', '#9fd0f2', '#f6ad6a', '#f2a3c0', '#c2b0ef', '#ffe07a', '#a6e3d0'];
+  var CASTLES = [
+    { id: 'katica', name: 'Katicavár', cap: 6, price: 44900 },
+    { id: 'mokus', name: 'Mókuscsúszda', th: 'Mókus\u00adcsúszda', cap: 8, price: 59900 }
+  ];
+  var groups = [
+    { name: 'Pillangó csoport', n: 22 },
+    { name: 'Maci csoport', n: 24 },
+    { name: 'Süni csoport', n: 18 }
+  ];
+  var $ = function (id) { return document.getElementById(id); };
+  var groupsEl = $('groups');
+  var startEl = $('start');
+  var endEl = $('end');
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function fmt(min) { return Math.floor(min / 60) + ':' + pad(min % 60); }
+  function money(n) { return n.toLocaleString('hu-HU').replace(/ /g, ' ') + ' Ft'; }
+  function short(name) { return name.replace(/\s*csoport$/i, '') || name; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  for (var m = 7 * 60 + 30; m <= 17 * 60; m += 30) {
+    startEl.add(new Option(fmt(m), m));
+    endEl.add(new Option(fmt(m), m));
+  }
+  startEl.value = String(9 * 60);
+  endEl.value = String(11 * 60 + 30);
+
+  function renderGroups() {
+    groupsEl.innerHTML = groups.map(function (g, i) {
+      return '<div class="group-row">' +
+        '<span class="swatch" style="background:' + COLORS[i % COLORS.length] + '"></span>' +
+        '<label class="visually-hidden" for="g-name-' + i + '">Csoport neve</label>' +
+        '<input class="blank" id="g-name-' + i + '" data-i="' + i + '" data-k="name" value="' + esc(g.name) + '">' +
+        '<span class="d-flex align-items-end gap-1"><label class="visually-hidden" for="g-n-' + i + '">Létszám</label>' +
+        '<input class="blank text-center" type="number" min="1" max="80" id="g-n-' + i + '" data-i="' + i + '" data-k="n" value="' + g.n + '"><span class="fo">fő</span></span>' +
+        '<button type="button" class="icon-btn no-print" data-del="' + i + '" aria-label="' + esc(g.name) + ' törlése"' + (groups.length < 2 ? ' disabled' : '') + '>×</button>' +
+        '</div>';
+    }).join('');
+  }
+
+  function schedule() {
+    var start = +startEl.value;
+    var end = +endEl.value;
+    if (end <= start) { end = start + 30; endEl.value = String(end); }
+    var active = CASTLES.filter(function (c) { return $('use-' + c.id).checked; });
+    var list = groups.map(function (g, i) { return { name: g.name, n: Math.max(0, g.n | 0), served: 0, idx: i }; }).filter(function (g) { return g.n > 0; });
+    var slots = [];
+    for (var t = start; t + 10 <= end; t += 10) {
+      var row = { time: t, cells: [] };
+      var used = [];
+      active.forEach(function (c) {
+        var pool = list.filter(function (g) { return used.indexOf(g.idx) === -1; });
+        if (!pool.length) pool = list;
+        pool.sort(function (a, b) { return (a.served / a.n) - (b.served / b.n) || a.idx - b.idx; });
+        var g = pool[0];
+        if (!g) { row.cells.push(null); return; }
+        var k = Math.min(c.cap, g.n);
+        g.served += k;
+        used.push(g.idx);
+        row.cells.push({ g: g, k: k });
+      });
+      slots.push(row);
+    }
+    return { start: start, end: end, active: active, list: list, slots: slots };
+  }
+
+  function renderTable(s) {
+    var table = $('timetable');
+    if (!s.active.length) {
+      table.tHead.innerHTML = '';
+      table.tBodies[0].innerHTML = '<tr><td class="slot is-empty p-3">Jelölj be legalább egy légvárat.</td></tr>';
+      return;
+    }
+    table.tHead.innerHTML = '<tr><th scope="col">idő</th>' + s.active.map(function (c) { return '<th scope="col">' + (c.th || c.name) + '</th>'; }).join('') + '</tr>';
+    table.tBodies[0].innerHTML = s.slots.map(function (r) {
+      return '<tr><th scope="row">' + fmt(r.time) + '<span class="t-end">–' + fmt(r.time + 10) + '</span></th>' + r.cells.map(function (cell) {
+        if (!cell) return '<td><span class="slot is-empty">szabad</span></td>';
+        return '<td><span class="slot" style="background-color:' + COLORS[cell.g.idx % COLORS.length] + '">' + esc(short(cell.g.name)) + '<span class="k-full">, ' + cell.k + ' fő</span><span class="k-short"> ' + cell.k + '</span></span></td>';
+      }).join('') + '</tr>';
+    }).join('');
+  }
+
+  function renderReport(s) {
+    var max = 4;
+    var min = Infinity;
+    $('report').innerHTML = s.list.map(function (g) {
+      var per = g.served / g.n;
+      min = Math.min(min, per);
+      var w = Math.min(100, per / max * 100);
+      var txt = per >= 1 ? (Math.round(per * 10) / 10).toString().replace('.', ',') + ' kör / gyerek' : Math.round(per * 100) + '% jut sorra';
+      return '<div class="bar-row"><span>' + esc(short(g.name)) + '</span><span class="bar" aria-hidden="true"><i style="width:' + w + '%;background:' + COLORS[g.idx % COLORS.length] + '"></i></span><span>' + txt + '</span></div>';
+    }).join('') || '<p class="fo m-0">Adj hozzá legalább egy csoportot.</p>';
+    if (!s.list.length || !s.active.length) min = 0;
+    var num = $('grade-num');
+    var text = $('grade-text');
+    if (min >= 2) { num.textContent = '5'; text.textContent = 'Kitűnő! Mindenki legalább kétszer ugrálhat.'; }
+    else if (min >= 1) { num.textContent = '4'; text.textContent = 'Jó! Mindenki sorra kerül legalább egyszer.'; }
+    else { num.textContent = '2'; text.textContent = 'Így nem jut mindenkinek. Hosszabbítsd meg a programot, vagy kérd mindkét légvárat.'; }
+  }
+
+  function syncOrder(s) {
+    var mins = s.end - s.start;
+    $('o-time').value = fmt(s.start) + '–' + fmt(s.end) + ' (' + (mins / 60).toString().replace('.', ',') + ' óra)';
+    var total = groups.reduce(function (a, g) { return a + Math.max(0, g.n | 0); }, 0);
+    if (!$('o-kids').dataset.touched) $('o-kids').value = total || '';
+    $('o-katica').checked = $('use-katica').checked;
+    $('o-mokus').checked = $('use-mokus').checked;
+    renderPrice();
+  }
+
+  function renderPrice() {
+    var k = $('o-katica').checked, mo = $('o-mokus').checked;
+    var hours = Math.max(0, (+endEl.value - +startEl.value) / 60);
+    var rows = [];
+    var base = 0;
+    if (k && mo) { rows.push(['Katicavár és Mókuscsúszda, egy délelőtt, két felügyelővel', 94000]); base = 94000; }
+    else if (k) { rows.push(['Katicavár, egy délelőtt, felügyelővel', 44900]); base = 44900; }
+    else if (mo) { rows.push(['Mókuscsúszda, egy délelőtt, felügyelővel', 59900]); base = 59900; }
+    var extra = Math.max(0, Math.ceil(hours - 4));
+    if (base && extra) rows.push(['Hosszabbítás, ' + extra + ' óra × ' + ((k && mo) ? 2 : 1) + ' légvár', extra * 9000 * ((k && mo) ? 2 : 1)]);
+    var sum = rows.reduce(function (a, r) { return a + r[1]; }, 0);
+    $('price-rows').innerHTML = rows.length ? rows.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + money(r[1]) + '</td></tr>'; }).join('') +
+      '<tr class="total"><td>Fizetendő (tájékoztató, a díjbekérő szerint)</td><td>' + money(sum) + '</td></tr>' :
+      '<tr><td>Jelölj be legalább egy légvárat.</td><td></td></tr>';
+  }
+
+  function update() {
+    var s = schedule();
+    renderTable(s);
+    renderReport(s);
+    syncOrder(s);
+  }
+
+  groupsEl.addEventListener('input', function (e) {
+    var el = e.target;
+    if (el.dataset.i == null) return;
+    var g = groups[+el.dataset.i];
+    if (el.dataset.k === 'name') g.name = el.value;
+    else g.n = Math.max(0, Math.min(80, parseInt(el.value, 10) || 0));
+    update();
+  });
+  groupsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-del]');
+    if (!b || groups.length < 2) return;
+    groups.splice(+b.dataset.del, 1);
+    renderGroups();
+    update();
+  });
+  $('add-group').addEventListener('click', function () {
+    var names = ['Csiga csoport', 'Katica csoport', 'Nyuszi csoport', 'Méhecske csoport', 'Bagoly csoport'];
+    var name = names.find(function (n) { return !groups.some(function (g) { return g.name === n; }); }) || 'Új csoport';
+    groups.push({ name: name, n: 20 });
+    renderGroups();
+    update();
+    var inputs = groupsEl.querySelectorAll('input[data-k="name"]');
+    inputs[inputs.length - 1].focus();
+    inputs[inputs.length - 1].select();
+  });
+  [startEl, endEl, $('use-katica'), $('use-mokus')].forEach(function (el) { el.addEventListener('change', update); });
+  $('o-katica').addEventListener('change', function () { $('use-katica').checked = this.checked; update(); });
+  $('o-mokus').addEventListener('change', function () { $('use-mokus').checked = this.checked; update(); });
+  $('o-kids').addEventListener('input', function () { this.dataset.touched = '1'; });
+
+  var today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  $('o-date').min = today.toISOString().slice(0, 10);
+
+  function syncLetter() {
+    var d = $('o-date').value;
+    $('letter-date').textContent = d ? d.replace(/-/g, '. ') + '.' : ' ';
+    var place = document.querySelector('input[name="Hely"]:checked').value;
+    $('letter-place').textContent = place === 'Tornateremben' ? 'tornatermében' : 'udvarán';
+  }
+  $('o-date').addEventListener('change', syncLetter);
+  document.querySelectorAll('input[name="Hely"]').forEach(function (r) { r.addEventListener('change', syncLetter); });
+
+  document.querySelectorAll('[data-print-mode]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.body.dataset.print = b.dataset.printMode;
+      window.print();
+    });
+  });
+  window.addEventListener('afterprint', function () { delete document.body.dataset.print; });
+
+  $('order').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = this;
+    var status = $('order-status');
+    var bad = [];
+    form.querySelectorAll('[required]').forEach(function (el) {
+      var ok = el.value.trim() !== '';
+      el.closest('.box').classList.toggle('is-invalid', !ok);
+      if (!ok) bad.push(form.querySelector('label[for="' + el.id + '"]').textContent.toLowerCase());
+    });
+    if (bad.length) {
+      status.textContent = 'Javítsd ki: hiányzik ' + bad.join(', ') + '.';
+      status.classList.add('is-error');
+      var first = form.querySelector('.is-invalid input');
+      if (first) first.focus();
+      return;
+    }
+    status.classList.remove('is-error');
+    var lines = [];
+    form.querySelectorAll('input[name], textarea[name]').forEach(function (el) {
+      if (el.type === 'radio' && !el.checked) return;
+      lines.push(el.name + ': ' + (el.value.trim() || '-'));
+    });
+    var castles = [$('o-katica').checked ? 'Katicavár' : '', $('o-mokus').checked ? 'Mókuscsúszda' : ''].filter(Boolean).join(', ') || '-';
+    lines.push('Légvár: ' + castles);
+    var s = schedule();
+    lines.push('', 'Turnusbeosztás (' + fmt(s.start) + '–' + fmt(s.end) + '):');
+    s.list.forEach(function (g) { lines.push('- ' + g.name + ', ' + g.n + ' fő: ' + (Math.round(g.served / g.n * 10) / 10).toString().replace('.', ',') + ' kör / gyerek'); });
+    var subject = 'Megrendelő: ' + $('o-org').value.trim() + ', ' + $('o-date').value;
+    location.href = 'mailto:hello@ovikert.hu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    status.textContent = 'Megnyílt a leveleződ a kitöltött megrendelővel. Küldd el, és két munkanapon belül visszaigazoljuk.';
+  });
+  $('order').addEventListener('input', function (e) {
+    var box = e.target.closest('.box');
+    if (box && box.classList.contains('is-invalid') && e.target.value.trim()) box.classList.remove('is-invalid');
+  });
+
+  $('copy-letter').addEventListener('click', function () {
+    var text = $('letter-text').innerText.replace(/\n{3,}/g, '\n\n');
+    var status = $('letter-status');
+    var done = function () { status.textContent = 'Kimásoltuk. Beillesztheted a szülői csoportba.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { status.textContent = 'A másolás nem sikerült. Jelöld ki a szöveget, és másold kézzel.'; });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { status.textContent = 'A másolás nem sikerült. Jelöld ki a szöveget, és másold kézzel.'; }
+      ta.remove();
+    }
+  });
+
+  renderGroups();
+  update();
+  syncLetter();
+})();
+</script>
+<script src="switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UGRI légvár osztálybulira</title>
+<meta name="description" content="UGRI: légvár osztálybulira, ballagásra, tinibulira. A Rámpa 14 éves korig bírja, a Mini a kistesóknak való. Kérdezz a chatben, és foglalj pár koppintással.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+  --v: #6a2bff;
+  --v-deep: #3d12a8;
+  --o: #ff5a1f;
+  --m: #3df2b5;
+  --y: #ffe14d;
+  --pink: #ff8fd8;
+  --lav: #efe9ff;
+  --ink: #000;
+  --paper: #fff;
+  --holo: linear-gradient(120deg, #ff9de2 0%, #a0f0ff 22%, #c5ffb0 40%, #fff6a0 58%, #ffb3f0 76%, #9fd8ff 100%);
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+body {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  color: var(--ink);
+  background-color: var(--v);
+  background-image: radial-gradient(rgba(255, 255, 255, .16) 1.4px, transparent 1.8px);
+  background-size: 16px 16px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 7px var(--y); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 64px);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 32px clamp(16px, 3vw, 48px) 56px;
+  align-items: start;
+}
+
+.poster {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 36px);
+  min-width: 0;
+}
+.wordmark {
+  font-family: "Rubik Mono One", sans-serif;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: clamp(120px, 21vh, 220px);
+  line-height: .82;
+  letter-spacing: -.02em;
+  color: var(--o);
+  -webkit-text-stroke: 5px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: -9px -9px 0 var(--ink);
+  margin: 0;
+  user-select: none;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--dsw-h, 40px) + 24px);
+}
+.stickers { display: flex; flex-direction: column; gap: 34px; padding-top: 14px; min-width: 0; position: relative; z-index: 1; }
+
+.paper {
+  position: relative;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  padding: 26px 26px 22px;
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.headline { transform: rotate(-1.6deg); max-width: 34rem; }
+.headline h1 {
+  font-weight: 800;
+  font-size: clamp(2.1rem, 3.6vw, 3.5rem);
+  line-height: .94;
+  letter-spacing: -.035em;
+  margin: 0 0 14px;
+  font-variation-settings: "opsz" 96;
+}
+.headline p { margin: 0; font-size: 1.08rem; max-width: 32ch; }
+
+.tape {
+  position: absolute;
+  width: 128px;
+  height: 34px;
+  background: rgba(255, 225, 77, .82);
+  clip-path: polygon(0 12%, 6% 0, 12% 12%, 18% 0, 24% 12%, 30% 0, 36% 12%, 42% 0, 48% 12%, 54% 0, 60% 12%, 66% 0, 72% 12%, 78% 0, 84% 12%, 90% 0, 96% 12%, 100% 0, 100% 88%, 94% 100%, 88% 88%, 82% 100%, 76% 88%, 70% 100%, 64% 88%, 58% 100%, 52% 88%, 46% 100%, 40% 88%, 34% 100%, 28% 88%, 22% 100%, 16% 88%, 10% 100%, 4% 88%, 0 100%);
+  pointer-events: none;
+}
+.headline .tape { top: -18px; left: 38px; transform: rotate(-7deg); }
+
+.die { filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(2px 2px 0 #fff) drop-shadow(-2px -2px 0 #fff) drop-shadow(6px 8px 0 rgba(0, 0, 0, .35)); }
+.die svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.castle-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; position: relative; }
+.castle-sticker { position: relative; }
+.castle-sticker.big { width: min(100%, 420px); transform: rotate(2deg); }
+.castle-sticker.small { width: min(62%, 240px); transform: rotate(-4deg); }
+.price-tag {
+  display: inline-block;
+  background: var(--m);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 10px 16px 11px;
+  box-shadow: 4px 4px 0 var(--ink);
+  line-height: 1.15;
+  font-size: .95rem;
+}
+.price-tag b { display: block; font-size: 1.35rem; letter-spacing: -.02em; }
+.castle-sticker.big .price-tag { position: absolute; right: -6px; top: -22px; transform: rotate(7deg); }
+.castle-sticker.small .price-tag { position: absolute; left: -10px; top: -30px; transform: rotate(-6deg); background: var(--y); }
+.castle-name { font-weight: 800; font-size: 1.25rem; margin: 10px 0 0 6px; color: #fff; text-shadow: 2px 2px 0 var(--ink); }
+.castle-note { color: #fff; margin: 2px 0 0 6px; font-size: .95rem; max-width: 30ch; }
+
+.holo {
+  width: 150px;
+  height: 150px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--holo);
+  background-size: 260% 260%;
+  border: 3px solid var(--ink);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.05;
+  transform: rotate(-12deg);
+  box-shadow: 4px 4px 0 var(--ink), inset 0 0 0 7px rgba(255, 255, 255, .55);
+  animation: shimmer 6s ease-in-out infinite alternate;
+  padding: 12px;
+}
+.holo strong { font-size: 2rem; letter-spacing: -.04em; display: block; }
+@keyframes shimmer { to { background-position: 100% 100%; } }
+
+.bottom-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.call {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--o);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  padding: 14px 20px 16px;
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-2deg);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.call:hover { transform: rotate(-2deg) translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); color: var(--ink); }
+.call span { display: block; font-size: .9rem; font-weight: 600; }
+.call b { font-size: clamp(1.35rem, 2.2vw, 1.8rem); letter-spacing: -.02em; white-space: nowrap; }
+.area { position: relative; background: #fff; border: 3px solid var(--ink); padding: 10px 16px; font-weight: 700; transform: rotate(4deg); border-radius: 6px; }
+.area .tape { width: 70px; height: 24px; top: -14px; right: 14px; transform: rotate(10deg); background: rgba(61, 242, 181, .85); }
+.to-chat { display: none !important; justify-self: start; align-items: center; gap: 8px; text-decoration: none; background: var(--m); border: 3px solid var(--ink); border-radius: 999px; padding: 10px 18px; font-weight: 800; box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg); }
+.to-chat:hover { color: var(--ink); }
+.poster-foot { color: #fff; font-size: .92rem; display: flex; gap: 18px; flex-wrap: wrap; padding-left: 4px; }
+.poster-foot a { text-underline-offset: 3px; }
+
+.doodle { position: absolute; pointer-events: none; z-index: 0; }
+.d1 { right: 4%; top: 2%; width: 70px; transform: rotate(14deg); }
+.d2 { right: 30%; top: 40%; width: 48px; }
+.d3 { left: 22%; bottom: 8%; width: 90px; }
+.arrow-doodle { position: absolute; right: -40px; top: 60%; width: 120px; pointer-events: none; }
+
+.phone-col { position: sticky; top: calc(var(--dsw-h, 40px) + 24px); }
+.phone {
+  width: 404px;
+  height: min(830px, calc(100vh - var(--dsw-h, 40px) - 48px));
+  min-height: 560px;
+  background: var(--ink);
+  border-radius: 56px;
+  padding: 12px;
+  box-shadow: 0 0 0 3px #2a2a2a, 14px 16px 0 rgba(0, 0, 0, .45);
+  position: relative;
+}
+.screen { height: 100%; border-radius: 45px; overflow: hidden; background: var(--lav); display: flex; flex-direction: column; position: relative; }
+.notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 112px; height: 32px; border-radius: 20px; background: var(--ink); z-index: 3; }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 52px 14px 12px; background: #fff; border-bottom: 2px solid var(--ink); }
+.chat-head .avatar { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--ink); background: var(--holo); display: grid; place-items: center; font-family: "Rubik Mono One", sans-serif; font-size: 13px; flex: none; }
+.chat-head .t { flex: 1; min-width: 0; line-height: 1.15; }
+.chat-head .t b { display: block; font-size: 1.02rem; }
+.chat-head .t span { font-size: .8rem; color: #5a4b87; }
+.head-call { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--m); border: 2px solid var(--ink); flex: none; }
+.head-call svg { width: 18px; height: 18px; }
+
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background-image: radial-gradient(rgba(106, 43, 255, .14) 1.4px, transparent 1.6px);
+  background-size: 18px 18px;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+.msg {
+  max-width: 84%;
+  padding: 9px 13px 7px;
+  border-radius: 20px;
+  border-bottom-left-radius: 6px;
+  font-size: .95rem;
+  line-height: 1.38;
+  border: 2px solid var(--ink);
+  background: #fff;
+  align-self: flex-start;
+  animation: pop .22s ease-out;
+  position: relative;
+  overflow-wrap: anywhere;
+}
+.msg p { margin: 0; }
+.msg p + p { margin-top: 6px; }
+.msg .time { display: block; text-align: right; font-size: .68rem; color: #6d6391; margin-top: 3px; }
+.msg.me { align-self: flex-end; background: var(--o); border-bottom-left-radius: 20px; border-bottom-right-radius: 6px; }
+.msg.me .time { color: rgba(0, 0, 0, .6); }
+.msg.sys { align-self: center; background: rgba(255, 255, 255, .7); border: 0; font-size: .75rem; color: #4b3d7a; padding: 3px 10px; border-radius: 999px; animation: none; }
+.msg.sys + .msg:not(.sys) { margin-top: 6px; }
+.from { font-size: .72rem; font-weight: 800; color: var(--v); display: block; margin-bottom: 2px; letter-spacing: .01em; }
+.msg.media { padding: 5px 5px 7px; width: 84%; }
+.msg.media svg { display: block; width: 100%; height: auto; border-radius: 15px; }
+.msg.media .cap { padding: 7px 8px 0; font-size: .92rem; }
+.msg.media .time { padding-right: 6px; }
+@keyframes pop { from { transform: translateY(6px) scale(.97); opacity: 0; } }
+
+.typing { display: inline-flex; gap: 4px; padding: 12px 14px; }
+.typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--v); animation: dot 1s infinite ease-in-out; }
+.typing i:nth-child(2) { animation-delay: .15s; }
+.typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%, 60%, 100% { transform: translateY(0); opacity: .5; } 30% { transform: translateY(-5px); opacity: 1; } }
+
+.voice { display: flex; align-items: center; gap: 10px; padding: 2px 0; }
+.play { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--ink); background: var(--v); color: #fff; display: grid; place-items: center; flex: none; padding: 0; }
+.play svg { width: 14px; height: 14px; }
+.wave { display: flex; align-items: center; gap: 2px; height: 30px; flex: 1; }
+.wave span { width: 3px; border-radius: 3px; background: #b9a8ee; flex: none; }
+.voice.playing .wave span { animation: lit 2.4s linear forwards; }
+@keyframes lit { to { background: var(--v); } }
+.dur { font-size: .75rem; font-weight: 700; color: #5a4b87; }
+.transcript { font-size: .82rem; color: #4b3d7a; border-top: 1.5px dashed #c9bdf0; margin-top: 6px !important; padding-top: 6px; }
+
+.prices { width: 100%; border-collapse: collapse; margin: 2px 0; }
+.prices td { padding: 4px 0; border-bottom: 1.5px dashed #d8cff5; }
+.prices tr:last-child td { border-bottom: 0; }
+.prices td:last-child { text-align: right; font-weight: 800; white-space: nowrap; padding-left: 10px; }
+
+.poll { width: 84%; }
+.poll h4 { font-size: 1rem; font-weight: 800; margin: 0 0 2px; }
+.poll .hint { font-size: .78rem; color: #5a4b87; margin-bottom: 8px !important; }
+.opt { position: relative; display: flex; justify-content: space-between; align-items: center; width: 100%; border: 2px solid var(--ink); border-radius: 12px; background: #fff; padding: 8px 10px; margin-bottom: 6px; font-weight: 700; font-size: .92rem; overflow: hidden; text-align: left; }
+.opt .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--m); transition: width .35s ease; z-index: 0; }
+.opt:nth-of-type(2) .bar { background: var(--y); }
+.opt:nth-of-type(3) .bar { background: var(--pink); }
+.opt span { position: relative; z-index: 1; }
+.opt:active { transform: scale(.98); }
+.poll-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 4px; font-size: .8rem; color: #5a4b87; }
+.mini-btn { border: 2px solid var(--ink); border-radius: 999px; background: var(--o); font-weight: 800; font-size: .82rem; padding: 6px 11px; }
+.mini-btn[disabled] { opacity: .45; }
+
+.pack { width: 84%; }
+.pack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.game { border: 0; background: none; padding: 0; text-align: center; font-weight: 800; font-size: .86rem; line-height: 1.1; }
+.game .disc { width: 74px; height: 74px; margin: 0 auto 6px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--ink); transition: transform .2s ease; }
+.game .disc svg { width: 42px; height: 42px; }
+.game:hover .disc, .game[aria-expanded="true"] .disc { transform: rotate(-8deg) scale(1.05); }
+.game-desc { font-size: .86rem; background: var(--lav); border-radius: 12px; padding: 8px 10px; margin-top: 8px !important; }
+
+.summary { width: 88%; background: #fff; }
+.summary h4 { font-weight: 800; font-size: 1.05rem; margin: 0 0 6px; }
+.summary dl { margin: 0 0 10px; display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; font-size: .88rem; }
+.summary dt { color: #5a4b87; font-weight: 600; }
+.summary dd { margin: 0; font-weight: 700; }
+.summary .acts { display: flex; flex-direction: column; gap: 6px; }
+.act { display: block; text-align: center; text-decoration: none; border: 2px solid var(--ink); border-radius: 12px; padding: 9px 10px; font-weight: 800; font-size: .92rem; background: var(--m); }
+.act.alt { background: var(--y); }
+.act.ghost { background: #fff; }
+.act:hover { color: var(--ink); filter: brightness(1.04); }
+.copied { font-size: .8rem; color: #2f7d5b; font-weight: 700; margin-top: 4px !important; }
+
+.composer { background: #fff; border-top: 2px solid var(--ink); padding: 10px 10px 16px; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 36px; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 2px solid var(--ink); background: #fff; border-radius: 999px; padding: 7px 12px; font-weight: 700; font-size: .88rem; white-space: nowrap; }
+.chip:hover { background: var(--lav); }
+.chip.hot { background: var(--o); }
+.chip.hot:hover { background: #ff7a45; }
+.chip.soft { background: var(--m); }
+.inrow { display: flex; gap: 8px; align-items: center; }
+.field { flex: 1; min-width: 0; border: 2px solid var(--ink); border-radius: 999px; padding: 9px 15px; font: inherit; font-size: .95rem; background: var(--lav); color: var(--ink); }
+.field:focus { outline: none; box-shadow: 0 0 0 3px var(--y), 0 0 0 5px var(--ink); }
+.send { width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--ink); background: var(--v); color: #fff; display: grid; place-items: center; flex: none; padding: 0; }
+.send svg { width: 18px; height: 18px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 1180px) {
+  .phone { width: 372px; }
+  .holo { width: 130px; height: 130px; }
+  .holo strong { font-size: 1.7rem; }
+}
+@media (max-width: 991.98px) {
+  .stage { grid-template-columns: minmax(0, 1fr); padding: 20px 16px 32px; gap: 36px; }
+  .poster { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .wordmark { writing-mode: horizontal-tb; transform: rotate(-3deg); font-size: clamp(76px, 25vw, 170px); text-shadow: 7px 7px 0 var(--ink); -webkit-text-stroke: 4px var(--ink); position: static; margin: 4px 0 6px -4px; }
+  .stickers { gap: 30px; }
+  .arrow-doodle, .d2 { display: none; }
+  .phone-col { position: static; scroll-margin-top: calc(var(--dsw-h, 40px) + 12px); }
+  .stickers { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 30px 16px; align-items: start; }
+  .headline, .bottom-row, .poster-foot, .to-chat { grid-column: 1 / -1; }
+  .castle-sticker.big, .castle-sticker.small { width: 100%; }
+  .castle-row .holo { display: none; }
+  .castle-sticker.big .price-tag, .castle-sticker.small .price-tag { position: relative; left: auto; right: auto; top: auto; margin: -8px 0 0 4px; font-size: .78rem; padding: 6px 10px 7px; }
+  .castle-sticker.big, .castle-sticker.small { transform: none; }
+  .castle-sticker.small .die { width: 68%; margin-inline: auto; }
+  .price-tag b { white-space: nowrap; }
+  .price-tag b { font-size: 1.05rem; }
+  .castle-name { font-size: 1.1rem; }
+  .castle-note { font-size: .85rem; }
+  .to-chat { display: inline-flex !important; }
+  .phone { width: 100%; height: calc(100svh - var(--dsw-h, 40px) - 32px); min-height: 520px; max-height: 820px; border-radius: 34px; padding: 7px; }
+  .screen { border-radius: 28px; }
+  .notch { display: none; }
+  .chat-head { padding-top: 14px; }
+}
+@media (max-width: 420px) {
+  .paper { padding: 22px 18px 18px; }
+  .castle-sticker.small { width: 58%; }
+  .holo { width: 118px; height: 118px; font-size: .85rem; }
+  .holo strong { font-size: 1.5rem; }
+  .msg, .msg.media, .poll, .pack { max-width: 90%; }
+  .msg.media, .poll, .pack { width: 90%; }
+  .summary { width: 94%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" class="position-absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="u-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff9ad5"/>
+      <stop offset=".55" stop-color="#ffc58a"/>
+      <stop offset="1" stop-color="#ffe9a8"/>
+    </linearGradient>
+    <marker id="u-arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#000"/>
+    </marker>
+    <symbol id="u-rampa" viewBox="0 0 300 220">
+      <g stroke="#000" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="8" y="170" width="284" height="38" rx="19" fill="#3df2b5"/>
+        <path d="M150 78 L186 78 Q232 120 290 170 L290 192 L236 192 Q206 128 150 118 Z" fill="#ffe14d"/>
+        <path d="M168 92 Q220 132 262 184" fill="none" stroke-width="4"/>
+        <rect x="30" y="72" width="122" height="110" rx="14" fill="#6a2bff"/>
+        <rect x="56" y="98" width="70" height="62" rx="26" fill="#000"/>
+        <rect x="18" y="44" width="30" height="142" rx="15" fill="#ff5a1f"/>
+        <rect x="134" y="44" width="30" height="142" rx="15" fill="#ff5a1f"/>
+      </g>
+      <path d="M36 70 Q91 16 146 70" fill="none" stroke="#000" stroke-width="26" stroke-linecap="round"/>
+      <path d="M36 70 Q91 16 146 70" fill="none" stroke="#ff8fd8" stroke-width="16" stroke-linecap="round"/>
+      <g stroke="#000" stroke-width="4">
+        <circle cx="33" cy="38" r="14" fill="#ffe14d"/>
+        <circle cx="149" cy="38" r="14" fill="#ffe14d"/>
+        <circle cx="44" cy="92" r="5" fill="#ff5a1f"/>
+        <circle cx="138" cy="112" r="5" fill="#3df2b5"/>
+        <circle cx="44" cy="150" r="5" fill="#ffe14d"/>
+        <circle cx="138" cy="160" r="5" fill="#ff8fd8"/>
+      </g>
+      <path d="M66 112 q10 -8 20 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+      <path d="M26 64 v100 M142 64 v100" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+      <path d="M40 186 h220" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    </symbol>
+    <symbol id="u-mini" viewBox="0 0 220 200">
+      <g stroke="#000" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="8" y="150" width="204" height="38" rx="19" fill="#ff5a1f"/>
+        <rect x="42" y="78" width="136" height="84" rx="12" fill="#3df2b5"/>
+        <rect x="72" y="98" width="76" height="54" rx="24" fill="#000"/>
+        <rect x="20" y="54" width="36" height="112" rx="18" fill="#6a2bff"/>
+        <rect x="164" y="54" width="36" height="112" rx="18" fill="#6a2bff"/>
+        <path d="M14 60 L38 10 L62 60 Z" fill="#ffe14d"/>
+        <path d="M158 60 L182 10 L206 60 Z" fill="#ffe14d"/>
+        <path d="M110 44 l8 16 18 2 -13 12 3 18 -16 -9 -16 9 3 -18 -13 -12 18 -2z" fill="#ff8fd8"/>
+      </g>
+      <path d="M30 76 v76 M174 76 v76" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+      <path d="M34 166 h150" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <section class="poster" aria-labelledby="ugri-title">
+    <p class="wordmark" aria-hidden="true">UGRI</p>
+
+    <div class="stickers">
+      <div class="paper headline">
+        <span class="tape"></span>
+        <h1 id="ugri-title">Légvár osztálybulira, ballagásra, tinibulira.</h1>
+        <p>Ti hozzátok az osztályt, mi hozzuk a légvárat. A Rámpa 14 éves korig bírja a strapát.</p>
+      </div>
+
+      <a class="to-chat" href="#chat">Kérdezz a chatben, lent várunk</a>
+
+      <div class="castle-row">
+        <figure class="castle-sticker big m-0">
+          <div class="die"><svg viewBox="0 0 300 220" role="img" aria-label="A Rámpa légvár csúszdával és mászófallal"><use href="#u-rampa"/></svg></div>
+          <span class="price-tag"><b>34 900 Ft</b>egy napra</span>
+          <figcaption>
+            <p class="castle-name mb-0">Rámpa</p>
+            <p class="castle-note mb-0">7 × 4 m, 2,5 méteres csúszda, mászófal. 4–14 éveseknek, egyszerre 8 fő.</p>
+          </figcaption>
+        </figure>
+        <svg class="arrow-doodle" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 44 C30 10 70 6 104 26" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><path d="M92 14 L108 28 L88 36" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="castle-row">
+        <figure class="castle-sticker small m-0">
+          <div class="die"><svg viewBox="0 0 220 200" role="img" aria-label="A Mini légvár a kistesóknak"><use href="#u-mini"/></svg></div>
+          <span class="price-tag"><b>24 900 Ft</b>egy napra</span>
+          <figcaption>
+            <p class="castle-name mb-0">Mini</p>
+            <p class="castle-note mb-0">A kistesóknak: 4 × 4 m, 3–10 év, 6 gyerek.</p>
+          </figcaption>
+        </figure>
+        <div class="holo"><strong>65 kg</strong>fejenként is bírja a Rámpa</div>
+      </div>
+
+      <div class="bottom-row">
+        <a class="call" href="tel:+36301234567"><span>Inkább hívnál?</span><b>+36 30 123 4567</b></a>
+        <span class="area"><span class="tape"></span>Budapest + 30 km</span>
+      </div>
+
+      <div class="poster-foot">
+        <a href="mailto:hello@ugri.hu">hello@ugri.hu</a>
+        <a href="https://m.me/ugri.buli" target="_blank" rel="noopener">m.me/ugri.buli</a>
+        <span>© 2026 UGRI légvár</span>
+      </div>
+    </div>
+
+    <svg class="doodle d1" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 4 L36 24 L56 30 L36 36 L30 56 L24 36 L4 30 L24 24 Z" fill="#ffe14d" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+    <svg class="doodle d2" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 6 L35 25 L54 30 L35 35 L30 54 L25 35 L6 30 L25 25 Z" fill="#3df2b5" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg>
+    <svg class="doodle d3" viewBox="0 0 90 30" aria-hidden="true"><path d="M4 18 Q15 2 26 16 T48 16 T70 16 T88 12" fill="none" stroke="#ff8fd8" stroke-width="5" stroke-linecap="round"/></svg>
+  </section>
+
+  <div class="phone-col" id="chat">
+    <div class="phone">
+      <div class="screen">
+        <span class="notch" aria-hidden="true"></span>
+        <header class="chat-head">
+          <span class="avatar" aria-hidden="true">UG</span>
+          <div class="t"><b>6.b buli szervezés</b><span>UGRI, te</span></div>
+          <a class="head-call" href="tel:+36301234567" aria-label="Hívás: +36 30 123 4567"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></a>
+        </header>
+        <div class="log" id="log" role="log" aria-live="polite" aria-label="Beszélgetés az UGRI-val"></div>
+        <form class="composer" id="composer" autocomplete="off">
+          <div class="chips" id="chips" role="group" aria-label="Gyors kérdések"></div>
+          <div class="inrow">
+            <label for="field" class="sr-only" id="field-label">Üzenet</label>
+            <input class="field" id="field" type="text" placeholder="Írj üzenetet…">
+            <button class="send" type="submit" aria-label="Küldés"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var PHONE = '+36 30 123 4567';
+  var EMAIL = 'hello@ugri.hu';
+  var MESSENGER = 'https://m.me/ugri.buli';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var log = document.getElementById('log');
+  var chips = document.getElementById('chips');
+  var form = document.getElementById('composer');
+  var field = document.getElementById('field');
+  var fieldLabel = document.getElementById('field-label');
+  var busy = false;
+  var flow = null;
+  var pollCount = 0;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function now(offset) {
+    var d = new Date(Date.now() - (offset || 0) * 60000);
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, reduce ? 30 : ms); }); }
+  function scrollDown() { log.scrollTop = log.scrollHeight; }
+
+  function add(html, cls, offset) {
+    var el = document.createElement('div');
+    el.className = 'msg' + (cls ? ' ' + cls : '');
+    el.innerHTML = html + (cls && cls.indexOf('sys') > -1 ? '' : '<span class="time">' + now(offset) + '</span>');
+    log.appendChild(el);
+    scrollDown();
+    return el;
+  }
+  function text(t) { return '<p>' + t + '</p>'; }
+
+  function photo(kind, measures) {
+    var label = kind === 'rampa' ? 'Fotó a Rámpáról egy iskolaudvaron' : 'Fotó a Miniről egy iskolaudvaron';
+    var s = '<svg viewBox="0 0 320 210" role="img" aria-label="' + label + (measures ? ', méretekkel' : '') + '">' +
+      '<rect width="320" height="210" fill="url(#u-sky)"/>' +
+      '<circle cx="270" cy="46" r="20" fill="#fff6c9"/>' +
+      '<rect x="176" y="64" width="160" height="104" fill="#c9b8ff" stroke="#000" stroke-width="3"/>' +
+      '<rect x="176" y="56" width="160" height="12" fill="#6a2bff" stroke="#000" stroke-width="3"/>';
+    for (var r = 0; r < 3; r++) for (var c = 0; c < 5; c++) s += '<rect x="' + (190 + c * 28) + '" y="' + (78 + r * 28) + '" width="16" height="16" rx="2" fill="' + ((r + c) % 3 ? '#fff' : '#ffe14d') + '" stroke="#000" stroke-width="2"/>';
+    s += '<rect y="160" width="320" height="50" fill="#9ae6c3"/><path d="M0 160 H320" stroke="#000" stroke-width="3"/>';
+    if (kind === 'rampa') {
+      s += '<use href="#u-rampa" x="14" y="26" width="236" height="174"/>';
+      if (measures) {
+        s += '<g stroke="#000" stroke-width="2.5" fill="none"><path d="M22 202 H244" marker-start="url(#u-arr)" marker-end="url(#u-arr)"/><path d="M262 72 V178" marker-start="url(#u-arr)" marker-end="url(#u-arr)"/></g>' +
+          '<g font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="15" paint-order="stroke" stroke="#fff" stroke-width="4"><text x="118" y="198">7 m</text><text x="270" y="130">2,5 m</text></g>';
+      }
+    } else {
+      s += '<use href="#u-mini" x="40" y="44" width="172" height="156"/>';
+      if (measures) {
+        s += '<g stroke="#000" stroke-width="2.5" fill="none"><path d="M48 203 H206" marker-start="url(#u-arr)" marker-end="url(#u-arr)"/></g>' +
+          '<g font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="15" paint-order="stroke" stroke="#fff" stroke-width="4"><text x="112" y="199">4 m</text></g>';
+      }
+    }
+    return s + '</svg>';
+  }
+  function media(kind, measures, cap) {
+    return '<span class="from">UGRI</span>' + photo(kind, measures) + '<p class="cap">' + cap + '</p>';
+  }
+
+  function voice(transcript, dur) {
+    var bars = '';
+    var seed = 7;
+    for (var i = 0; i < 30; i++) {
+      seed = (seed * 37 + 11) % 97;
+      var h = 6 + (seed % 22);
+      bars += '<span style="height:' + h + 'px;animation-delay:' + (i * 0.08).toFixed(2) + 's"></span>';
+    }
+    return '<span class="from">UGRI hangüzenet</span><div class="voice"><button type="button" class="play" aria-label="Hangüzenet felolvasása"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M2 1 L13 7 L2 13 Z"/></svg></button><div class="wave" aria-hidden="true">' + bars + '</div><span class="dur">' + dur + '</span></div><p class="transcript">' + transcript + '</p>';
+  }
+
+  function pollHtml() {
+    pollCount++;
+    var id = 'poll' + pollCount;
+    return '<span class="from">UGRI szavazás</span><div class="poll-body" data-poll="' + id + '"><h4>Melyik legyen?</h4><p class="hint">Koppints annyiszor, ahányan az osztályból rá szavaznak.</p>' +
+      ['Rámpa', 'Mini', 'Mindkettő'].map(function (o) { return '<button type="button" class="opt" data-opt="' + o + '"><span class="bar"></span><span>' + o + '</span><span class="n">0</span></button>'; }).join('') +
+      '<div class="poll-foot"><span class="total">Még nincs szavazat</span><button type="button" class="mini-btn win" disabled>A győztest foglalom</button></div></div>';
+  }
+
+  var GAMES = [
+    { t: 'Csúszdaverseny', c: '#ffe14d', d: 'Stopperrel mérjük, ki ér le leggyorsabban a Rámpán. A rekordot felírjuk a táblára.', svg: '<circle cx="21" cy="24" r="14" fill="#fff" stroke="#000" stroke-width="3"/><path d="M21 24 V15 M17 6 h8 M21 6 v4" stroke="#000" stroke-width="3" stroke-linecap="round"/>' },
+    { t: 'Szoborjáték', c: '#3df2b5', d: 'Szól a zene, mindenki ugrál. Ha megáll, mindenki megdermed. Aki mozdul, kiesik.', svg: '<circle cx="21" cy="8" r="5" fill="#fff" stroke="#000" stroke-width="3"/><path d="M21 13 v14 M12 18 l9 -3 9 3 M21 27 l-6 10 M21 27 l6 10" stroke="#000" stroke-width="3" stroke-linecap="round" fill="none"/>' },
+    { t: 'Lufimentés', c: '#ff8fd8', d: 'Tíz lufi a légvárban, egyik sem érhet földet. Csak csapatban megy.', svg: '<ellipse cx="21" cy="15" rx="10" ry="12" fill="#ff5a1f" stroke="#000" stroke-width="3"/><path d="M21 27 q-4 5 0 8 t0 6" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round"/>' },
+    { t: 'Váltófutás', c: '#c9b8ff', d: 'Mászófal fel, csúszda le, pacsi a következőnek. Két csapat, egy győztes.', svg: '<rect x="8" y="17" width="26" height="8" rx="4" fill="#ffe14d" stroke="#000" stroke-width="3" transform="rotate(-30 21 21)"/><path d="M6 34 h10 M26 8 h10" stroke="#000" stroke-width="3" stroke-linecap="round"/>' }
+  ];
+  function packHtml() {
+    return '<span class="from">UGRI matricacsomag</span><p>Játékok, amiket már kipróbáltunk. Koppints egy matricára:</p><div class="pack-grid">' +
+      GAMES.map(function (g, i) { return '<button type="button" class="game" aria-expanded="false" data-game="' + i + '"><span class="disc" style="background:' + g.c + '"><svg viewBox="0 0 42 42" aria-hidden="true">' + g.svg + '</svg></span>' + g.t + '</button>'; }).join('') +
+      '</div><p class="game-desc">Koppints egy matricára, és elmondjuk, hogyan kell játszani.</p>';
+  }
+
+  var ANSWERS = {
+    price: function () {
+      return [
+        { html: voice('A Rámpa 34 900 forint egy napra, a Mini 24 900. Ha mindkettő jön, 52 000, és a hangszóró ajándék. Budapesten belül a kiszállítás ingyenes.', '0:14') },
+        { html: '<table class="prices"><tr><td>Rámpa</td><td>34 900 Ft / nap</td></tr><tr><td>Mini</td><td>24 900 Ft / nap</td></tr><tr><td>Mindkettő</td><td>52 000 Ft / nap</td></tr><tr><td>Kiszállítás 30 km-ig</td><td>150 Ft / km</td></tr></table>' },
+        { html: text('Számlát adunk, így a szülői munkaközösség is utalhat. Az előleget elég a buli előtti héten.') }
+      ];
+    },
+    size: function () {
+      return [
+        { html: media('rampa', true, 'Rámpa: 7 × 4 m, a csúszda 2,5 m magas. 8 × 5 m sík hely kell neki.'), cls: 'media' },
+        { html: media('mini', true, 'Mini: 4 × 4 m, 5 × 5 m hely kell neki.'), cls: 'media' },
+        { html: text('Iskolaudvar, kert, sportpálya is jó. Egy konnektor kell 25 méteren belül, a hosszabbítót mi hozzuk.') }
+      ];
+    },
+    strong: function () {
+      return [
+        { html: text('Igen. A Rámpa fejenként 65 kg-ig bírja, egyszerre 8-an lehettek bent. 14 éves korig ajánljuk.') },
+        { html: text('A Mini a kistesóknak való: 3–10 éveseknek, 45 kg-ig, egyszerre 6 gyerek.') },
+        { html: pollHtml(), cls: 'poll' }
+      ];
+    },
+    music: function () {
+      return [
+        { html: text('Kérésre hozunk egy Bluetooth-hangszórót, arra mehet a zene a telefonotokról.') },
+        { html: text('Ha mindkét légvárat kéritek, a hangszóró ingyen jár. Egyébként 3 000 Ft.') }
+      ];
+    },
+    games: function () { return [{ html: packHtml(), cls: 'pack' }]; },
+    contact: function () {
+      return [
+        { html: text('Hívj nyugodtan: <a href="tel:+36301234567">' + PHONE + '</a>') + text('E-mail: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a><br>Messenger: <a href="' + MESSENGER + '" target="_blank" rel="noopener">m.me/ugri.buli</a>') },
+        { html: text('Budapesten és 30 km-es körzetében dolgozunk, hétvégén is.') }
+      ];
+    },
+    adult: function () {
+      return [{ html: text('Felnőtt nem ugrálhat, a légvár gyerekeknek készült. Egy felnőttnek viszont végig mellette kell lennie.') }];
+    },
+    rain: function () {
+      return [{ html: text('Esőben és erős szélben nem ugrálunk. Ha az idő miatt elmarad, az előleget visszaadjuk, vagy áttesszük egy másik napra.') }];
+    },
+    fallback: function () {
+      return [{ html: text('Ezt inkább telefonon beszéljük meg: <a href="tel:+36301234567">' + PHONE + '</a>. Vagy válassz egy kérdést lent.') }];
+    }
+  };
+
+  var MAIN_CHIPS = [
+    ['Mennyibe kerül?', 'price'],
+    ['Mekkora?', 'size'],
+    ['Bírja a 14 éveseket?', 'strong'],
+    ['Van zene?', 'music'],
+    ['Játékötletek', 'games'],
+    ['Elérhetőség', 'contact'],
+    ['Foglalok!', 'book', 'hot']
+  ];
+
+  function setChips(list) {
+    chips.innerHTML = '';
+    list.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip' + (c[2] ? ' ' + c[2] : '');
+      b.textContent = c[0];
+      b.addEventListener('click', function () { onChip(c); });
+      chips.appendChild(b);
+    });
+    chips.scrollLeft = 0;
+  }
+
+  function setField(type, placeholder, label) {
+    field.type = type || 'text';
+    field.value = '';
+    field.placeholder = placeholder || 'Írj üzenetet…';
+    fieldLabel.textContent = label || 'Üzenet';
+    if (type === 'date') {
+      var t = new Date();
+      t.setMinutes(t.getMinutes() - t.getTimezoneOffset());
+      field.min = t.toISOString().slice(0, 10);
+    } else field.removeAttribute('min');
+    if (type === 'number') { field.min = '1'; field.inputMode = 'numeric'; } else field.removeAttribute('inputmode');
+  }
+
+  async function botSay(parts) {
+    busy = true;
+    for (var i = 0; i < parts.length; i++) {
+      var typing = document.createElement('div');
+      typing.className = 'msg';
+      typing.setAttribute('aria-label', 'Az UGRI ír');
+      typing.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+      log.appendChild(typing);
+      scrollDown();
+      var len = parts[i].html.replace(/<[^>]+>/g, '').length;
+      await wait(Math.min(1300, 450 + len * 7));
+      typing.remove();
+      add(parts[i].html, parts[i].cls);
+      await wait(180);
+    }
+    busy = false;
+  }
+
+  function me(t) { add(text(esc(t)), 'me'); }
+
+  async function onChip(c) {
+    if (busy) return;
+    if (flow) { return flowInput(c[0], c[1]); }
+    me(c[0]);
+    if (c[1] === 'book') return startFlow();
+    await botSay(ANSWERS[c[1]]());
+  }
+
+  function match(t) {
+    var s = t.toLowerCase();
+    if (/foglal|időpont|lefoglal|kérem|kerem/.test(s)) return 'book';
+    if (/ár\b|ára|mennyi|pénz|forint|ft\b|költ|fizet|számla/.test(s)) return 'price';
+    if (/mekkora|méret|hely|terület|udvar|konnektor|áram/.test(s)) return 'size';
+    if (/súly|kg|14|nagy|bírja|tini|kamasz/.test(s)) return 'strong';
+    if (/zene|hangszóró|bluetooth|spotify/.test(s)) return 'music';
+    if (/játék|jatek|ötlet|unalom/.test(s)) return 'games';
+    if (/felnőtt|tanár|ofő|szülő ugr/.test(s)) return 'adult';
+    if (/eső|esik|szél|idő/.test(s)) return 'rain';
+    if (/telefon|szám|elér|email|e-mail|messenger|hol vagytok|hol/.test(s)) return 'contact';
+    return 'fallback';
+  }
+
+  var STEPS = {
+    date: { ask: 'Szuper! Melyik napra kéritek? Válassz a naptárból lent.', type: 'date', ph: 'Dátum', label: 'A buli napja' },
+    kids: { ask: 'Hányan lesztek nagyjából?', type: 'number', ph: 'pl. 24', label: 'Létszám', chips: ['10 körül', '15–20', '20–30', '30-nál több'] },
+    castle: { ask: 'Melyik légvár jöjjön?', chips: ['Rámpa', 'Mini', 'Mindkettő'], ph: 'Rámpa, Mini vagy mindkettő', label: 'Légvár' },
+    place: { ask: 'Melyik iskola, melyik osztály, és hol lesz a buli?', ph: 'pl. Petőfi Ált. Isk., 6.b, udvar', label: 'Iskola, osztály, helyszín' },
+    who: { ask: 'Utolsó: kit hívhatunk, és milyen számon?', ph: 'pl. Kovács Anna, 06 30 …', label: 'Kapcsolattartó és telefonszám' }
+  };
+  var ORDER = ['date', 'kids', 'castle', 'place', 'who'];
+
+  function stepChips(key) {
+    var s = STEPS[key];
+    var list = (s.chips || []).map(function (x) { return [x, 'val', 'soft']; });
+    list.push(['Mégse', 'cancel']);
+    return list;
+  }
+
+  async function startFlow(castle) {
+    flow = { i: 0, data: {} };
+    if (castle) flow.data.castle = castle;
+    await askStep();
+  }
+  function curKey() { return ORDER[flow.i]; }
+  async function askStep() {
+    while (flow.i < ORDER.length && flow.data[curKey()]) flow.i++;
+    if (flow.i >= ORDER.length) return finish();
+    var key = curKey();
+    var s = STEPS[key];
+    setChips(stepChips(key));
+    setField(s.type, s.ph, s.label);
+    await botSay([{ html: text(s.ask) }]);
+    field.focus({ preventScroll: true });
+  }
+
+  function fmtDate(v) {
+    var d = new Date(v + 'T12:00:00');
+    if (isNaN(d)) return v;
+    return d.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  }
+
+  async function flowInput(value, kind) {
+    if (busy) return;
+    if (kind === 'cancel') {
+      me('Mégse');
+      flow = null;
+      setChips(MAIN_CHIPS);
+      setField('text');
+      return botSay([{ html: text('Semmi gond. Ha meggondolod magad, a Foglalok gomb itt vár.') }]);
+    }
+    var key = curKey();
+    var v = String(value || '').trim();
+    if (!v) {
+      var tip = key === 'date' ? 'Válassz egy napot a naptárból.' : 'Ezt még írd be, légyszi.';
+      return botSay([{ html: text(tip) }]);
+    }
+    if (key === 'date') {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return botSay([{ html: text('Válassz egy napot a naptárból.') }]);
+      flow.data.date = v;
+      me(fmtDate(v));
+    } else if (key === 'kids') {
+      flow.data.kids = /^\d+$/.test(v) ? v + ' fő' : v;
+      me(flow.data.kids);
+    } else if (key === 'castle') {
+      var c = /mind|kett|both/i.test(v) ? 'Mindkettő' : /mini|kis/i.test(v) ? 'Mini' : /r[aá]mp/i.test(v) ? 'Rámpa' : null;
+      if (!c) { me(v); return botSay([{ html: text('Rámpa, Mini vagy mindkettő? Koppints lent.') }]); }
+      flow.data.castle = c;
+      me(c);
+    } else {
+      flow.data[key] = v;
+      me(v);
+    }
+    flow.i++;
+    await askStep();
+  }
+
+  function summaryText(d) {
+    return [
+      'Szia UGRI! Szeretnénk lefoglalni egy légvárat.',
+      'Nap: ' + fmtDate(d.date),
+      'Légvár: ' + d.castle,
+      'Létszám: ' + d.kids,
+      'Iskola, osztály, helyszín: ' + d.place,
+      'Kapcsolattartó: ' + d.who
+    ].join('\n');
+  }
+
+  async function finish() {
+    var d = flow.data;
+    flow = null;
+    setChips(MAIN_CHIPS);
+    setField('text');
+    var body = summaryText(d);
+    var mail = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Osztálybuli foglalás, ' + d.date) + '&body=' + encodeURIComponent(body);
+    await botSay([
+      { html: text('Kész is! Így küldjük el a kérést:') },
+      {
+        cls: 'summary',
+        html: '<span class="from">UGRI foglalás</span><h4>Buli ' + esc(fmtDate(d.date)) + '</h4><dl>' +
+          '<dt>Légvár</dt><dd>' + esc(d.castle) + '</dd><dt>Létszám</dt><dd>' + esc(d.kids) + '</dd><dt>Hol</dt><dd>' + esc(d.place) + '</dd><dt>Kit hívunk</dt><dd>' + esc(d.who) + '</dd></dl>' +
+          '<div class="acts"><a class="act" href="' + mail + '">Küldés e-mailben</a><button type="button" class="act alt copy-msg">Másolás és Messenger</button></div><p class="copied" hidden>Kimásoltuk. Illeszd be a Messengerben, és küldd el.</p>'
+      },
+      { html: text('Egy munkanapon belül visszaírunk, hogy szabad-e a nap. Ha még nem biztos a dátum, akkor is írj, egyeztetünk.') }
+    ]);
+    var last = log.querySelectorAll('.summary');
+    var card = last[last.length - 1];
+    card.querySelector('.copy-msg').addEventListener('click', function () { copyAndOpen(body, card); });
+  }
+
+  function copyAndOpen(body, card) {
+    var done = function () {
+      card.querySelector('.copied').hidden = false;
+      window.open(MESSENGER, '_blank', 'noopener');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(body).then(done, function () { legacyCopy(body); done(); });
+    } else { legacyCopy(body); done(); }
+  }
+  function legacyCopy(t) {
+    var ta = document.createElement('textarea');
+    ta.value = t;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var v = field.value;
+    if (flow) { await flowInput(v, 'val'); return; }
+    if (!v.trim()) return;
+    field.value = '';
+    me(v);
+    var k = match(v);
+    if (k === 'book') return startFlow();
+    await botSay(ANSWERS[k]());
+  });
+
+  log.addEventListener('click', function (e) {
+    var play = e.target.closest('.play');
+    if (play) {
+      var box = play.closest('.voice');
+      var tr = box.parentNode.querySelector('.transcript').textContent;
+      box.classList.remove('playing');
+      void box.offsetWidth;
+      box.classList.add('playing');
+      if ('speechSynthesis' in window) {
+        try {
+          speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(tr);
+          u.lang = 'hu-HU';
+          u.rate = 1.05;
+          speechSynthesis.speak(u);
+        } catch (err) {}
+      }
+      return;
+    }
+    var opt = e.target.closest('.opt');
+    if (opt) {
+      var body = opt.closest('.poll-body');
+      var n = opt.querySelector('.n');
+      n.textContent = +n.textContent + 1;
+      var opts = body.querySelectorAll('.opt');
+      var total = 0, best = null, bestN = -1, tie = false;
+      opts.forEach(function (o) { var k = +o.querySelector('.n').textContent; total += k; if (k > bestN) { bestN = k; best = o.dataset.opt; tie = false; } else if (k === bestN) tie = true; });
+      opts.forEach(function (o) { o.querySelector('.bar').style.width = (100 * +o.querySelector('.n').textContent / total) + '%'; });
+      body.querySelector('.total').textContent = total + ' szavazat' + (tie ? ', döntetlen' : ', vezet: ' + best);
+      var win = body.querySelector('.win');
+      win.disabled = tie;
+      win.dataset.winner = best;
+      return;
+    }
+    var win2 = e.target.closest('.win');
+    if (win2 && !win2.disabled && !busy && !flow) {
+      me('A ' + win2.dataset.winner + ' nyert, azt foglalom!');
+      startFlow(win2.dataset.winner);
+      return;
+    }
+    var g = e.target.closest('.game');
+    if (g) {
+      var pack = g.closest('.msg');
+      pack.querySelectorAll('.game').forEach(function (x) { x.setAttribute('aria-expanded', x === g ? 'true' : 'false'); });
+      var gm = GAMES[+g.dataset.game];
+      pack.querySelector('.game-desc').innerHTML = '<b>' + gm.t + ':</b> ' + gm.d;
+      scrollDown();
+    }
+  });
+
+  add(text('Ma'), 'sys');
+  add(text('Az UGRI csatlakozott a csoporthoz'), 'sys');
+  add('<span class="from">UGRI</span>' + text('Sziasztok, 6.b! Mi vagyunk az UGRI. Mi hozzuk a légvárat, ti hozzátok az osztályt.'), '', 3);
+  add(media('rampa', false, 'Ez a Rámpa: csúszda, mászófal és ugrálótér egyben. 14 éves korig bírja.'), 'media', 3);
+  add(text('Kérdezzetek bátran lent, vagy nyomjátok meg a Foglalok gombot.'), '', 2);
+  setChips(MAIN_CHIPS);
+  setField('text');
+  log.scrollTop = 0;
+})();
+</script>
+<script src="switcher.js"></script>
+</body>
+</html>

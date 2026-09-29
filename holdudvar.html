@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holdudvar – gyereksarok esküvőkre és esti rendezvényekre</title>
+<meta name="description" content="Légvár és gyerekfelügyelet esküvőre, keresztelőre, esti fogadásra. Halk fúvó, meleg fények, felügyelő egész este.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Caveat:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+  --ink: #2c1d33;
+  --ink-soft: #5b4652;
+  --line: #6b4a3a;
+  --time: #9a6a34;
+  --night: 0;
+  --gold: #c9a45c;
+  --champagne: #ecd9ae;
+  --rose: #c9868e;
+  --midnight: #1b1f52;
+  --paper: #fbf5ea;
+  --paper-ink: #2c1d33;
+  --serif: "Bodoni Moda", "Didot", Georgia, serif;
+  --sans: "Manrope", system-ui, sans-serif;
+}
+html.is-night {
+  --ink: #f4eefa;
+  --ink-soft: #cfc8e3;
+  --line: #e8d3a6;
+  --time: #ecd9ae;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: #f6c896;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: color .6s ease;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
+.wordmark, .promise, .ch-time, .ch-title, .scene-caption, .menu-title, .course h3, .course-sub, .course-price, .letter, .rsvp-title, .rsvp input, .rsvp select, .rsvp textarea, .seal, .goodnight h2, .clock { font-variation-settings: "opsz" 18; }
+
+.sky { position: fixed; inset: 0; z-index: -4; background: linear-gradient(180deg, var(--sky-top, #fae2b2) 0%, var(--sky-bot, #f6c896) 100%); }
+.stars { position: fixed; inset: 0; z-index: -3; width: 100%; height: 100%; opacity: var(--stars, 0); pointer-events: none; }
+.stars circle { fill: #fff; }
+.stars .tw { animation: twinkle 4s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: .25; } }
+.sun, .moon { position: fixed; z-index: -2; border-radius: 50%; pointer-events: none; will-change: transform, opacity; }
+.sun {
+  left: 64vw;
+  top: 0;
+  width: 26vmin;
+  height: 26vmin;
+  background: radial-gradient(circle, #fff6dc 0 34%, #ffd996 46%, rgba(255, 190, 120, .45) 58%, rgba(255, 170, 110, 0) 71%);
+}
+.moon {
+  left: 72vw;
+  top: 0;
+  width: 11vmin;
+  height: 11vmin;
+  background: radial-gradient(circle at 42% 40%, #ffffff 0, #eef0f8 45%, #cdd3e4 100%);
+  box-shadow: 0 0 40px 8px rgba(214, 222, 255, .35);
+}
+.moon::before {
+  content: "";
+  position: absolute;
+  inset: -120%;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 0 30%, rgba(220, 228, 255, .16) 36%, rgba(220, 228, 255, .05) 44%, transparent 50%);
+}
+
+.garland { position: fixed; left: 0; top: var(--dsw-h, 40px); width: 100%; height: 80px; z-index: -1; pointer-events: none; overflow: visible; }
+.garland .wire { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .55; transition: stroke .6s; }
+.garland .cord { stroke: var(--line); stroke-width: 1; opacity: .55; }
+.garland .bulb { fill: rgba(255, 255, 255, .22); stroke: var(--line); stroke-width: .6; transition: fill .5s ease, filter .5s ease; }
+.garland .bulb.on { fill: #ffdc9a; stroke: #ffe9c2; filter: url(#bulbglow); }
+
+.page { position: relative; z-index: 1; }
+
+.opening { min-height: calc(100vh - var(--dsw-h, 40px)); display: flex; align-items: center; padding: 7rem 0 5rem; }
+.monogram { width: 108px; height: 108px; color: var(--line); transition: color .6s; }
+.wordmark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3.4rem, 11vw, 8.5rem);
+  line-height: .95;
+  letter-spacing: -.02em;
+  margin: 1.25rem 0 .5rem;
+}
+.descriptor { font-size: 1rem; color: var(--ink-soft); letter-spacing: .02em; margin: 0; }
+.promise {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.3;
+  max-width: 22ch;
+  margin: 3rem auto 0;
+}
+.opening-links { margin-top: 2.75rem; }
+.opening-links a { text-decoration: none; font-weight: 600; font-size: .95rem; padding-bottom: 4px; border-bottom: 1px solid currentColor; }
+.opening-links a:hover { border-bottom-width: 2px; }
+.cue { width: 1px; height: 64px; margin: 3.5rem auto 0; background: linear-gradient(var(--line), transparent); position: relative; overflow: hidden; }
+.cue::after { content: ""; position: absolute; left: 0; top: -30%; width: 1px; height: 30%; background: var(--ink); animation: cue 2.4s ease-in-out infinite; }
+@keyframes cue { to { top: 100%; } }
+
+.chapter { padding: 16vh 0 10vh; }
+.chapter:first-child { padding-top: 6vh; }
+.ch-time {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(4.4rem, 11vw, 9rem);
+  line-height: .9;
+  letter-spacing: -.03em;
+  color: var(--time);
+  margin: 0 0 1rem;
+  transition: color .6s;
+  font-variant-numeric: lining-nums;
+}
+.ch-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.3rem); line-height: 1.15; margin: 0 0 1rem; }
+.ch-text { max-width: 44ch; color: var(--ink-soft); font-size: 1.125rem; margin: 0; transition: color .6s; }
+
+.scene-col { position: relative; }
+.scene { position: sticky; top: calc(var(--dsw-h, 40px) + 14vh); }
+.scene svg, .scene-inline svg { width: 100%; height: auto; display: block; overflow: visible; }
+.scene-art { filter: drop-shadow(0 0 calc(var(--night) * 26px) rgba(255, 200, 130, calc(var(--night) * .55))); }
+.scene-caption { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink-soft); text-align: center; margin-top: 1rem; transition: color .6s; }
+.art-line { fill: rgba(255, 255, 255, .07); stroke: var(--line); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; transition: stroke .6s; }
+.art-thin { fill: none; stroke: var(--line); stroke-width: 1; opacity: .6; transition: stroke .6s; }
+.art-glow { fill: #ffd28f; opacity: calc(var(--night) * .85); }
+.art-led { fill: #ffe7b5; opacity: var(--night); }
+.art-lawn { fill: rgba(40, 20, 30, .12); }
+.scene-inline { max-width: 460px; margin: 3rem auto 0; }
+
+.menu {
+  background: var(--paper);
+  color: var(--paper-ink);
+  margin-top: 3.5rem;
+  padding: clamp(2.25rem, 5vw, 3.75rem) clamp(1.5rem, 5vw, 3.5rem);
+  text-align: center;
+  box-shadow: inset 0 0 0 10px var(--paper), inset 0 0 0 11px #d6bf8f, 0 40px 70px -40px rgba(40, 20, 30, .55);
+}
+.menu-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(2.1rem, 4vw, 2.8rem); margin: 0; line-height: 1; }
+.menu-intro { color: #6b5760; max-width: 38ch; margin: .9rem auto 0; font-size: 1rem; }
+.divider { display: block; width: 180px; height: 18px; margin: 1.75rem auto; color: #b8965a; }
+.course h3 { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 2rem; margin: 0 0 .25rem; line-height: 1.1; }
+.course-sub { font-family: var(--serif); font-style: italic; color: #6b5760; margin: 0 0 .9rem; }
+.course-detail { margin: 0; font-size: .98rem; color: #4d3c46; }
+.course-price { font-family: var(--serif); font-size: 1.6rem; margin: 1rem 0 0; line-height: 1.1; }
+.course-price small { display: block; font-family: var(--sans); font-size: .82rem; color: #7a6a70; margin-top: .3rem; }
+.pick { margin-top: 1.1rem; background: none; border: 0; font: 600 .92rem var(--sans); color: #6b3d52; padding: 0 0 3px; border-bottom: 1px solid currentColor; cursor: pointer; }
+.pick:hover { color: #2c1d33; }
+.menu-note { font-size: .88rem; color: #7a6a70; max-width: 44ch; margin: 0 auto; }
+
+.letter {
+  background: #f7efe3;
+  color: #2c1d33;
+  margin-top: 3.5rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  transform: rotate(-.8deg);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 40px 70px -40px rgba(0, 0, 0, .7);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+.letter p { margin: 0 0 1.1rem; max-width: 60ch; }
+.letter .greeting { font-style: italic; font-size: 1.45rem; margin-bottom: 1.4rem; }
+.letter strong { font-weight: 600; }
+.letter .signoff { font-style: italic; margin: 1.8rem 0 0; }
+.signature { font-family: "Caveat", cursive; font-size: 2.3rem; line-height: 1; color: #6b3d52; margin: .2rem 0 0; }
+.letter-hosts { font-family: var(--sans); font-size: .85rem; color: #7a6a70; margin: .4rem 0 0; }
+
+.env-area { margin-top: 3.5rem; }
+.env { position: relative; width: min(520px, 100%); aspect-ratio: 1.55; margin: 0 auto; perspective: 1400px; transition: opacity .5s ease, transform .5s ease; }
+.env-back { position: absolute; inset: 0; background: #d9c8a9; border-radius: 4px; box-shadow: 0 40px 70px -35px rgba(0, 0, 0, .75); }
+.env-left, .env-right, .env-bottom { position: absolute; inset: 0; border-radius: 4px; }
+.env-left { background: #ede1cb; clip-path: polygon(0 0, 52% 57%, 0 100%); }
+.env-right { background: #e9dbc1; clip-path: polygon(100% 0, 48% 57%, 100% 100%); }
+.env-bottom { background: #f3e9d7; clip-path: polygon(0 100%, 50% 47%, 100% 100%); }
+.env-flap { position: absolute; left: 0; right: 0; top: 0; height: 62%; background: #e4d5b8; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: 50% 0; transition: transform .9s cubic-bezier(.5, 0, .2, 1); z-index: 3; }
+.env-address { position: absolute; left: 0; right: 0; bottom: 12%; text-align: center; font-family: "Caveat", cursive; font-size: clamp(1.4rem, 4vw, 1.9rem); color: #5a4150; z-index: 2; margin: 0; }
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 78px;
+  height: 78px;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  border: 0;
+  cursor: pointer;
+  border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 36% 30%, #b8506e 0, #8a2b47 55%, #6a1d34 100%);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, .25), inset 0 -5px 9px rgba(0, 0, 0, .35), 0 5px 12px rgba(0, 0, 0, .35);
+  color: #efc2cd;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 2.1rem;
+  line-height: 1;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .35), 0 1px 0 rgba(255, 255, 255, .2);
+  transition: transform .5s ease, opacity .5s ease;
+}
+.seal::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid rgba(255, 210, 220, .35); }
+.seal:hover { transform: translate(-50%, -50%) scale(1.05); }
+.env.is-open .env-flap { transform: rotateX(180deg); z-index: 0; }
+.env.is-open .seal { opacity: 0; transform: translate(-50%, -50%) scale(.6) rotate(-20deg); pointer-events: none; }
+.env.is-done { display: none; }
+.open-btn { background: none; border: 0; font: 600 1rem var(--sans); color: var(--ink); padding: 0 0 4px; border-bottom: 1px solid currentColor; cursor: pointer; }
+.env-alt { font-size: .95rem; color: var(--ink-soft); }
+.env-alt a { text-decoration: none; border-bottom: 1px solid currentColor; }
+
+.rsvp {
+  background: var(--paper);
+  color: var(--paper-ink);
+  max-width: 620px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3.25rem);
+  box-shadow: inset 0 0 0 10px var(--paper), inset 0 0 0 11px #d6bf8f, 0 40px 70px -35px rgba(0, 0, 0, .75);
+}
+html.js .rsvp { display: none; }
+html.js .rsvp.is-shown { display: block; animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(40px); } }
+.rsvp-title { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.4rem); text-align: center; margin: 0; line-height: 1.1; }
+.rsvp-intro { text-align: center; color: #6b5760; margin: .6rem auto 1.8rem; max-width: 40ch; font-size: .98rem; }
+.rsvp label { display: block; font-size: .82rem; font-weight: 600; color: #7a6a70; margin-bottom: .15rem; }
+.rsvp input, .rsvp select, .rsvp textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bfa274;
+  background: transparent;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #2c1d33;
+  padding: .35rem 0 .45rem;
+  border-radius: 0;
+  outline: none;
+  appearance: none;
+}
+.rsvp select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23927548' stroke-width='1.4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 2px center; padding-right: 1.4rem; }
+.rsvp textarea { resize: vertical; min-height: 3.2rem; }
+.rsvp input:focus, .rsvp select:focus, .rsvp textarea:focus { border-bottom: 2px solid #8a2b47; padding-bottom: calc(.45rem - 1px); }
+.rsvp input.is-invalid { border-bottom-color: #a3243f; }
+.send { background: var(--midnight); color: var(--champagne); border: 0; font: 700 .98rem var(--sans); padding: .95rem 1.8rem; border-radius: 2px; cursor: pointer; transition: background-color .2s; }
+.send:hover { background: #2b3175; }
+.rsvp-status { font-size: .92rem; color: #5b4652; margin: 0; min-height: 1.4em; text-align: center; }
+.rsvp-status.is-error { color: #a3243f; }
+
+.goodnight { padding: 22vh 0 5rem; text-align: center; }
+.goodnight h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(3rem, 9vw, 6.5rem); line-height: 1; margin: 0; }
+.goodnight .monogram { width: 64px; height: 64px; }
+.contacts { margin-top: 3rem; font-size: 1rem; }
+.contacts a { text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .35); }
+.contacts a:hover { border-bottom-color: currentColor; }
+.fine { font-size: .82rem; color: var(--ink-soft); margin-top: 4rem; }
+
+.clock {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  padding: .45rem .95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .22);
+  border: 1px solid rgba(255, 255, 255, .35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums lining-nums;
+  transition: color .6s;
+}
+html.is-night .clock { background: rgba(20, 22, 60, .35); border-color: rgba(255, 255, 255, .18); }
+
+@media (max-width: 991.98px) {
+  .chapter { padding: 12vh 0 6vh; }
+  .sun { width: 36vmin; height: 36vmin; left: 52vw; }
+  .moon { width: 16vmin; height: 16vmin; }
+}
+@media (max-width: 575.98px) {
+  body { font-size: 1rem; }
+  .ch-text { font-size: 1.05rem; }
+  .letter { transform: none; font-size: 1.02rem; }
+  .clock { font-size: .9rem; right: 10px; bottom: 10px; padding: .3rem .7rem; }
+  .seal { width: 64px; height: 64px; font-size: 1.7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<svg width="0" height="0" class="position-absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="bulbglow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <symbol id="monogram" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="60" cy="60" r="49" fill="none" stroke="currentColor" stroke-width=".6" stroke-dasharray="1 3.2"/>
+      <path d="M71 30a31 31 0 1 0 0 60a26 26 0 1 1 0-60z" fill="currentColor"/>
+      <path d="M80 44l1.6 4.2 4.4.3-3.4 2.8 1.1 4.3-3.7-2.4-3.7 2.4 1.1-4.3-3.4-2.8 4.4-.3z" fill="currentColor"/>
+    </symbol>
+    <symbol id="scene" viewBox="0 0 540 400">
+      <ellipse class="art-lawn" cx="270" cy="360" rx="250" ry="26"/>
+      <ellipse cx="270" cy="352" rx="210" ry="30" fill="#ffcf8a" filter="url(#soft)" style="opacity: calc(var(--night) * .35)"/>
+      <g>
+        <rect class="art-line" x="36" y="282" width="190" height="58" rx="26"/>
+        <path class="art-thin" d="M60 302h142"/>
+        <rect class="art-line" x="62" y="176" width="138" height="116" rx="16"/>
+        <path class="art-glow" d="M92 288v-50a39 39 0 0 1 78 0v50z"/>
+        <path class="art-line" d="M92 288v-50a39 39 0 0 1 78 0v50" fill="none"/>
+        <path class="art-thin" d="M105 288v-58M118 288v-66M131 288v-68M144 288v-66M157 288v-58M92 250h78M92 268h78"/>
+        <rect class="art-line" x="42" y="140" width="36" height="156" rx="18"/>
+        <rect class="art-line" x="184" y="140" width="36" height="156" rx="18"/>
+        <path class="art-line" d="M38 146q22-50 22-62q0 12 22 62z"/>
+        <path class="art-line" d="M180 146q22-50 22-62q0 12 22 62z"/>
+        <path class="art-line" d="M131 150a19 19 0 1 0 0 30a15 15 0 1 1 0-30z"/>
+        <path class="art-thin" d="M84 176q47-30 94 0"/>
+        <circle class="art-led" cx="60" cy="84" r="3"/>
+        <circle class="art-led" cx="202" cy="84" r="3"/>
+      </g>
+      <g>
+        <rect class="art-line" x="256" y="288" width="262" height="52" rx="24"/>
+        <path class="art-thin" d="M280 306h214"/>
+        <path class="art-line" d="M388 160h40q54 56 90 126v22h-66q-28-72-64-104z"/>
+        <path class="art-thin" d="M404 170q52 50 88 118M420 166q50 52 84 120"/>
+        <rect class="art-line" x="276" y="158" width="120" height="136" rx="16"/>
+        <path class="art-glow" d="M298 290v-44a38 38 0 0 1 76 0v44z"/>
+        <path class="art-line" d="M298 290v-44a38 38 0 0 1 76 0v44" fill="none"/>
+        <path class="art-thin" d="M311 290v-54M324 290v-62M337 290v-64M350 290v-62M363 290v-54M298 256h76M298 274h76"/>
+        <rect class="art-line" x="262" y="122" width="30" height="172" rx="15"/>
+        <rect class="art-line" x="380" y="122" width="30" height="172" rx="15"/>
+        <path class="art-line" d="M336 104l6 12.5 13.6 2-9.8 9.6 2.3 13.6-12.1-6.4-12.1 6.4 2.3-13.6-9.8-9.6 13.6-2z"/>
+        <path class="art-thin" d="M292 158q44-34 88 0"/>
+        <circle class="art-led" cx="277" cy="120" r="3"/>
+        <circle class="art-led" cx="395" cy="120" r="3"/>
+      </g>
+      <g class="leds">
+        <circle class="art-led" cx="70" cy="290" r="2.4"/><circle class="art-led" cx="100" cy="290" r="2.4"/><circle class="art-led" cx="130" cy="290" r="2.4"/><circle class="art-led" cx="160" cy="290" r="2.4"/><circle class="art-led" cx="190" cy="290" r="2.4"/>
+        <circle class="art-led" cx="290" cy="296" r="2.4"/><circle class="art-led" cx="322" cy="296" r="2.4"/><circle class="art-led" cx="354" cy="296" r="2.4"/><circle class="art-led" cx="386" cy="296" r="2.4"/><circle class="art-led" cx="418" cy="296" r="2.4"/><circle class="art-led" cx="450" cy="296" r="2.4"/><circle class="art-led" cx="482" cy="296" r="2.4"/>
+        <circle class="art-led" cx="440" cy="190" r="2.2"/><circle class="art-led" cx="464" cy="218" r="2.2"/><circle class="art-led" cx="486" cy="248" r="2.2"/><circle class="art-led" cx="504" cy="278" r="2.2"/>
+      </g>
+    </symbol>
+    <symbol id="ornament" viewBox="0 0 180 18">
+      <path d="M0 9h70M110 9h70" stroke="currentColor" stroke-width=".8"/>
+      <path d="M93 2a7 7 0 1 0 0 14a9 9 0 0 1 0-14z" fill="currentColor"/>
+      <circle cx="76" cy="9" r="1.2" fill="currentColor"/><circle cx="104" cy="9" r="1.2" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sky" aria-hidden="true"></div>
+<svg class="stars" id="stars" aria-hidden="true"></svg>
+<div class="sun" id="sun" aria-hidden="true"></div>
+<div class="moon" id="moon" aria-hidden="true"></div>
+<svg class="garland" id="garland" aria-hidden="true"></svg>
+
+<div class="page">
+  <header class="opening text-center">
+    <div class="container">
+      <svg class="monogram" role="img" aria-label="Holdudvar"><use href="#monogram"/></svg>
+      <h1 class="wordmark">Holdudvar</h1>
+      <p class="descriptor">Gyereksarok esküvőkre és esti rendezvényekre</p>
+      <p class="promise">Míg ti táncoltok, a gyerekek ugrálnak. Egész este, felügyelővel.</p>
+      <p class="opening-links d-flex flex-wrap justify-content-center gap-4 mb-0">
+        <a href="#ora-1400">Nézzük végig az estét</a>
+        <a href="#menu">Az esti menü</a>
+        <a href="#level">Írjatok nekünk</a>
+      </p>
+      <div class="cue" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="row gx-0 gx-lg-5">
+      <div class="col-lg-7">
+
+        <section class="chapter" id="ora-1400" data-min="840">
+          <p class="ch-time">14:00</p>
+          <h2 class="ch-title">Felállítás, még a vendégek előtt</h2>
+          <p class="ch-text">Negyvenöt perc alatt felállítjuk és rögzítjük a légvárat. A helyszín koordinátorával előre megbeszéljük, hol legyen, és honnan kapjuk az áramot, nektek ezzel nem kell foglalkoznotok.</p>
+          <div class="scene-inline d-lg-none">
+            <svg class="scene-art" viewBox="0 0 540 400" role="img" aria-label="A Kis Hold és a Csillagút légvár vonalrajza"><use href="#scene"/></svg>
+          </div>
+        </section>
+
+        <section class="chapter" id="ora-1630" data-min="990">
+          <p class="ch-time">16:30</p>
+          <h2 class="ch-title">Megérkeznek a gyerekek</h2>
+          <p class="ch-text">A felügyelőnk bemutatkozik a szülőknek, és elmondja a gyerekeknek a három szabályt. Onnantól ő figyel rájuk. Ti közben fogadhatjátok a gratulációkat.</p>
+        </section>
+
+        <section class="chapter" id="ora-1900" data-min="1140">
+          <p class="ch-time">19:00</p>
+          <h2 class="ch-title">Vacsora, nyugalomban</h2>
+          <p class="ch-text">A gyerekek esznek pár falatot, aztán visszaszaladnak ugrálni. A szülők végre végigülhetik a vacsorát, és senkinek sem kell az asztal alatt keresgélnie.</p>
+
+          <article class="menu" id="menu" aria-labelledby="menu-title">
+            <h2 class="menu-title" id="menu-title">Az esti menü</h2>
+            <p class="menu-intro">Mindegyik fogás mellé jár egy felügyelő, egy halk fúvó és meleg fény.</p>
+            <svg class="divider" aria-hidden="true"><use href="#ornament"/></svg>
+            <div class="course">
+              <h3>Kis Hold</h3>
+              <p class="course-sub">tornyos légvár a legkisebbeknek</p>
+              <p class="course-detail">4 × 4 méter, 3–10 éveseknek, egyszerre hat gyerek.</p>
+              <p class="course-detail">Hálós falak, így a szülők az asztaltól is látják a gyereküket.</p>
+              <p class="course-detail">Halk fúvó, kb. 58 dB, meleg fehér fény.</p>
+              <p class="course-price">59 900 Ft<small>egy estére, felügyelővel</small></p>
+              <button type="button" class="pick" data-pick="Kis Hold">Ezt kérjük</button>
+            </div>
+            <svg class="divider" aria-hidden="true"><use href="#ornament"/></svg>
+            <div class="course">
+              <h3>Csillagút</h3>
+              <p class="course-sub">ugrálóvár csúszdával a nagyobbaknak</p>
+              <p class="course-detail">7 × 4 méter, 2,5 méteres csúszda és mászófal, 4–14 éveseknek, egyszerre nyolc gyerek.</p>
+              <p class="course-detail">Halk fúvó, kb. 62 dB, a csúszda este fénysort kap.</p>
+              <p class="course-price">74 900 Ft<small>egy estére, felügyelővel</small></p>
+              <button type="button" class="pick" data-pick="Csillagút">Ezt kérjük</button>
+            </div>
+            <svg class="divider" aria-hidden="true"><use href="#ornament"/></svg>
+            <div class="course">
+              <h3>A teljes est</h3>
+              <p class="course-sub">mindkét légvár, két felügyelővel</p>
+              <p class="course-detail">Nagy családnak, sok unokatestvérnek, amikor a kicsik és a nagyok külön játszanak.</p>
+              <p class="course-price">119 000 Ft<small>egy estére</small></p>
+              <button type="button" class="pick" data-pick="A teljes est">Ezt kérjük</button>
+            </div>
+            <svg class="divider" aria-hidden="true"><use href="#ornament"/></svg>
+            <p class="menu-note">Az ár tartalmazza a kiszállítást 60 km-en belül, a felállítást, a csendes bontást és a fertőtlenítést. Este tíz után óránként 8 000 Ft.</p>
+          </article>
+        </section>
+
+        <section class="chapter" id="ora-2030" data-min="1230">
+          <p class="ch-time">20:30</p>
+          <h2 class="ch-title">Felkapcsoljuk a fényeket</h2>
+          <p class="ch-text">Sötétedéskor meleg fényt kap a légvár. A kert egyik legszebb pontja lesz, a fotósotok is szeretni fogja.</p>
+
+          <article class="letter" aria-label="Levél a Holdudvar gazdáitól">
+            <p class="greeting">Kedves Jegyespár!</p>
+            <p>Tudjuk, hogy egy esküvőn minden percnek megvan a helye, ezért pár dolgot előre leírunk.</p>
+            <p><strong>A hangról.</strong> A fúvóink halkak, 58–62 dB-esek, ez nagyjából egy beszélgetés hangereje. Tizenöt méterről már alig hallani, a beszédeket és a zenét nem zavarja.</p>
+            <p><strong>A helyszínről.</strong> Kastélyszállóba, pajtába, kerthelyiségbe is jövünk. A koordinátorral mi egyeztetünk: hol álljon a légvár, honnan kapjuk az áramot, és mikor jöhetünk be felállítani.</p>
+            <p><strong>A felügyelőről.</strong> Végig a légvár mellett marad. Turnusokban engedi be a gyerekeket, figyel, hogy a kicsik és a nagyok ne egyszerre ugráljanak, és elsősegélycsomagot is hoz. A gyerekekért ettől még a szüleik felelnek, de nekik is jólesik egy kis szünet.</p>
+            <p><strong>A fotókról.</strong> Ha szeretnétek, a légvár bekerülhet a képekbe. Ha nem, a díszlet mögé állítjuk, és egyik fotón sem fog látszani.</p>
+            <p><strong>Ha elhúzódik az este.</strong> Maradunk, óránként 8 000 Ft-ért, felügyelővel együtt. Ezt előre is megbeszélhetjük.</p>
+            <p class="signoff">Szeretettel,</p>
+            <p class="signature">Réka és Máté</p>
+            <p class="letter-hosts">a Holdudvar gazdái</p>
+          </article>
+        </section>
+
+        <section class="chapter" id="ora-2200" data-min="1320">
+          <p class="ch-time">22:00</p>
+          <h2 class="ch-title">Csendes bontás</h2>
+          <p class="ch-text">Csendben lebontunk, miközben a buli megy tovább. Reggel nincs vele dolgotok. Ha tetszett ez az este, írjatok nekünk, és két napon belül küldünk egy pontos ajánlatot.</p>
+
+          <div class="env-area" id="level">
+            <div class="env" id="env">
+              <div class="env-back"></div>
+              <div class="env-left"></div>
+              <div class="env-right"></div>
+              <div class="env-bottom"></div>
+              <p class="env-address">A Holdudvar csapatának</p>
+              <div class="env-flap"></div>
+              <button type="button" class="seal" id="seal" aria-label="Nyisd ki a borítékot">H</button>
+            </div>
+            <p class="env-alt text-center mt-4 mb-0" id="env-alt"><button type="button" class="open-btn" id="open-btn">Nyisd ki a borítékot</button><span class="d-block mt-3">vagy hívjatok: <a href="tel:+36301234567">+36 30 123 4567</a></span></p>
+
+            <form class="rsvp" id="rsvp" novalidate aria-labelledby="rsvp-title">
+              <h2 class="rsvp-title" id="rsvp-title">Kérjük, jelezzétek</h2>
+              <p class="rsvp-intro">Pár sor elég. Két napon belül válaszolunk egy pontos ajánlattal.</p>
+              <div class="row g-4">
+                <div class="col-sm-6"><label for="r-name">Nevetek</label><input id="r-name" name="Nevetek" autocomplete="name" required></div>
+                <div class="col-sm-6"><label for="r-phone">Telefonszám</label><input id="r-phone" name="Telefonszám" type="tel" autocomplete="tel" required></div>
+                <div class="col-sm-6"><label for="r-date">Az esemény napja</label><input id="r-date" name="Dátum" type="date" required></div>
+                <div class="col-sm-6"><label for="r-venue">Helyszín</label><input id="r-venue" name="Helyszín" placeholder="pl. Tornyos Kúria, Tök"></div>
+                <div class="col-sm-6"><label for="r-kids">Várható gyerekszám</label><input id="r-kids" name="Gyerekek" type="number" min="1" inputmode="numeric"></div>
+                <div class="col-sm-6"><label for="r-until">Meddig maradjunk?</label>
+                  <select id="r-until" name="Meddig"><option>22:00-ig</option><option>23:00-ig</option><option>Éjfélig</option><option>Még nem tudjuk</option></select>
+                </div>
+                <div class="col-12"><label for="r-corner">Melyik fogást kérnétek?</label>
+                  <select id="r-corner" name="Fogás"><option>Kis Hold</option><option>Csillagút</option><option>A teljes est</option><option>Még nem döntöttünk</option></select>
+                </div>
+                <div class="col-12"><label for="r-msg">Üzenet</label><textarea id="r-msg" name="Üzenet" rows="2" placeholder="Az esküvő stílusa, a vőfély vagy a koordinátor elérhetősége"></textarea></div>
+                <div class="col-12 d-flex flex-column align-items-center gap-3 mt-2">
+                  <button type="submit" class="send">Elküldjük a levelet</button>
+                  <p class="rsvp-status" id="rsvp-status" role="status"></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </div>
+      <div class="col-lg-5 scene-col d-none d-lg-block">
+        <div class="scene">
+          <svg class="scene-art" viewBox="0 0 540 400" role="img" aria-label="A Kis Hold és a Csillagút légvár vonalrajza, este kivilágítva"><use href="#scene"/></svg>
+          <p class="scene-caption">A Kis Hold és a Csillagút</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="goodnight" data-min="1365">
+    <div class="container">
+      <svg class="monogram" aria-hidden="true"><use href="#monogram"/></svg>
+      <h2 class="mt-4">Jó éjszakát.</h2>
+      <div class="contacts d-flex flex-column flex-md-row align-items-center justify-content-center gap-2 gap-md-4">
+        <a href="tel:+36301234567">+36 30 123 4567</a>
+        <a href="mailto:hello@holdudvar.hu">hello@holdudvar.hu</a>
+        <a href="https://m.me/holdudvar" target="_blank" rel="noopener">Messenger</a>
+        <span>Budapest és 60 km-es környéke</span>
+      </div>
+      <p class="fine mb-0">© 2026 Holdudvar. Felelősségbiztosítással, EN 14960 szabvány szerinti légvárakkal.</p>
+    </div>
+  </footer>
+</div>
+
+<p class="clock" id="clock" aria-hidden="true">13:30</p>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var sun = document.getElementById('sun');
+  var moon = document.getElementById('moon');
+  var clock = document.getElementById('clock');
+  var garland = document.getElementById('garland');
+  var starsSvg = document.getElementById('stars');
+  var NS = 'http://www.w3.org/2000/svg';
+  var START = 13 * 60 + 30;
+  var END = 22 * 60 + 45;
+
+  var stops = [
+    [0, [250, 228, 182], [246, 202, 150]],
+    [0.35, [248, 208, 152], [240, 170, 124]],
+    [0.55, [238, 162, 128], [206, 120, 128]],
+    [0.66, [150, 94, 130], [88, 64, 120]],
+    [0.78, [40, 36, 90], [26, 26, 72]],
+    [1, [11, 13, 40], [17, 19, 54]]
+  ];
+
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function mix(c1, c2, t) { return 'rgb(' + Math.round(lerp(c1[0], c2[0], t)) + ',' + Math.round(lerp(c1[1], c2[1], t)) + ',' + Math.round(lerp(c1[2], c2[2], t)) + ')'; }
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  for (var i = 0; i < 110; i++) {
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', (rnd() * 100).toFixed(2) + '%');
+    c.setAttribute('cy', (rnd() * 70).toFixed(2) + '%');
+    c.setAttribute('r', (rnd() * 1.1 + .35).toFixed(2));
+    c.setAttribute('opacity', (rnd() * .6 + .4).toFixed(2));
+    if (i % 4 === 0) { c.setAttribute('class', 'tw'); c.style.animationDelay = (rnd() * 4).toFixed(2) + 's'; }
+    starsSvg.appendChild(c);
+  }
+
+  var bulbs = [];
+  function buildGarland() {
+    while (garland.firstChild) garland.removeChild(garland.firstChild);
+    bulbs = [];
+    var w = window.innerWidth;
+    var spans = Math.max(2, Math.round(w / 380));
+    var sw = w / spans;
+    var y0 = 6, sag = w < 600 ? 34 : 46;
+    var d = 'M0 ' + y0;
+    for (var s = 0; s < spans; s++) {
+      var x0 = s * sw, x1 = x0 + sw, xm = x0 + sw / 2;
+      d += ' Q' + xm + ' ' + (y0 + sag * 2) + ' ' + x1 + ' ' + y0;
+      var per = w < 600 ? 3 : 5;
+      for (var k = 1; k <= per; k++) {
+        var t = k / (per + 1);
+        var bx = (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * xm + t * t * x1;
+        var by = (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * (y0 + sag * 2) + t * t * y0;
+        var cord = document.createElementNS(NS, 'line');
+        cord.setAttribute('class', 'cord');
+        cord.setAttribute('x1', bx); cord.setAttribute('y1', by);
+        cord.setAttribute('x2', bx); cord.setAttribute('y2', by + 7);
+        garland.appendChild(cord);
+        var b = document.createElementNS(NS, 'ellipse');
+        b.setAttribute('class', 'bulb');
+        b.setAttribute('cx', bx); b.setAttribute('cy', by + 13);
+        b.setAttribute('rx', 4.2); b.setAttribute('ry', 6);
+        bulbs.push({ el: b, x: bx });
+      }
+    }
+    var wire = document.createElementNS(NS, 'path');
+    wire.setAttribute('class', 'wire');
+    wire.setAttribute('d', d);
+    garland.insertBefore(wire, garland.firstChild);
+    bulbs.sort(function (a, b) { return a.x - b.x; });
+    bulbs.forEach(function (b) { garland.appendChild(b.el); });
+  }
+
+  var marks = [];
+  function measure() {
+    var vh = window.innerHeight;
+    var max = Math.max(1, document.documentElement.scrollHeight - vh);
+    marks = [{ y: 0, m: START }];
+    document.querySelectorAll('[data-min]').forEach(function (el) {
+      var y = el.getBoundingClientRect().top + window.scrollY - vh * .5;
+      if (el.classList.contains('goodnight')) y = max - 1;
+      marks.push({ y: Math.max(1, Math.min(y, max - 1)), m: +el.dataset.min });
+    });
+    marks.push({ y: max, m: END });
+    marks.sort(function (a, b) { return a.y - b.y; });
+  }
+
+  function minuteAt(y) {
+    for (var i = 1; i < marks.length; i++) {
+      if (y <= marks[i].y) {
+        var a = marks[i - 1], b = marks[i];
+        var t = b.y === a.y ? 1 : (y - a.y) / (b.y - a.y);
+        return Math.max(a.m, lerp(a.m, b.m, clamp(t)));
+      }
+    }
+    return END;
+  }
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var m = minuteAt(window.scrollY);
+    var p = clamp((m - START) / (END - START));
+    var j = 1;
+    while (j < stops.length - 1 && p > stops[j][0]) j++;
+    var s0 = stops[j - 1], s1 = stops[j];
+    var t = clamp((p - s0[0]) / (s1[0] - s0[0]));
+    root.style.setProperty('--sky-top', mix(s0[1], s1[1], t));
+    root.style.setProperty('--sky-bot', mix(s0[2], s1[2], t));
+    root.classList.toggle('is-night', p > 0.65);
+    root.style.setProperty('--night', clamp((p - 0.7) / 0.14).toFixed(3));
+    root.style.setProperty('--stars', clamp((p - 0.68) / 0.16).toFixed(3));
+
+    var vh = window.innerHeight;
+    var sp = clamp(p / 0.66);
+    sun.style.transform = 'translateY(' + lerp(vh * .1, vh * .92, sp).toFixed(1) + 'px)';
+    sun.style.opacity = (1 - clamp((p - 0.58) / 0.1)).toFixed(3);
+    var mp = ease(clamp((p - 0.64) / 0.26));
+    moon.style.transform = 'translateY(' + lerp(vh * 1.05, vh * .09, mp).toFixed(1) + 'px)';
+    moon.style.opacity = clamp((p - 0.64) / 0.06).toFixed(3);
+
+    var lit = Math.round(clamp((p - 0.72) / 0.12) * bulbs.length);
+    bulbs.forEach(function (b, i) { b.el.classList.toggle('on', i < lit); });
+
+    var mm = Math.round(m / 5) * 5;
+    var hh = Math.floor(mm / 60), mi = mm % 60;
+    clock.textContent = hh + ':' + (mi < 10 ? '0' : '') + mi;
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+  function relayout() { buildGarland(); measure(); update(); }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', relayout);
+  window.addEventListener('load', relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  relayout();
+
+  var env = document.getElementById('env');
+  var alt = document.getElementById('env-alt');
+  var form = document.getElementById('rsvp');
+  var opened = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function openEnvelope(focus) {
+    if (opened) return;
+    opened = true;
+    env.classList.add('is-open');
+    setTimeout(function () {
+      env.classList.add('is-done');
+      alt.classList.add('d-none');
+      form.classList.add('is-shown');
+      measure();
+      if (focus) document.getElementById('r-name').focus({ preventScroll: true });
+    }, reduce ? 0 : 1000);
+  }
+  document.getElementById('seal').addEventListener('click', function () { openEnvelope(true); });
+  document.getElementById('open-btn').addEventListener('click', function () { openEnvelope(true); });
+
+  document.querySelectorAll('[data-pick]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.getElementById('r-corner').value = b.dataset.pick;
+      document.getElementById('level').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      setTimeout(function () { openEnvelope(false); }, reduce ? 0 : 700);
+    });
+  });
+
+  var date = document.getElementById('r-date');
+  var today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  date.min = today.toISOString().slice(0, 10);
+
+  var status = document.getElementById('rsvp-status');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var missing = [];
+    form.querySelectorAll('[required]').forEach(function (el) {
+      var ok = el.value.trim() !== '';
+      el.classList.toggle('is-invalid', !ok);
+      if (!ok) missing.push(form.querySelector('label[for="' + el.id + '"]').textContent.toLowerCase());
+    });
+    if (missing.length) {
+      status.textContent = 'Még hiányzik: ' + missing.join(', ') + '.';
+      status.classList.add('is-error');
+      return;
+    }
+    status.classList.remove('is-error');
+    var lines = [];
+    form.querySelectorAll('input, select, textarea').forEach(function (el) {
+      var label = form.querySelector('label[for="' + el.id + '"]').textContent;
+      lines.push(label + ': ' + (el.value.trim() || '-'));
+    });
+    var subject = 'Gyereksarok ajánlatkérés, ' + date.value;
+    location.href = 'mailto:hello@holdudvar.hu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    status.textContent = 'Megnyílt a leveleződ a kitöltött levéllel. Küldjétek el, és két napon belül válaszolunk.';
+  });
+})();
+</script>
+<script src="switcher.js"></script>
+</body>
+</html>
